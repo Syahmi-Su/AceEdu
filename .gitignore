@@ -9,3 +9,5 @@ obj/Debug/AceTC.csprojAssemblyReference.cache
 Web.config
 *.config
 *.config
+*.config
+.vs/AceTC/v16/.suo
