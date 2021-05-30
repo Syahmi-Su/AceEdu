@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AceTC.Models.Student>
+﻿@model IEnumerable<AceTC.Models.MultipleClass>
 @{ Layout = null;}
 @{
     ViewBag.Title = "StudentList";
@@ -307,15 +307,15 @@
                                             <tbody>
                                                 @foreach (var student in Model)
                                                 {
-                                                    <tr>
-                                                        <td>@student.student_ic</td>
-                                                        <td>@student.student_name</td>
-                                                        <td>@student.student_cname</td>
-                                                        <td>@student.student_package</td>
-                                                        <td>@student.parent_ic</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>@student.studentdetails.student_ic</td>
+                                                    <td>@student.studentdetails.student_name</td>
+                                                    <td>@student.studentdetails.student_cname</td>
+                                                    <td>@student.studentdetails.student_package</td>
+                                                    <td>@student.parentdetails.parents_name</td>
+                                                </tr>
                                                 }
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -377,7 +377,7 @@
         $(document).on('ready', function () {
             // data-tables
             $('#dataTable').DataTable({
-            //    data:dataSet,
+                //    data:dataSet,
                 columns: [{
                     title: "Student IC"
                 }, {

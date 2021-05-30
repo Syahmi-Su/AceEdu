@@ -24,7 +24,15 @@ namespace AceTC.Controllers
         public ActionResult StudentList()
         {
             AceDBEntities entity = new AceDBEntities();
-            return View(from Student in entity.Students select Student);
+            List<Student> studentparent = entity.Students.ToList();
+            List<Parent> parentname = entity.Parents.ToList();
+
+            var multipletable = from s in studentparent
+                                join p in parentname on s.parent_ic equals p.parents_ic into table1
+                                from p in table1.DefaultIfEmpty()
+                                select new MultipleClass { studentdetails = s, parentdetails = p };
+
+            return View(multipletable);
         }
 
         public ActionResult ParentList()
