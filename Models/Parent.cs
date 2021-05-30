@@ -11,14 +11,28 @@ namespace AceTC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.Web.Mvc;
+
     public partial class Parent
     {
+        [DisplayName("Identification Card No.")]
         public string parents_ic { get; set; }
+
+        [DisplayName("Full Name")]
         public string parents_name { get; set; }
+        [DisplayName("Password")]
         public string parents_pass { get; set; }
+
+        [DisplayName("E-mail")]
         public string parents_email { get; set; }
+
+        [DisplayName("Phone No.")]
         public string parents_phone { get; set; }
+
+        [DisplayName("Address")]
         public string parents_address { get; set; }
+
+
     }
 }

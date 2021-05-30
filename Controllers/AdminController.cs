@@ -29,8 +29,8 @@ namespace AceTC.Controllers
 
         public ActionResult ParentList()
         {
-            
-            return View();
+            AceDBEntities plist = new AceDBEntities();
+            return View(from Parent in plist.Parents select Parent);
         }
 
         public ActionResult PackageList()
