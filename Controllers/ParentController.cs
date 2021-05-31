@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AceTC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,8 @@ namespace AceTC.Controllers
 
         public ActionResult ViewChildren()
         {
-            return View();
+            AceDBEntities entity = new AceDBEntities();
+            return View(from Student in entity.Students select Student);
         }
 
         public ActionResult ViewPaymentHistory()
