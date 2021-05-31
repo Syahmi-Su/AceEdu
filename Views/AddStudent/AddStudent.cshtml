@@ -1,6 +1,8 @@
-﻿@{ Layout = null;}
+﻿@model AceTC.Models.Student
+
+@{ Layout = null;}
 @{
-    ViewBag.Title = "AdminDashboard";
+    ViewBag.Title = "AddStudent";
 }
 
 <!DOCTYPE html>
@@ -41,10 +43,10 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                    <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                    <span style="color:white">Pusat Tuisyen Madani</span>
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
-            
+
             <nav class="navbar-custom">
 
                 <ul class="list-inline float-right mb-0">
@@ -140,7 +142,7 @@
                                 <span> Dashboard </span>
                             </a>
                         </li>
-                        
+
                         <li class="menu-title">Home</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -148,7 +150,7 @@
                                 <span> Notification</span>
                             </a>
                         </li>
-                        
+
 
                         <li class="menu-title">Administration</li>
                         <li class="submenu">
@@ -159,7 +161,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                  <a href="/Admin/ParentList">Manage Parent List</a>  
+                                    <a href="/Admin/ParentList">Manage Parent List</a>
                                 </li>
                             </ul>
                         </li>
@@ -204,7 +206,7 @@
 
                             </ul>
                         </li>
-                        
+
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
@@ -228,7 +230,7 @@
                             </a>
                         </li>
 
-                        
+
                         <li class="menu-title">Data Analytics</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -237,7 +239,7 @@
                             </a>
                         </li>
 
-                        
+
                         <li class="menu-title">User Manual</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -270,10 +272,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Dashboard</h1>
+                                <h1 class="main-title float-left">Manage Student</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li class="breadcrumb-item active">Admin</li>
+                                    <li class="breadcrumb-item active">Manage Student</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -283,46 +286,77 @@
                     </div>
                     <!-- end row -->
 
-
                     <div class="row">
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-danger">
-                                <i class="far fa-user float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Students</h6>
-                                <h1 class="m-b-20 text-white counter">487</h1>
-                                <span class="text-white">12 Today</span>
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-user-friends"></i> Student Details</h3>
+                                </div>
+
+                                <div class="card-body">
+
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-horizontal">
+                                            <h4>Student</h4>
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_cname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_cname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_cname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_package, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_package, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_package, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.parent_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Create" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                </div>
+                                <!-- end card-body-->
                             </div>
+                            <!-- end card-->
                         </div>
-
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-purple">
-                                <i class="fas fa-credit-card float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Payments</h6>
-                                <h1 class="m-b-20 text-white counter">290</h1>
-                                <span class="text-white">12 Today</span>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-warning">
-                                <i class="fas fa-book float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Packages</h6>
-                                <h1 class="m-b-20 text-white counter">320</h1>
-                                <span class="text-white">25 Today</span>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <!-- end row -->
-
-
- 
-
-
-
-                    <div class="row">
-
 
 
                     </div>
@@ -369,34 +403,11 @@
     <script src="~/Content/assets/data/data_datatables.js"></script>
 
     <!-- Charts data -->
-    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
-    <script>
-        $(document).on('ready', function () {
-            // data-tables
-            $('#dataTable').DataTable({
-                data: dataSet,
-                columns: [{
-                    title: "Name"
-                }, {
-                    title: "Position"
-                }, {
-                    title: "Office"
-                }, {
-                    title: "Extn."
-                }, {
-                    title: "Date"
-                }, {
-                    title: "Salary"
-                }]
-            });
 
-            // counter-up
-            $('.counter').counterUp({
-                delay: 10,
-                time: 600
-            });
-        });
-    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
     <!-- END Java Script for this page -->
 
 </body>
