@@ -154,6 +154,7 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MultipleClass.cs" />
     <Compile Include="Models\Outstanding.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
