@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AceTC.Models;
-
+using AceTC.Controllers;
 namespace AceTC.Controllers
 {
     public class AddStudentController : Controller
@@ -26,7 +26,9 @@ namespace AceTC.Controllers
             }
             ModelState.Clear();
             ViewBag.SuccessMessage = "Registration Successful. ";
-            return View("Admin", "AddParent");
+            return RedirectToAction("StudentList", "Admin");
         }
+
+
     }
 }

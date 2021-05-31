@@ -26,7 +26,7 @@ namespace AceTC.Controllers
             }
             ModelState.Clear();
             ViewBag.SuccessMessage = "Registration Successful. ";
-            return View("AddParent", "AddParent");
+            return RedirectToAction("ParentList", "Admin");
         }
 
 
