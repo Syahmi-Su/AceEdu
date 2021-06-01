@@ -1,14 +1,8 @@
-﻿@model IEnumerable<AceTC.Models.Student>
-
+﻿@model AceTC.Models.Student
+@*@model IEnumerable<AceTC.Models.MultipleClass>*@
 @{ Layout = null;}
-
 @{
-    ViewBag.Title = "ViewChildren";
-
-    if (Session["parents_ic"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
+    ViewBag.Title = "ViewChildrenDetails";
 }
 
 <!DOCTYPE html>
@@ -107,12 +101,12 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hello, @Session["parents_ic"].ToString()</small>
+                                    <small @*value="@Session["parents_ic"].ToString()"*@>Hello,  </small>
                                 </h5>
                             </div>
 
                             <!-- item-->
-                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
+                            <a @*href="@Url.Action("Logout","Login")"*@ class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
@@ -221,10 +215,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Children Lists</h1>
+                                <h1 class="main-title float-left">Details</h1>
                                 <ol class="breadcrumb float-right">
-                                    <li href="/Parent/ParentsDashboard" class="breadcrumb-item">Home</li>
-                                    <li href="/Parent/ViewChildren" class="breadcrumb-item active">Children Lists</li>
+                                    <li href="/Parent/ParentsDashboard" class="breadcrumb-item">Children Lists</li>
+                                    <li href="/Parent/ViewChildren" class="breadcrumb-item active">Details</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -233,77 +227,97 @@
                         </div>
                     </div>
                     <!-- end row -->
-                    <!-- start student lists row -->
-                    <div class="row">
 
+                    <div>
+                        <p>
+                            @*@Html.ActionLink("Edit", "Edit", new { id = Model.student_ic }) |*@
+                            @Html.ActionLink("Back to List", "ViewChildren")
+                        </p>
 
+                        <!--STUDENT DETAILS-->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-user-friends"></i> Student Details</h3>
+                                    </div>
 
-                    </div>
-                    <!-- end row -->
-                    @*<label>IC : </label>@Model.student_ic
-                        <label>Name : </label>@Model.student_name
-                        <label>Package : </label>@Model.student_name-->*@
+                                    <div class="card-body">
+                                        <dl>
+                                            <dt>
+                                                IC
+                                            </dt>
 
-                    <p>
-                        @Html.ActionLink("Create New", "Create")
-                    </p>
-                    <table class="table table-bordered table-striped table-hover">
-                        <tr>
-                            <th>
-                                IC
-                                @*@Html.DisplayNameFor(model => model.student_ic)*@
-                            </th>
-                            <th>
-                                Name
-                                @*@Html.DisplayNameFor(model => model.student_name)*@
-                            </th>
-                            <th>
-                                Chinese Name
-                                @*@Html.DisplayNameFor(model => model.student_cname)*@
-                            </th>
-                            <th>
-                                Tuition Package
-                                @*@Html.DisplayNameFor(model => model.student_package)*@
-                            </th>
-                            <th>
-                                Action
-                            </th>
-                        </tr>
+                                            <dd>
+                                                @Html.DisplayFor(model => model.student_ic)
 
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @item.student_ic
-                                    @*@Html.DisplayFor(modelItem => item.student_ic)*@
-                                </td>
-                                <td>
-                                    @item.student_name
-                                    @*@Html.DisplayFor(modelItem => item.student_name)*@
-                                </td>
-                                <td>
-                                    @item.student_cname
-                                    @*@Html.DisplayFor(modelItem => item.student_cname)*@
-                                </td>
-                                <td>
-                                    @item.student_package
-                                    @*@Html.DisplayFor(modelItem => item.student_package)*@
-                                </td>
-                                <td>
-                                    @Html.ActionLink("View Details", "ViewChildrenDetails", new { id = item.student_ic })
-                                </td>
-                            </tr>
-                        }
-                    </table>
+                                            </dd>
 
+                                            <dt>
+                                                Name
+                                            </dt>
 
-                    <div class="row">
+                                            <dd>
+                                                @Html.DisplayFor(model => model.student_name)
+                                            </dd>
 
+                                            <dt>
+                                                Chinese Name
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(model => model.student_cname)
+                                            </dd>
+
+                                            <dt>
+                                                Tuition Package
+                                            </dt>
+
+                                            <dd>
+                                                @Html.DisplayFor(model => model.student_package)
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <!-- end card-body-->
+                            </div>
+                            <!-- end card-->
+                        </div>
+
+                        <!--PACKAGE DETAILS-->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-folder"></i> Tuition Package Details</h3>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <dl>
+                                            <dt>
+                                                Tuition Package Name
+                                            </dt>
+                                            <dd>
+                                                pmr
+                                            </dd>
+
+                                            <dt>
+                                                Tuition Package Fee (RM)
+                                            </dt>
+                                            <dd>
+                                                120
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <!-- end card-body-->
+                            </div>
+                            <!-- end card-->
+                        </div>
 
 
                     </div>
                     <!-- end row-->
-
                 </div>
                 <!-- END container-fluid -->
 
@@ -374,9 +388,7 @@
         });
     </script>
     <!-- END Java Script for this page -->
-
 </body>
 
 </html>
-
 
