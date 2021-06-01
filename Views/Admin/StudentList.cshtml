@@ -2,6 +2,11 @@
 @{ Layout = null;}
 @{
     ViewBag.Title = "StudentList";
+
+    if (Session["admin_id"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
 <!DOCTYPE html>
@@ -100,12 +105,12 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hello, admin</small>
+                                    <small>Hi, @Session["admin_id"].ToString()</small>
                                 </h5>
                             </div>
 
                             <!-- item-->
-                            <a href="#" class="dropdown-item notify-item">
+                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
@@ -289,6 +294,7 @@
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <h3><i class="fas fa-user-friends"></i> Student Details</h3>
+                                    <button style="float:right;position:relative;" class="btn btn-info" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;">Add Student</button>
                                 </div>
 
                                 <div class="card-body">
@@ -321,7 +327,7 @@
                                     </div>
                                     <!-- end table-responsive-->
                                     <div>
-                                        <button onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;">Add Student</button>
+                                        
                                     </div>
                                 </div>
                                 <!-- end card-body-->
@@ -385,7 +391,7 @@
                 }, {
                     title: "Student Name"
                 }, {
-                    title: "Student Name (BC)"
+                    title: "Student Name (Chinese)"
                 }, {
                     title: "Package Taken"
                 }, {
