@@ -3,6 +3,11 @@
 @{ Layout = null;}
 @{
     ViewBag.Title = "AddParent";
+
+    if (Session["admin_id"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
 
@@ -102,7 +107,7 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hello, admin</small>
+                                    <small>Hi, @Session["admin_id"].ToString()</small>
                                 </h5>
                             </div>
 
@@ -353,7 +358,7 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-offset-2 col-md-10">
-                                                    <input type="submit" value="Create" class="btn-default" />
+                                                    <input type="submit" value="Create" style="margin:auto;display:block;" class="btn btn-info" />
                                                 </div>
                                             </div>
                                         </div>
