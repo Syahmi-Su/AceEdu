@@ -1360,6 +1360,7 @@
     <Content Include="Views\Admin\PaymentHistory.cshtml" />
     <Content Include="Views\Payment\PaymentHistories.cshtml" />
     <Content Include="Views\Admin\testing.cshtml" />
+    <Content Include="Views\Parent\ViewChildrenDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
