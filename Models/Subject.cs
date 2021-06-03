@@ -14,8 +14,9 @@ namespace AceTC.Models
     
     public partial class Subject
     {
-        public int subject_code { get; set; }
+        public string subject_code { get; set; }
         public string subject_name { get; set; }
-        public double subject_fee { get; set; }
+        public string subject_type { get; set; }
+        public string subject_year { get; set; }
     }
 }

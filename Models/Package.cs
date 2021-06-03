@@ -15,7 +15,11 @@ namespace AceTC.Models
     public partial class Package
     {
         public int package_id { get; set; }
-        public string package_name { get; set; }
         public double package_price { get; set; }
+        public Nullable<int> subject1 { get; set; }
+        public Nullable<int> subject2 { get; set; }
+        public Nullable<int> subject3 { get; set; }
+        public Nullable<int> subject4 { get; set; }
+        public Nullable<int> subject5 { get; set; }
     }
 }

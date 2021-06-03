@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -28,8 +28,12 @@
             <PropertyRef Name="package_id" />
           </Key>
           <Property Name="package_id" Type="int" Nullable="false" />
-          <Property Name="package_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="package_price" Type="float" Nullable="false" />
+          <Property Name="subject1" Type="int" />
+          <Property Name="subject2" Type="int" />
+          <Property Name="subject3" Type="int" />
+          <Property Name="subject4" Type="int" />
+          <Property Name="subject5" Type="int" />
         </EntityType>
         <EntityType Name="Parents">
           <Key>
@@ -80,9 +84,10 @@
           <Key>
             <PropertyRef Name="subject_code" />
           </Key>
-          <Property Name="subject_code" Type="int" Nullable="false" />
-          <Property Name="subject_name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="subject_fee" Type="float" Nullable="false" />
+          <Property Name="subject_code" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="subject_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="subject_type" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="subject_year" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityContainer Name="AceDBModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
@@ -94,8 +99,7 @@
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -116,14 +120,6 @@
           <Property Name="O_fees" Type="Double" Nullable="false" />
           <Property Name="O_remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="O_status" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Package">
-          <Key>
-            <PropertyRef Name="package_id" />
-          </Key>
-          <Property Name="package_id" Type="Int32" Nullable="false" />
-          <Property Name="package_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="package_price" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Parent">
           <Key>
@@ -170,24 +166,37 @@
           <Property Name="student_package" Type="Int32" Nullable="false" />
           <Property Name="parent_ic" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="Subject">
-          <Key>
-            <PropertyRef Name="subject_code" />
-          </Key>
-          <Property Name="subject_code" Type="Int32" Nullable="false" />
-          <Property Name="subject_name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="subject_fee" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="AceDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Outstandings" EntityType="Self.Outstanding" />
-          <EntitySet Name="Packages" EntityType="Self.Package" />
           <EntitySet Name="Parents" EntityType="Self.Parent" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="Students" EntityType="Self.Student" />
-          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Packages" EntityType="AceDBModel.Package" />
+          <EntitySet Name="Subjects" EntityType="AceDBModel.Subject" />
         </EntityContainer>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="package_id" />
+          </Key>
+          <Property Name="package_id" Type="Int32" Nullable="false" />
+          <Property Name="package_price" Type="Double" Nullable="false" />
+          <Property Name="subject1" Type="Int32" />
+          <Property Name="subject2" Type="Int32" />
+          <Property Name="subject3" Type="Int32" />
+          <Property Name="subject4" Type="Int32" />
+          <Property Name="subject5" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="subject_code" />
+          </Key>
+          <Property Name="subject_code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="subject_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="subject_type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="subject_year" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -211,15 +220,6 @@
                 <ScalarProperty Name="O_fees" ColumnName="O_fees" />
                 <ScalarProperty Name="O_remark" ColumnName="O_remark" />
                 <ScalarProperty Name="O_status" ColumnName="O_status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Packages">
-            <EntityTypeMapping TypeName="AceDBModel.Package">
-              <MappingFragment StoreEntitySet="Package">
-                <ScalarProperty Name="package_id" ColumnName="package_id" />
-                <ScalarProperty Name="package_name" ColumnName="package_name" />
-                <ScalarProperty Name="package_price" ColumnName="package_price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -272,12 +272,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="AceDBModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="subject5" ColumnName="subject5" />
+                <ScalarProperty Name="subject4" ColumnName="subject4" />
+                <ScalarProperty Name="subject3" ColumnName="subject3" />
+                <ScalarProperty Name="subject2" ColumnName="subject2" />
+                <ScalarProperty Name="subject1" ColumnName="subject1" />
+                <ScalarProperty Name="package_price" ColumnName="package_price" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Subjects">
             <EntityTypeMapping TypeName="AceDBModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
-                <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+                <ScalarProperty Name="subject_year" ColumnName="subject_year" />
+                <ScalarProperty Name="subject_type" ColumnName="subject_type" />
                 <ScalarProperty Name="subject_name" ColumnName="subject_name" />
-                <ScalarProperty Name="subject_fee" ColumnName="subject_fee" />
+                <ScalarProperty Name="subject_code" ColumnName="subject_code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

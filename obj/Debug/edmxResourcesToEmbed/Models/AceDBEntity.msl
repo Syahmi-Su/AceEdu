@@ -21,15 +21,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Packages">
-      <EntityTypeMapping TypeName="AceDBModel.Package">
-        <MappingFragment StoreEntitySet="Package">
-          <ScalarProperty Name="package_id" ColumnName="package_id" />
-          <ScalarProperty Name="package_name" ColumnName="package_name" />
-          <ScalarProperty Name="package_price" ColumnName="package_price" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Parents">
       <EntityTypeMapping TypeName="AceDBModel.Parent">
         <MappingFragment StoreEntitySet="Parents">
@@ -79,12 +70,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="AceDBModel.Package">
+        <MappingFragment StoreEntitySet="Package">
+          <ScalarProperty Name="subject5" ColumnName="subject5" />
+          <ScalarProperty Name="subject4" ColumnName="subject4" />
+          <ScalarProperty Name="subject3" ColumnName="subject3" />
+          <ScalarProperty Name="subject2" ColumnName="subject2" />
+          <ScalarProperty Name="subject1" ColumnName="subject1" />
+          <ScalarProperty Name="package_price" ColumnName="package_price" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Subjects">
       <EntityTypeMapping TypeName="AceDBModel.Subject">
         <MappingFragment StoreEntitySet="Subject">
-          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="subject_year" ColumnName="subject_year" />
+          <ScalarProperty Name="subject_type" ColumnName="subject_type" />
           <ScalarProperty Name="subject_name" ColumnName="subject_name" />
-          <ScalarProperty Name="subject_fee" ColumnName="subject_fee" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
