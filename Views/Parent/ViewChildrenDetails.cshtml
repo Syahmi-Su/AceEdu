@@ -3,6 +3,10 @@
 @{ Layout = null;}
 @{
     ViewBag.Title = "ViewChildrenDetails";
+    if (Session["parents_ic"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
 <!DOCTYPE html>
@@ -43,8 +47,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                <span style="color:white">Pusat Tuisyen Madani</span>
+                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                
             </div>
 
             <nav class="navbar-custom">
@@ -101,12 +105,12 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small @*value="@Session["parents_ic"].ToString()"*@>Hello,  </small>
+                                    <small> Hi, @Session["parents_ic"].ToString()</small>
                                 </h5>
                             </div>
 
                             <!-- item-->
-                            <a @*href="@Url.Action("Logout","Login")"*@ class="dropdown-item notify-item">
+                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
