@@ -35,6 +35,45 @@ namespace AceTC.Controllers
             return View(multipletable);
         }
 
+        public ActionResult EditStudentDetails(string id)
+        {
+
+            AceDBEntities entity = new AceDBEntities();
+            Student stud = entity.Students.Find(id);
+            if (stud == null)
+                return View("NotFound");
+            else
+                return View(stud);
+        }
+        [HttpPost]
+        public ActionResult EditStudentDetails(Student student)
+        {
+            /*AceDBEntities entity = new AceDBEntities();
+            entity.Entry(student).State = EntityState.Modified;
+            entity.SaveChanges();
+            //ModelState.Clear();
+            //ViewBag.SuccessMessage = "Save Changes Successful. ";
+            return RedirectToAction("StudentList", "Admin");*/
+
+            using (AceDBEntities entity = new AceDBEntities())
+            {
+                entity.Entry(student).State = EntityState.Modified;
+                entity.SaveChanges();
+            }
+            ModelState.Clear();
+            ViewBag.SuccessMessage = "Save Changes Successful. ";
+            return RedirectToAction("StudentList", "Admin");
+
+        }
+
+        public ActionResult DeleteStudent()
+        {
+
+
+            return View();
+        }
+
+
         public ActionResult ParentList()
         {
             AceDBEntities plist = new AceDBEntities();
