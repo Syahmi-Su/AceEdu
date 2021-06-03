@@ -47,8 +47,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                <span style="color:white">Pusat Tuisyen Madani</span>
+                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+               
             </div>
 
             <nav class="navbar-custom">
@@ -294,11 +294,11 @@
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <h3><i class="fas fa-user-friends"></i> Student Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;">Add Student</button>
+                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Student</button>
                                 </div>
 
                                 <div class="card-body">
-
+                                   
                                     <div class="table-responsive">
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
@@ -313,13 +313,13 @@
                                             <tbody>
                                                 @foreach (var student in Model)
                                                 {
-                                                <tr>
-                                                    <td>@student.studentdetails.student_ic</td>
-                                                    <td>@student.studentdetails.student_name</td>
-                                                    <td>@student.studentdetails.student_cname</td>
-                                                    <td>@student.studentdetails.student_package</td>
-                                                    <td>@student.parentdetails.parents_name</td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>@student.studentdetails.student_ic</td>
+                                                        <td>@student.studentdetails.student_name</td>
+                                                        <td>@student.studentdetails.student_cname</td>
+                                                        <td>@student.studentdetails.student_package</td>
+                                                        <td>@student.parentdetails.parents_name</td>
+                                                    </tr>
                                                 }
 
                                             </tbody>
@@ -327,7 +327,7 @@
                                     </div>
                                     <!-- end table-responsive-->
                                     <div>
-                                        
+
                                     </div>
                                 </div>
                                 <!-- end card-body-->
