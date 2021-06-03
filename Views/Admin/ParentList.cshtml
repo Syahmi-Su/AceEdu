@@ -48,8 +48,7 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                <span style="color:white">Pusat Tuisyen Madani</span>
+                <img alt="Logo" class="active" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
             </div>
 
             <nav class="navbar-custom">
@@ -140,7 +139,6 @@
                 <div id="sidebar-menu">
 
                     <ul>
-
                         <li class="submenu">
                             <a class="active" href="/Admin/AdminDashboard">
                                 <i class="fas fa-bars"></i>
@@ -295,14 +293,19 @@
                             <div class="card mb-3">
                                 <div class="card-header">
                                     <h3><i class="fas fa-user-friends"></i> Parent Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info" onclick="location.href='@Url.Action("AddParent", "AddParent")';return false;">Add Parent</button>
+
+                                    <button style="float:right;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddParent", "AddParent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Parent</button>&nbsp;&nbsp;
+                                    &nbsp;
+                                   
                                 </div>
 
                                 <div class="card-body">
-
-
+                                    <button class="btn btn-success btn-sm" onclick="javascript: fnExcelReport('dataTable', 'data')" style="float: right;"><i class="fa fa-download"></i>&nbsp; Download</button>
+<br />
                                     <div class="table-responsive">
+
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+
                                             <thead>
                                                 <tr>
                                                     <th>Parent Name</th>
@@ -404,6 +407,31 @@
     </script>
 
     <!-- Charts data -->
+    <script src="~/Content/FileSaver.js"></script>
+    <script>
+        function fnExcelReport(id, name) {
+            var tab_text = '<html xmlns: x="urn:schemas-microsoft-com:office:excel">';
+            tab_text = tab_text + '<head><xml><x: ExcelWorkbook><x: ExcelWorksheets><x: ExcelWorksheet>';
+            tab_text = tab_text + '<x: Name>Test Sheet</x: Name>';
+            tab_text = tab_text + '<x: WorksheetOptions><x: Panes></x: Panes></x: WorksheetOptions ></x: ExcelWorksheet > ';
+            tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+            tab_text = tab_text + "<table border='1px' style='color:black'>";
+
+
+            var exportTable = $('#' + id).clone();
+   //         exportTable.find('th').last().remove();
+            exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
+            exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
+
+            tab_text = tab_text + exportTable.html();
+            tab_text = tab_text + '</table></body></html>';
+            var fileName = "Demo" + '.xls';
+
+            //Save the file
+            var blob = new Blob([tab_text], { type: "application/vnd.ms-excel;charset=utf-8" })
+            window.saveAs(blob, fileName);
+        }
+    </script>
     <!-- END Java Script for this page -->
 
 </body>

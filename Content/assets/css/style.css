@@ -28,6 +28,12 @@ a {
     border: 0!important
 }
 
+.divider{
+    width:5px;
+    height:auto;
+   display:inline-block;
+}
+
 .radius-circle {
     border-radius: 50px
 }
@@ -365,7 +371,7 @@ a {
 }
 
 .headerbar .headerbar-left {
-    background: #2a3542;
+    background: #637d9c;
     float: left;
     text-align: center;
     height: 50px;
@@ -383,7 +389,7 @@ a {
 }
 
 .navbar-custom {
-    background-color: #2a3542;
+    background-color: #637d9c;
     border-radius: 0;
     margin-bottom: 0;
     padding: 0 10px;
@@ -423,7 +429,7 @@ a {
     top: 50px;
     width: 250px;
     z-index: 1000;
-    background: #2a3542;
+    background: #637d9c;
     bottom: 70px;
     margin-bottom: -70px;
     margin-top: 0;
@@ -1660,13 +1666,13 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .menu-title{
-     border-bottom: 10px solid #9496a1;
-    color: #9496a1;
+    border-bottom: 10px solid #000000;
+    color: #000000;
     clear: both;
     display: block;
     font-family: 'Open Sans';
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 1000;
     line-height: 50px;
     padding: 15px 0 0;
     text-transform: uppercase;
