@@ -1,13 +1,9 @@
-﻿@model IEnumerable<AceTC.Models.MultipleClass>
+﻿@model AceTC.Models.Student
 @{ Layout = null;}
 @{
-    ViewBag.Title = "StudentList";
-
-    if (Session["admin_id"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
+    ViewBag.Title = "EditStudentDetails";
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,8 +43,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-               
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
 
             <nav class="navbar-custom">
@@ -105,12 +101,12 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hi, @Session["admin_id"].ToString()</small>
+                                    <small>Hello, admin</small>
                                 </h5>
                             </div>
 
                             <!-- item-->
-                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
+                            <a href="#" class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
@@ -290,53 +286,74 @@
                     <!-- end row -->
 
                     <div class="row">
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "StudentList")
+                        </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-user-friends"></i> Student Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Student</button>
+                                    <h3><i class="fas fa-user-friends"></i> Edit Student Details</h3>
                                 </div>
 
                                 <div class="card-body">
-                                   
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Student IC</th>
-                                                    <th>Student Name</th>
-                                                    <th>Student Name (BC)</th>
-                                                    <th>Package Taken</th>
-                                                    <th>Guardian</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var student in Model)
-                                                {
 
-                                                <tr>
-                                                    <td>@student.studentdetails.student_ic</td>
-                                                    <td>@student.studentdetails.student_name</td>
-                                                    <td>@student.studentdetails.student_cname</td>
-                                                    <td>@student.studentdetails.student_package</td>
-                                                    <td>@student.parentdetails.parents_name</td>
-                                                    <td>
-                                                        @Html.ActionLink("Edit", "EditStudentDetails", new { id = student.studentdetails.student_ic })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink("Delete", "DeleteStudent", new { id = student.studentdetails.student_ic })
-                                                    </td>
-                                                </tr>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                                }
+                                        <div class="form-horizontal">
+                                            <h4>Student</h4>
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive-->
-                                    <div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                    </div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_cname, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_cname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_cname, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_package, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_package, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_package, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.parent_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Save Changes" class="btn btn-default" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -399,7 +416,7 @@
                 }, {
                     title: "Student Name"
                 }, {
-                    title: "Student Name (Chinese)"
+                    title: "Student Name (BC)"
                 }, {
                     title: "Package Taken"
                 }, {
@@ -419,4 +436,6 @@
 </body>
 
 </html>
+
+
 
