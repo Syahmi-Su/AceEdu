@@ -53,25 +53,15 @@
     <Property Name="status_id" Type="Int32" Nullable="false" />
     <Property Name="status_desc" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="Student">
-    <Key>
-      <PropertyRef Name="student_ic" />
-    </Key>
-    <Property Name="student_ic" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="student_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="student_cname" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <Property Name="student_package" Type="Int32" Nullable="false" />
-    <Property Name="parent_ic" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityContainer Name="AceDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Admins" EntityType="Self.Admin" />
     <EntitySet Name="Outstandings" EntityType="Self.Outstanding" />
     <EntitySet Name="Parents" EntityType="Self.Parent" />
     <EntitySet Name="Payments" EntityType="Self.Payment" />
     <EntitySet Name="Status" EntityType="Self.Status" />
-    <EntitySet Name="Students" EntityType="Self.Student" />
     <EntitySet Name="Packages" EntityType="AceDBModel.Package" />
     <EntitySet Name="Subjects" EntityType="AceDBModel.Subject" />
+    <EntitySet Name="Students" EntityType="AceDBModel.Student" />
   </EntityContainer>
   <EntityType Name="Package">
     <Key>
@@ -93,5 +83,19 @@
     <Property Name="subject_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="subject_type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="subject_year" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="student_ic" />
+    </Key>
+    <Property Name="student_ic" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+    <Property Name="student_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="student_cname" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="student_package" Type="Int32" Nullable="false" />
+    <Property Name="student_dob" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="student_gender" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+    <Property Name="student_category" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="student_year" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="parent_ic" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -73,6 +73,10 @@
     <Property Name="student_name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="student_cname" Type="nvarchar" MaxLength="10" />
     <Property Name="student_package" Type="int" Nullable="false" />
+    <Property Name="student_dob" Type="date" Nullable="false" />
+    <Property Name="student_gender" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="student_category" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="student_year" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="parent_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
   </EntityType>
   <EntityType Name="Subject">

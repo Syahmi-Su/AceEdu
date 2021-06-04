@@ -59,17 +59,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="AceDBModel.Student">
-        <MappingFragment StoreEntitySet="Student">
-          <ScalarProperty Name="student_ic" ColumnName="student_ic" />
-          <ScalarProperty Name="student_name" ColumnName="student_name" />
-          <ScalarProperty Name="student_cname" ColumnName="student_cname" />
-          <ScalarProperty Name="student_package" ColumnName="student_package" />
-          <ScalarProperty Name="parent_ic" ColumnName="parent_ic" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Packages">
       <EntityTypeMapping TypeName="AceDBModel.Package">
         <MappingFragment StoreEntitySet="Package">
@@ -90,6 +79,21 @@
           <ScalarProperty Name="subject_type" ColumnName="subject_type" />
           <ScalarProperty Name="subject_name" ColumnName="subject_name" />
           <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="AceDBModel.Student">
+        <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="parent_ic" ColumnName="parent_ic" />
+          <ScalarProperty Name="student_year" ColumnName="student_year" />
+          <ScalarProperty Name="student_category" ColumnName="student_category" />
+          <ScalarProperty Name="student_gender" ColumnName="student_gender" />
+          <ScalarProperty Name="student_dob" ColumnName="student_dob" />
+          <ScalarProperty Name="student_package" ColumnName="student_package" />
+          <ScalarProperty Name="student_cname" ColumnName="student_cname" />
+          <ScalarProperty Name="student_name" ColumnName="student_name" />
+          <ScalarProperty Name="student_ic" ColumnName="student_ic" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

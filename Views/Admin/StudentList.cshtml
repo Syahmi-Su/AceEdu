@@ -305,7 +305,11 @@
                                                 <tr>
                                                     <th>Student IC</th>
                                                     <th>Student Name</th>
-                                                    <th>Student Name (BC)</th>
+                                                    <th>Student Name (Chinese)</th>
+                                                    <th>Gender</th>
+                                                    <th>Date of Birth</th>
+                                                    <th>Category</th>
+                                                    <th>Study Year</th>
                                                     <th>Package Taken</th>
                                                     <th>Guardian</th>
                                                     <th>Action</th>
@@ -319,6 +323,10 @@
                                                     <td>@student.studentdetails.student_ic</td>
                                                     <td>@student.studentdetails.student_name</td>
                                                     <td>@student.studentdetails.student_cname</td>
+                                                    <td>@student.studentdetails.student_gender</td>
+                                                    <td>@student.studentdetails.student_dob.ToShortDateString()</td>
+                                                    <td>@student.studentdetails.student_category</td>
+                                                    <td>@student.studentdetails.student_year</td>
                                                     <td>@student.studentdetails.student_package</td>
                                                     <td>@student.parentdetails.parents_name</td>
                                                     <td>
@@ -401,10 +409,18 @@
                 }, {
                     title: "Student Name (Chinese)"
                 }, {
+                    title: "Gender"
+                }, {
+                    title: "Date of Birth"
+                }, {
+                    title: "Category"
+                }, {
+                    title: "Study Year"
+                }, {
                     title: "Package Taken"
                 }, {
                     title: "Guardian"
-                },{
+                }, {
                     title: "Action"
                 }]
             });
