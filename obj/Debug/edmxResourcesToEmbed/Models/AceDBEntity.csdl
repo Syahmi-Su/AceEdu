@@ -59,22 +59,10 @@
     <EntitySet Name="Parents" EntityType="Self.Parent" />
     <EntitySet Name="Payments" EntityType="Self.Payment" />
     <EntitySet Name="Status" EntityType="Self.Status" />
-    <EntitySet Name="Packages" EntityType="AceDBModel.Package" />
     <EntitySet Name="Subjects" EntityType="AceDBModel.Subject" />
     <EntitySet Name="Students" EntityType="AceDBModel.Student" />
+    <EntitySet Name="Packages" EntityType="AceDBModel.Package" />
   </EntityContainer>
-  <EntityType Name="Package">
-    <Key>
-      <PropertyRef Name="package_id" />
-    </Key>
-    <Property Name="package_id" Type="Int32" Nullable="false" />
-    <Property Name="package_price" Type="Double" Nullable="false" />
-    <Property Name="subject1" Type="Int32" />
-    <Property Name="subject2" Type="Int32" />
-    <Property Name="subject3" Type="Int32" />
-    <Property Name="subject4" Type="Int32" />
-    <Property Name="subject5" Type="Int32" />
-  </EntityType>
   <EntityType Name="Subject">
     <Key>
       <PropertyRef Name="subject_code" />
@@ -97,5 +85,14 @@
     <Property Name="student_category" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
     <Property Name="student_year" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="parent_ic" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="package_id" />
+    </Key>
+    <Property Name="package_id" Type="Int32" Nullable="false" />
+    <Property Name="package_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="package_category" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="package_price" Type="Double" Nullable="false" />
   </EntityType>
 </Schema>

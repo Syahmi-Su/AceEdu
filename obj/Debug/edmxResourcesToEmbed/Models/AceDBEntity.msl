@@ -59,19 +59,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Packages">
-      <EntityTypeMapping TypeName="AceDBModel.Package">
-        <MappingFragment StoreEntitySet="Package">
-          <ScalarProperty Name="subject5" ColumnName="subject5" />
-          <ScalarProperty Name="subject4" ColumnName="subject4" />
-          <ScalarProperty Name="subject3" ColumnName="subject3" />
-          <ScalarProperty Name="subject2" ColumnName="subject2" />
-          <ScalarProperty Name="subject1" ColumnName="subject1" />
-          <ScalarProperty Name="package_price" ColumnName="package_price" />
-          <ScalarProperty Name="package_id" ColumnName="package_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Subjects">
       <EntityTypeMapping TypeName="AceDBModel.Subject">
         <MappingFragment StoreEntitySet="Subject">
@@ -94,6 +81,16 @@
           <ScalarProperty Name="student_cname" ColumnName="student_cname" />
           <ScalarProperty Name="student_name" ColumnName="student_name" />
           <ScalarProperty Name="student_ic" ColumnName="student_ic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="AceDBModel.Package">
+        <MappingFragment StoreEntitySet="Package">
+          <ScalarProperty Name="package_price" ColumnName="package_price" />
+          <ScalarProperty Name="package_category" ColumnName="package_category" />
+          <ScalarProperty Name="package_desc" ColumnName="package_desc" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
