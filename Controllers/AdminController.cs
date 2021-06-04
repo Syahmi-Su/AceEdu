@@ -87,7 +87,9 @@ namespace AceTC.Controllers
 
         public ActionResult SubjectList()
         {
-            return View();
+            AceDBEntities slist = new AceDBEntities();
+            return View(from Subject in slist.Subjects select Subject);
+            
         }
 
         public ActionResult PaymentHistory()

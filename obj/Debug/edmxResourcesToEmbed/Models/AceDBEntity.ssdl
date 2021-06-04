@@ -23,8 +23,12 @@
       <PropertyRef Name="package_id" />
     </Key>
     <Property Name="package_id" Type="int" Nullable="false" />
-    <Property Name="package_name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="package_price" Type="float" Nullable="false" />
+    <Property Name="subject1" Type="int" />
+    <Property Name="subject2" Type="int" />
+    <Property Name="subject3" Type="int" />
+    <Property Name="subject4" Type="int" />
+    <Property Name="subject5" Type="int" />
   </EntityType>
   <EntityType Name="Parents">
     <Key>
@@ -69,15 +73,20 @@
     <Property Name="student_name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="student_cname" Type="nvarchar" MaxLength="10" />
     <Property Name="student_package" Type="int" Nullable="false" />
+    <Property Name="student_dob" Type="date" Nullable="false" />
+    <Property Name="student_gender" Type="nvarchar" MaxLength="6" Nullable="false" />
+    <Property Name="student_category" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="student_year" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="parent_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
   </EntityType>
   <EntityType Name="Subject">
     <Key>
       <PropertyRef Name="subject_code" />
     </Key>
-    <Property Name="subject_code" Type="int" Nullable="false" />
-    <Property Name="subject_name" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="subject_fee" Type="float" Nullable="false" />
+    <Property Name="subject_code" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="subject_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="subject_type" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="subject_year" Type="nvarchar" MaxLength="20" Nullable="false" />
   </EntityType>
   <EntityContainer Name="AceDBModelStoreContainer">
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
