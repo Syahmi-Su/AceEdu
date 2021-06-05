@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AceTC.Models.Student>
+﻿@model IEnumerable<AceTC.Models.JoinClass>
 
 @{ Layout = null;}
 
@@ -264,19 +264,15 @@
                         <tr>
                             <th>
                                 IC
-                                @*@Html.DisplayNameFor(model => model.student_ic)*@
                             </th>
                             <th>
                                 Name
-                                @*@Html.DisplayNameFor(model => model.student_name)*@
                             </th>
                             <th>
                                 Name (Chinese)
-                                @*@Html.DisplayNameFor(model => model.student_cname)*@
                             </th>
                             <th>
                                 Tuition Package
-                                @*@Html.DisplayNameFor(model => model.student_package)*@
                             </th>
                             <th>
                                 Action
@@ -287,23 +283,23 @@
                         {
                             <tr>
                                 <td>
-                                    @item.student_ic
+                                    @item.studentdetails.student_ic
                                     @*@Html.DisplayFor(modelItem => item.student_ic)*@
                                 </td>
                                 <td>
-                                    @item.student_name
+                                    @item.studentdetails.student_name
                                     @*@Html.DisplayFor(modelItem => item.student_name)*@
                                 </td>
                                 <td>
-                                    @item.student_cname
+                                    @item.studentdetails.student_cname
                                     @*@Html.DisplayFor(modelItem => item.student_cname)*@
                                 </td>
                                 <td>
-                                    @item.student_package
+                                    @item.packagedetails.package_desc
                                     @*@Html.DisplayFor(modelItem => item.student_package)*@
                                 </td>
                                 <td>
-                                    @Html.ActionLink("View Details", "ViewChildrenDetails", new { id = item.student_ic })
+                                    @Html.ActionLink("View Details", "ViewChildrenDetails", new { id = item.studentdetails.student_ic })
                                 </td>
                             </tr>
                         }
