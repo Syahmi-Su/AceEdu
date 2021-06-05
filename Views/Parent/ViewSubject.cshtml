@@ -1,10 +1,7 @@
-﻿@model IEnumerable<AceTC.Models.Student>
-
+﻿@model IEnumerable<AceTC.Models.Subject>
 @{ Layout = null;}
-
 @{
-    ViewBag.Title = "ViewChildren";
-
+    ViewBag.Title = "ViewSubject";
     if (Session["parents_ic"] == null)
     {
         Response.Redirect("~/Login/Index");
@@ -50,7 +47,7 @@
             <!-- LOGO -->
             <div class="headerbar-left">
                 <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                
+
             </div>
 
             <nav class="navbar-custom">
@@ -234,10 +231,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Children Lists</h1>
+                                <h1 class="main-title float-left">Subject Lists</h1>
                                 <ol class="breadcrumb float-right">
                                     <li href="/Parent/ParentsDashboard" class="breadcrumb-item">Home</li>
-                                    <li href="/Parent/ViewChildren" class="breadcrumb-item active">Children Lists</li>
+                                    <li href="/Parent/ViewChildren" class="breadcrumb-item active">Subject Lists</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -248,7 +245,54 @@
                     <!-- end row -->
                     <!-- start student lists row -->
                     <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-folder"></i> Subject Details</h3>
+                                   
+                                </div>
 
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Subject Code</th>
+                                                    <th>Student Name</th>
+                                                    <th>Subject Type</th>
+                                                    <th>Subject Year</th>
+                                                    
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var subject in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td>@subject.subject_code</td>
+                                                        <td>@subject.subject_name</td>
+                                                        <td>@subject.subject_type</td>
+                                                        <td>@subject.subject_year</td>
+                                                        
+
+                                                    </tr>
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end table-responsive-->
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <!-- end card-body-->
+                            </div>
+                            <!-- end card-->
+                        </div>
 
 
                     </div>
@@ -257,64 +301,11 @@
                         <label>Name : </label>@Model.student_name
                         <label>Package : </label>@Model.student_name-->*@
 
-                    <p>
-                        @Html.ActionLink("Create New", "Create")
-                    </p>
-                    <table class="table table-bordered table-striped table-hover">
-                        <tr>
-                            <th>
-                                IC
-                                @*@Html.DisplayNameFor(model => model.student_ic)*@
-                            </th>
-                            <th>
-                                Name
-                                @*@Html.DisplayNameFor(model => model.student_name)*@
-                            </th>
-                            <th>
-                                Name (Chinese)
-                                @*@Html.DisplayNameFor(model => model.student_cname)*@
-                            </th>
-                            <th>
-                                Tuition Package
-                                @*@Html.DisplayNameFor(model => model.student_package)*@
-                            </th>
-                            <th>
-                                Action
-                            </th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @item.student_ic
-                                    @*@Html.DisplayFor(modelItem => item.student_ic)*@
-                                </td>
-                                <td>
-                                    @item.student_name
-                                    @*@Html.DisplayFor(modelItem => item.student_name)*@
-                                </td>
-                                <td>
-                                    @item.student_cname
-                                    @*@Html.DisplayFor(modelItem => item.student_cname)*@
-                                </td>
-                                <td>
-                                    @item.student_package
-                                    @*@Html.DisplayFor(modelItem => item.student_package)*@
-                                </td>
-                                <td>
-                                    @Html.ActionLink("View Details", "ViewChildrenDetails", new { id = item.student_ic })
-                                </td>
-                            </tr>
-                        }
-                    </table>
-
-
-                    <div class="row">
 
 
 
-                    </div>
+
+
                     <!-- end row-->
 
                 </div>
@@ -363,19 +354,15 @@
         $(document).on('ready', function () {
             // data-tables
             $('#dataTable').DataTable({
-                data: dataSet,
+                //    data:dataSet,
                 columns: [{
-                    title: "Name"
+                    title: "Subject Code"
                 }, {
-                    title: "Position"
+                    title: "Subject Name"
                 }, {
-                    title: "Office"
+                    title: "Subject Type"
                 }, {
-                    title: "Extn."
-                }, {
-                    title: "Date"
-                }, {
-                    title: "Salary"
+                    title: "Subject Year"
                 }]
             });
 
@@ -391,5 +378,4 @@
 </body>
 
 </html>
-
 
