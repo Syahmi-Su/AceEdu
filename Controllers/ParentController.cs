@@ -66,5 +66,11 @@ namespace AceTC.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewSubject()
+        {
+            AceDBEntities slist = new AceDBEntities();
+            return View(from Subject in slist.Subjects select Subject);
+        }
     }
 }

@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddPackageController.cs" />
     <Compile Include="Controllers\AddParentController.cs" />
     <Compile Include="Controllers\AddStudentController.cs" />
     <Compile Include="Controllers\AddSubjectController.cs" />
@@ -1645,6 +1646,9 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Admin\EditStudentDetails.cshtml" />
     <Content Include="Views\AddSubject\AddSubject.cshtml" />
+    <Content Include="Views\AddPackage\AddPackage.cshtml" />
+    <Content Include="Views\Admin\EditPackageDetails.cshtml" />
+    <Content Include="Views\Parent\ViewSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -82,8 +82,51 @@ namespace AceTC.Controllers
 
         public ActionResult PackageList()
         {
+            AceDBEntities packagelist = new AceDBEntities();
+            return View(from Package in packagelist.Packages select Package);
+            
+        }
+
+
+        public ActionResult EditPackageDetails(int id)
+        {
+
+            AceDBEntities entity = new AceDBEntities();
+            Package pack = entity.Packages.Find(id);
+            if (pack == null)
+                return View("NotFound");
+            else
+                return View(pack);
+        }
+        [HttpPost]
+        public ActionResult EditPackageDetails(Package package)
+        {
+            /*AceDBEntities entity = new AceDBEntities();
+            entity.Entry(student).State = EntityState.Modified;
+            entity.SaveChanges();
+            //ModelState.Clear();
+            //ViewBag.SuccessMessage = "Save Changes Successful. ";
+            return RedirectToAction("StudentList", "Admin");*/
+
+            using (AceDBEntities entity = new AceDBEntities())
+            {
+                entity.Entry(package).State = EntityState.Modified;
+                entity.SaveChanges();
+            }
+            ModelState.Clear();
+            ViewBag.SuccessMessage = "Save Changes Successful. ";
+            return RedirectToAction("PackageList", "Admin");
+
+        }
+
+        public ActionResult DeletePackage()
+        {
+
+
             return View();
         }
+
+
 
         public ActionResult SubjectList()
         {
