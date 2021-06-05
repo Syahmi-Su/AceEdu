@@ -11,11 +11,13 @@ namespace AceTC.Models
 {
     using System;
     using System.Collections.Generic;
+
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web.Mvc;
     using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
+
 
     public partial class Parent
     {
@@ -46,7 +48,5 @@ namespace AceTC.Models
 
         [DisplayName("Address")]
         public string parents_address { get; set; }
-
-
     }
 }

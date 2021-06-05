@@ -1,7 +1,7 @@
-﻿@model IEnumerable<AceTC.Models.MultipleClass>
+﻿@model AceTC.Models.Package
 @{ Layout = null;}
 @{
-    ViewBag.Title = "StudentList";
+    ViewBag.Title = "EditPackageDetails";
 
     if (Session["admin_id"] == null)
     {
@@ -47,8 +47,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-               
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
 
             <nav class="navbar-custom">
@@ -110,7 +110,7 @@
                             </div>
 
                             <!-- item-->
-                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
+                            <a href="#" class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
@@ -276,10 +276,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Manage Student</h1>
+                                <h1 class="main-title float-left">Manage Package</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Student</li>
+                                    <li class="breadcrumb-item active">Manage Package</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -290,61 +290,70 @@
                     <!-- end row -->
 
                     <div class="row">
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "PackageList")
+                        </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-users"></i> Student Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Student</button>
+                                    <h3><i class="fas fa-user-friends"></i> Edit Package Details</h3>
                                 </div>
 
                                 <div class="card-body">
-                                   
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Student IC</th>
-                                                    <th>Student Name</th>
-                                                    <th>Student Name (Chinese)</th>
-                                                    <th>Gender</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Category</th>
-                                                    <th>Study Year</th>
-                                                    <th>Package Taken</th>
-                                                    <th>Guardian</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var student in Model)
-                                                {
 
-                                                <tr>
-                                                    <td>@student.studentdetails.student_ic</td>
-                                                    <td>@student.studentdetails.student_name</td>
-                                                    <td>@student.studentdetails.student_cname</td>
-                                                    <td>@student.studentdetails.student_gender</td>
-                                                    <td>@student.studentdetails.student_dob.ToShortDateString()</td>
-                                                    <td>@student.studentdetails.student_category</td>
-                                                    <td>@student.studentdetails.student_year</td>
-                                                    <td>@student.studentdetails.student_package</td>
-                                                    <td>@student.parentdetails.parents_name</td>
-                                                    <td>
-                                                        @Html.ActionLink("Edit", "EditStudentDetails", new { id = student.studentdetails.student_ic })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink("Delete", "DeleteStudent", new { id = student.studentdetails.student_ic })
-                                                    </td>
-                                                </tr>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                                }
+                                    <div class="form-horizontal">
+                                        <h4>Student</h4>
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.package_id, "Package ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.package_id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-                                            </tbody>
-                                        </table>
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.package_desc, "Package Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.package_desc, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.package_desc, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.package_category, "Package Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
+
+                                                @Html.DropDownListFor(model => model.package_category, new SelectList(new[] { "Primary", "Secondary" }))
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.package_price, "Package Price (RM)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.package_price, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.package_price, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Save Changes" style="margin:auto;display:block;" class="btn btn-info" onclick = "return confirm('Are you sure want to submit?');" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- end table-responsive-->
-                                    <div>
+                                    }
 
-                                    </div>
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -407,21 +416,11 @@
                 }, {
                     title: "Student Name"
                 }, {
-                    title: "Student Name (Chinese)"
-                }, {
-                    title: "Gender"
-                }, {
-                    title: "Date of Birth"
-                }, {
-                    title: "Category"
-                }, {
-                    title: "Study Year"
+                    title: "Student Name (BC)"
                 }, {
                     title: "Package Taken"
                 }, {
                     title: "Guardian"
-                }, {
-                    title: "Action"
                 }]
             });
 

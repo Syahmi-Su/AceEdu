@@ -7,12 +7,12 @@
       <Diagram DiagramId="9317170f6f604d269f23b17ea21586ea" Name="Diagram1">
         <EntityTypeShape EntityType="AceDBModel.Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AceDBModel.Outstanding" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AceDBModel.Package" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AceDBModel.Parent" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AceDBModel.Payment" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AceDBModel.Status" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AceDBModel.Student" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="AceDBModel.Subject" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AceDBModel.Subject" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="AceDBModel.Student" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="AceDBModel.Package" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

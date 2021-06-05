@@ -70,6 +70,11 @@ namespace AceTC.Controllers
             return View();
         }
 
+        public ActionResult ViewSubject()
+        {
+            AceDBEntities slist = new AceDBEntities();
+            return View(from Subject in slist.Subjects select Subject);
+
 
 /*        public ActionResult editPassword(string id)
         {
@@ -132,6 +137,7 @@ namespace AceTC.Controllers
                 return RedirectToAction("ViewChildren", "Parent");
             }
             return View(parent);
+
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿@model IEnumerable<AceTC.Models.MultipleClass>
+﻿@model IEnumerable<AceTC.Models.Subject>
 @{ Layout = null;}
 @{
-    ViewBag.Title = "StudentList";
-
-    if (Session["admin_id"] == null)
+    ViewBag.Title = "ViewSubject";
+    if (Session["parents_ic"] == null)
     {
         Response.Redirect("~/Login/Index");
     }
@@ -48,7 +47,7 @@
             <!-- LOGO -->
             <div class="headerbar-left">
                 <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-               
+
             </div>
 
             <nav class="navbar-custom">
@@ -105,7 +104,7 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hi, @Session["admin_id"].ToString()</small>
+                                    <small>Hi, @Session["parents_ic"].ToString()</small>
                                 </h5>
                             </div>
 
@@ -141,9 +140,9 @@
                     <ul>
 
                         <li class="submenu">
-                            <a class="active" href="/Admin/AdminDashboard">
+                            <a class="active" href="index.html">
                                 <i class="fas fa-bars"></i>
-                                <span> Dashboard </span>
+                                <span> Parent Account </span>
                             </a>
                         </li>
 
@@ -156,20 +155,7 @@
                         </li>
 
 
-                        <li class="menu-title">Administration</li>
-                        <li class="submenu">
-                            <a id="tables" href="#">
-                                <i class="fas fa-user-circle"></i>
-                                <span> Parent List </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="/Admin/ParentList">Manage Parent List</a>
-                                </li>
-                            </ul>
-                        </li>
-
+                        <li class="menu-title">Student</li>
                         <li class="submenu">
                             <a id="tables" href="#">
                                 <i class="fas fa-users"></i>
@@ -178,22 +164,8 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Admin/StudentList">Manage Student List</a>
+                                    <a href="/Parent/ViewChildren">View Children List</a>
                                 </li>
-                            </ul>
-                        </li>
-
-                        <li class="submenu">
-                            <a id="tables" href="#">
-                                <i class="fas fa-book"></i>
-                                <span> Package List </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="/Admin/PackageList">Manage Package List</a>
-                                </li>
-
                             </ul>
                         </li>
 
@@ -205,9 +177,8 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Admin/SubjectList">Manage Subject List</a>
+                                    <a href="/Parent/ViewSubject">View Subject Offered</a>
                                 </li>
-
                             </ul>
                         </li>
 
@@ -222,24 +193,8 @@
 
                         <li class="submenu">
                             <a href="/Admin/testing">
-                                <i class="fas fa-list"></i>
-                                <span> Approval List</span>
-                            </a>
-                        </li>
-
-                        <li class="submenu">
-                            <a href="/Admin/testing">
                                 <i class="fas fa-history"></i>
                                 <span> Payment History</span>
-                            </a>
-                        </li>
-
-
-                        <li class="menu-title">Data Analytics</li>
-                        <li class="submenu">
-                            <a href="/Admin/testing">
-                                <i class="fas fa-chart-bar"></i>
-                                <span> Outstanding List</span>
                             </a>
                         </li>
 
@@ -248,7 +203,7 @@
                         <li class="submenu">
                             <a href="/Admin/testing">
                                 <i class="fas fa-info-circle"></i>
-                                <span> Admin Manual</span>
+                                <span> Parent Manual</span>
                             </a>
                         </li>
 
@@ -276,10 +231,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Manage Student</h1>
+                                <h1 class="main-title float-left">Subject Lists</h1>
                                 <ol class="breadcrumb float-right">
-                                    <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Student</li>
+                                    <li href="/Parent/ParentsDashboard" class="breadcrumb-item">Home</li>
+                                    <li href="/Parent/ViewChildren" class="breadcrumb-item active">Subject Lists</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -288,53 +243,41 @@
                         </div>
                     </div>
                     <!-- end row -->
-
+                    <!-- start student lists row -->
                     <div class="row">
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-users"></i> Student Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Student</button>
+                                    <h3><i class="fas fa-folder"></i> Subject Details</h3>
+                                   
                                 </div>
 
                                 <div class="card-body">
-                                   
+
                                     <div class="table-responsive">
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Student IC</th>
+                                                    <th>Subject Code</th>
                                                     <th>Student Name</th>
-                                                    <th>Student Name (Chinese)</th>
-                                                    <th>Gender</th>
-                                                    <th>Date of Birth</th>
-                                                    <th>Category</th>
-                                                    <th>Study Year</th>
-                                                    <th>Package Taken</th>
-                                                    <th>Guardian</th>
-                                                    <th>Action</th>
+                                                    <th>Subject Type</th>
+                                                    <th>Subject Year</th>
+                                                    
+
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var student in Model)
+                                                @foreach (var subject in Model)
                                                 {
 
-                                                <tr>
-                                                    <td>@student.studentdetails.student_ic</td>
-                                                    <td>@student.studentdetails.student_name</td>
-                                                    <td>@student.studentdetails.student_cname</td>
-                                                    <td>@student.studentdetails.student_gender</td>
-                                                    <td>@student.studentdetails.student_dob.ToShortDateString()</td>
-                                                    <td>@student.studentdetails.student_category</td>
-                                                    <td>@student.studentdetails.student_year</td>
-                                                    <td>@student.studentdetails.student_package</td>
-                                                    <td>@student.parentdetails.parents_name</td>
-                                                    <td>
-                                                        @Html.ActionLink("Edit", "EditStudentDetails", new { id = student.studentdetails.student_ic })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink("Delete", "DeleteStudent", new { id = student.studentdetails.student_ic })
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td>@subject.subject_code</td>
+                                                        <td>@subject.subject_name</td>
+                                                        <td>@subject.subject_type</td>
+                                                        <td>@subject.subject_year</td>
+                                                        
+
+                                                    </tr>
 
                                                 }
 
@@ -353,6 +296,16 @@
 
 
                     </div>
+                    <!-- end row -->
+                    @*<label>IC : </label>@Model.student_ic
+                        <label>Name : </label>@Model.student_name
+                        <label>Package : </label>@Model.student_name-->*@
+
+
+
+
+
+
                     <!-- end row-->
 
                 </div>
@@ -403,25 +356,13 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Student IC"
+                    title: "Subject Code"
                 }, {
-                    title: "Student Name"
+                    title: "Subject Name"
                 }, {
-                    title: "Student Name (Chinese)"
+                    title: "Subject Type"
                 }, {
-                    title: "Gender"
-                }, {
-                    title: "Date of Birth"
-                }, {
-                    title: "Category"
-                }, {
-                    title: "Study Year"
-                }, {
-                    title: "Package Taken"
-                }, {
-                    title: "Guardian"
-                }, {
-                    title: "Action"
+                    title: "Subject Year"
                 }]
             });
 
