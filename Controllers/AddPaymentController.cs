@@ -4,47 +4,49 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AceTC.Controllers;
 using AceTC.Models;
 
 namespace AceTC.Controllers
 {
-    public class OutstandingController : Controller
+    public class AddPaymentController : Controller
     {
-        // GET: Oustanding/Index
+        // GET: AddPayment
         public ActionResult Index()
         {
             using (AceDBEntities entity = new AceDBEntities())
             {
-                return View(entity.Outstandings.ToList());
+                return View(entity.Payments.ToList());
             }
-
+                
         }
 
-        // GET: Oustanding/Details/5
+        // GET: AddPayment/Details/5
         public ActionResult Details(int id)
         {
-            using (AceDBEntities entity = new AceDBEntities())
+            using(AceDBEntities entity = new AceDBEntities())
             {
-                return View(entity.Outstandings.Where(x => x.O_ID == id).FirstOrDefault());
+                return View(entity.Payments.Where(x => x.confirmation_id == id).FirstOrDefault());
             }
+            
         }
 
-        // GET: Oustanding/Create
+        // GET: AddPayment/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Oustanding/Create
+        // POST: AddPayment/Create
         [HttpPost]
-        public ActionResult Create(Outstanding outstanding)
+        public ActionResult Create(Payment payment)
         {
             try
             {
                 // TODO: Add insert logic here
                 using (AceDBEntities entity = new AceDBEntities())
                 {
-                    entity.Outstandings.Add(outstanding);
+                    entity.Payments.Add(payment);
                     entity.SaveChanges();
                 }
                 return RedirectToAction("Index");
@@ -55,25 +57,26 @@ namespace AceTC.Controllers
             }
         }
 
-        // GET: Oustanding/Edit/5
+        // GET: AddPayment/Edit/5
         public ActionResult Edit(int id)
         {
             using (AceDBEntities entity = new AceDBEntities())
             {
-                return View(entity.Outstandings.Where(x => x.O_ID == id).FirstOrDefault());
+                return View(entity.Payments.Where(x => x.confirmation_id == id).FirstOrDefault());
             }
         }
 
-        // POST: Oustanding/Edit/5
+        // POST: AddPayment/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Outstanding outstanding)
+        public ActionResult Edit(int id, Payment payment
+            )
         {
             try
             {
                 // TODO: Add update logic here
                 using (AceDBEntities entity = new AceDBEntities())
                 {
-                    entity.Entry(outstanding).State = EntityState.Modified;
+                    entity.Entry(payment).State = EntityState.Modified;
                     entity.SaveChanges();
                 }
                 return RedirectToAction("Index");
@@ -84,29 +87,30 @@ namespace AceTC.Controllers
             }
         }
 
-        // GET: Oustanding/Delete/5
+        // GET: AddPayment/Delete/5
         public ActionResult Delete(int id)
         {
             using (AceDBEntities entity = new AceDBEntities())
             {
-                return View(entity.Outstandings.Where(x => x.O_ID == id).FirstOrDefault());
+                return View(entity.Payments.Where(x => x.confirmation_id == id).FirstOrDefault());
             }
         }
 
-        // POST: Oustanding/Delete/5
+        // POST: AddPayment/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Outstanding outstanding)
+        public ActionResult Delete(int id, Payment payment)
         {
             try
             {
                 // TODO: Add delete logic here
                 using (AceDBEntities entity = new AceDBEntities())
                 {
-                    outstanding = entity.Outstandings.Where(x => x.O_ID == id).FirstOrDefault();
-                    entity.Outstandings.Remove(outstanding);
+                    payment = entity.Payments.Where(x => x.confirmation_id == id).FirstOrDefault();
+                    entity.Payments.Remove(payment);
                     entity.SaveChanges();
                 }
-                    return RedirectToAction("Index");
+
+                return RedirectToAction("Index");
             }
             catch
             {

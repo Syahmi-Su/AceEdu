@@ -9,27 +9,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Outstandings">
-      <EntityTypeMapping TypeName="AceDBModel.Outstanding">
-        <MappingFragment StoreEntitySet="Outstanding">
-          <ScalarProperty Name="O_ID" ColumnName="O_ID" />
-          <ScalarProperty Name="O_month" ColumnName="O_month" />
-          <ScalarProperty Name="O_pID" ColumnName="O_pID" />
-          <ScalarProperty Name="O_fees" ColumnName="O_fees" />
-          <ScalarProperty Name="O_remark" ColumnName="O_remark" />
-          <ScalarProperty Name="O_status" ColumnName="O_status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Packages">
-      <EntityTypeMapping TypeName="AceDBModel.Package">
-        <MappingFragment StoreEntitySet="Package">
-          <ScalarProperty Name="package_id" ColumnName="package_id" />
-          <ScalarProperty Name="package_name" ColumnName="package_name" />
-          <ScalarProperty Name="package_price" ColumnName="package_price" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Parents">
       <EntityTypeMapping TypeName="AceDBModel.Parent">
         <MappingFragment StoreEntitySet="Parents">
@@ -39,24 +18,6 @@
           <ScalarProperty Name="parents_email" ColumnName="parents_email" />
           <ScalarProperty Name="parents_phone" ColumnName="parents_phone" />
           <ScalarProperty Name="parents_address" ColumnName="parents_address" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Payments">
-      <EntityTypeMapping TypeName="AceDBModel.Payment">
-        <MappingFragment StoreEntitySet="Payment">
-          <ScalarProperty Name="confirmation_id" ColumnName="confirmation_id" />
-          <ScalarProperty Name="student_ic" ColumnName="student_ic" />
-          <ScalarProperty Name="parent_ic" ColumnName="parent_ic" />
-          <ScalarProperty Name="payment_fee" ColumnName="payment_fee" />
-          <ScalarProperty Name="ref_num" ColumnName="ref_num" />
-          <ScalarProperty Name="status_id" ColumnName="status_id" />
-          <ScalarProperty Name="confirmation_date" ColumnName="confirmation_date" />
-          <ScalarProperty Name="class_code" ColumnName="class_code" />
-          <ScalarProperty Name="payment_date" ColumnName="payment_date" />
-          <ScalarProperty Name="payment_detail" ColumnName="payment_detail" />
-          <ScalarProperty Name="payment_feedetails" ColumnName="payment_feedetails" />
-          <ScalarProperty Name="filename" ColumnName="filename" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -71,6 +32,10 @@
     <EntitySetMapping Name="Students">
       <EntityTypeMapping TypeName="AceDBModel.Student">
         <MappingFragment StoreEntitySet="Student">
+          <ScalarProperty Name="student_year" ColumnName="student_year" />
+          <ScalarProperty Name="student_category" ColumnName="student_category" />
+          <ScalarProperty Name="student_gender" ColumnName="student_gender" />
+          <ScalarProperty Name="student_dob" ColumnName="student_dob" />
           <ScalarProperty Name="student_ic" ColumnName="student_ic" />
           <ScalarProperty Name="student_name" ColumnName="student_name" />
           <ScalarProperty Name="student_cname" ColumnName="student_cname" />
@@ -82,9 +47,50 @@
     <EntitySetMapping Name="Subjects">
       <EntityTypeMapping TypeName="AceDBModel.Subject">
         <MappingFragment StoreEntitySet="Subject">
-          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+          <ScalarProperty Name="subject_year" ColumnName="subject_year" />
+          <ScalarProperty Name="subject_type" ColumnName="subject_type" />
           <ScalarProperty Name="subject_name" ColumnName="subject_name" />
-          <ScalarProperty Name="subject_fee" ColumnName="subject_fee" />
+          <ScalarProperty Name="subject_code" ColumnName="subject_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="AceDBModel.Package">
+        <MappingFragment StoreEntitySet="Package">
+          <ScalarProperty Name="package_price" ColumnName="package_price" />
+          <ScalarProperty Name="package_category" ColumnName="package_category" />
+          <ScalarProperty Name="package_desc" ColumnName="package_desc" />
+          <ScalarProperty Name="package_id" ColumnName="package_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="AceDBModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="filename" ColumnName="filename" />
+          <ScalarProperty Name="payment_feedetails" ColumnName="payment_feedetails" />
+          <ScalarProperty Name="payment_detail" ColumnName="payment_detail" />
+          <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+          <ScalarProperty Name="class_code" ColumnName="class_code" />
+          <ScalarProperty Name="confirmation_date" ColumnName="confirmation_date" />
+          <ScalarProperty Name="status_id" ColumnName="status_id" />
+          <ScalarProperty Name="ref_num" ColumnName="ref_num" />
+          <ScalarProperty Name="payment_fee" ColumnName="payment_fee" />
+          <ScalarProperty Name="parent_ic" ColumnName="parent_ic" />
+          <ScalarProperty Name="student_ic" ColumnName="student_ic" />
+          <ScalarProperty Name="confirmation_id" ColumnName="confirmation_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Outstandings">
+      <EntityTypeMapping TypeName="AceDBModel.Outstanding">
+        <MappingFragment StoreEntitySet="Outstanding">
+          <ScalarProperty Name="O_status" ColumnName="O_status" />
+          <ScalarProperty Name="O_remark" ColumnName="O_remark" />
+          <ScalarProperty Name="O_fees" ColumnName="O_fees" />
+          <ScalarProperty Name="O_pID" ColumnName="O_pID" />
+          <ScalarProperty Name="O_month" ColumnName="O_month" />
+          <ScalarProperty Name="O_ID" ColumnName="O_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

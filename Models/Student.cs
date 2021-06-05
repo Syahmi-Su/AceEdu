@@ -11,23 +11,17 @@ namespace AceTC.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Student
     {
-        [DisplayName("Identification Card No.")]
         public string student_ic { get; set; }
-
-        [DisplayName("Student Name")]
         public string student_name { get; set; }
-
-        [DisplayName("Student Name (Chinese)")]
         public string student_cname { get; set; }
-
-        [DisplayName("Package")]
         public int student_package { get; set; }
-
-        [DisplayName("Students Parent IC")]
         public string parent_ic { get; set; }
+        public System.DateTime student_dob { get; set; }
+        public string student_gender { get; set; }
+        public string student_category { get; set; }
+        public string student_year { get; set; }
     }
 }

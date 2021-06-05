@@ -15,7 +15,8 @@ namespace AceTC.Models
     public partial class Package
     {
         public int package_id { get; set; }
-        public string package_name { get; set; }
+        public string package_desc { get; set; }
+        public string package_category { get; set; }
         public double package_price { get; set; }
     }
 }
