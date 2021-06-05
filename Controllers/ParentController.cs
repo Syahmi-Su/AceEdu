@@ -1,7 +1,10 @@
 ﻿using AceTC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -65,6 +68,70 @@ namespace AceTC.Controllers
         public ActionResult ViewPaymentHistory()
         {
             return View();
+        }
+
+
+/*        public ActionResult editPassword(string id)
+        {
+            AceDBEntities entity = new AceDBEntities();
+            Parent par = entity.Parents.Find(id);
+            if (par == null)
+                return View("Error");
+            else
+                return View(par);
+
+        }
+
+        [HttpPost]
+        public ActionResult editPassword(Parent parent)
+        {
+            using (AceDBEntities entity = new AceDBEntities())
+            {
+                entity.Entry(parent).State = EntityState.Modified;
+                entity.SaveChanges();
+            }
+            ModelState.Clear();
+            ViewBag.SuccessMessage = "Save Changes Successful. ";
+            return RedirectToAction("ViewChildren", "Parent");
+
+        }*/
+
+
+
+        // GET: editpass/Edit/5
+        public ActionResult editPassword(string id)
+        {
+            string uid = Session["parents_ic"].ToString();
+            AceDBEntities entity = new AceDBEntities();
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Parent parent = entity.Parents.Find(id);
+            if (parent == null)
+            {
+                return HttpNotFound();
+            }
+            return View(parent);
+        }
+
+        // POST: editpass/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult editPassword([Bind(Include = "parents_ic,parents_name,parents_pass,confirmPass,parents_email,parents_phone,parents_address")] Parent parent)
+        {
+            string uid = Session["parents_ic"].ToString();
+            AceDBEntities entity = new AceDBEntities();
+            if (ModelState.IsValid)
+            {
+                entity.Entry(parent).State = EntityState.Modified;
+                entity.SaveChanges();
+                return RedirectToAction("ViewChildren", "Parent");
+            }
+            return View(parent);
         }
     }
 }

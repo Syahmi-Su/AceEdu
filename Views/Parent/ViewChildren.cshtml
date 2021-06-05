@@ -9,6 +9,8 @@
     {
         Response.Redirect("~/Login/Index");
     }
+
+    var ses = Session["parents_ic"];
 }
 
 <!DOCTYPE html>
@@ -71,10 +73,10 @@
                             </div>
 
                             <!-- item-->
-                            <a href="#" class="dropdown-item notify-item">
+                            <a href="@Url.Action("editPassword", "Parent", new { id = @Session["parents_ic"] })" class="dropdown-item notify-item">
                                 <p class="notify-details ml-0">
                                     <i class="fas fa-cog"></i>
-                                    <b>Settings 1</b>
+                                    <b>Change Password</b>
                                 </p>
                             </a>
 
