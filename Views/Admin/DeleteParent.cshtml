@@ -1,8 +1,7 @@
-﻿
-@model IEnumerable<AceTC.Models.Parent>
+﻿@model AceTC.Models.Parent
 @{ Layout = null;}
 @{
-    ViewBag.Title = "ParentList";
+    ViewBag.Title = "DeleteParent";
 
     if (Session["admin_id"] == null)
     {
@@ -48,7 +47,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" class="active" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+
             </div>
 
             <nav class="navbar-custom">
@@ -139,6 +139,7 @@
                 <div id="sidebar-menu">
 
                     <ul>
+
                         <li class="submenu">
                             <a class="active" href="/Admin/AdminDashboard">
                                 <i class="fas fa-bars"></i>
@@ -190,7 +191,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="tables-basic.html">Manage Package List</a>
+                                    <a href="/Admin/PackageList">Manage Package List</a>
                                 </li>
 
                             </ul>
@@ -204,7 +205,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="tables-basic.html">Manage Subject List</a>
+                                    <a href="/Admin/SubjectList">Manage Subject List</a>
                                 </li>
 
                             </ul>
@@ -278,7 +279,8 @@
                                 <h1 class="main-title float-left">Manage Parent</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Parent</li>
+                                    <li class="breadcrumb-item">Manage Parent</li>
+                                    <li class="breadcrumb-item active">Delete Parent</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -289,55 +291,67 @@
                     <!-- end row -->
 
                     <div class="row">
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "ParentList")
+                        </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-user-friends"></i> Parent Details</h3>
-
-                                    <button style="float:right;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddParent", "AddParent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Parent</button>&nbsp;&nbsp;
-                                    &nbsp;
-                                   
+                                    <h2 style="color:red"><i class="fas fa-exclamation"></i> WARNING </h2>
                                 </div>
 
                                 <div class="card-body">
-                                    <button class="btn btn-success btn-sm" onclick="javascript: fnExcelReport('dataTable', 'data')" style="float: right;"><i class="fa fa-download"></i>&nbsp; Download</button>
-<br />
-                                    <div class="table-responsive">
+                                    <h4 style="color:red">Are you sure want to DELETE this parent?</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Parent IC :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_ic)
+                                        </dd>
 
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                                        <dt>
+                                            Parent Name :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_name)
+                                        </dd>
 
-                                            <thead>
-                                                <tr>
-                                                    <th>Parent Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone Number</th>
-                                                    <th>Address</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var parent in Model)
-                                                {
-                                                    <tr>
-                                                        <td>@parent.parents_name</td>
-                                                        <td>@parent.parents_email</td>
-                                                        <td>@parent.parents_phone</td>
-                                                        <td>@parent.parents_address</td>
-                                                        <td>
-                                                        @Html.ActionLink(" Edit", "EditParentDetails", new { id = parent.parents_ic }, new { @class = "btn btn-warning fas fa-edit" })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink(" Delete", "DeleteParent", new { id = parent.parents_ic }, new { @class = "btn btn-danger fas fa-trash-alt" })
-                                                        </td>
-                                                    </tr>
-                                                }
+                                        <dt>
+                                            Email:
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_email)
+                                        </dd>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive-->
-                                    <div>
+                                        <dt>
+                                            Phone Number :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_phone)
+                                        </dd>
 
-                                    </div>
+                                        <dt>
+                                            Address :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_address)
+                                        </dd>
+                                    </dl>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-actions no-color">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Confirm Delete" class="btn btn-warning" style="margin:auto;display:block;" onclick="return confirm('Parent Deleted successfully !!');" />
+
+                                            </div>
+                                        </div>
+                                    }
+
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -388,12 +402,16 @@
     <!-- dataTabled data -->
     <script src="~/Content/assets/data/data_datatables.js"></script>
 
+    <!-- Charts data -->
+    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
     <script>
         $(document).on('ready', function () {
             // data-tables
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
+                    title: "Parent IC"
+                }, {
                     title: "Parent Name"
                 }, {
                     title: "Email"
@@ -411,36 +429,8 @@
             });
         });
     </script>
-
-    <!-- Charts data -->
-    <script src="~/Content/FileSaver.js"></script>
-    <script>
-        function fnExcelReport(id, name) {
-            var tab_text = '<html xmlns: x="urn:schemas-microsoft-com:office:excel">';
-            tab_text = tab_text + '<head><xml><x: ExcelWorkbook><x: ExcelWorksheets><x: ExcelWorksheet>';
-            tab_text = tab_text + '<x: Name>Test Sheet</x: Name>';
-            tab_text = tab_text + '<x: WorksheetOptions><x: Panes></x: Panes></x: WorksheetOptions ></x: ExcelWorksheet > ';
-            tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
-            tab_text = tab_text + "<table border='1px' style='color:black'>";
-
-
-            var exportTable = $('#' + id).clone();
-   //         exportTable.find('th').last().remove();
-            exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
-            exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
-
-            tab_text = tab_text + exportTable.html();
-            tab_text = tab_text + '</table></body></html>';
-            var fileName = "Demo" + '.xls';
-
-            //Save the file
-            var blob = new Blob([tab_text], { type: "application/vnd.ms-excel;charset=utf-8" })
-            window.saveAs(blob, fileName);
-        }
-    </script>
     <!-- END Java Script for this page -->
 
 </body>
 
 </html>
-
