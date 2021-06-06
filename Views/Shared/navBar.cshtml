@@ -36,10 +36,10 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                    <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                    <span style="color:white">Pusat Tuisyen Madani</span>
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
-            
+
             <nav class="navbar-custom">
 
                 <ul class="list-inline float-right mb-0">
@@ -135,7 +135,7 @@
                                 <span> Dashboard </span>
                             </a>
                         </li>
-                        
+
                         <li class="menu-title">Home</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -143,7 +143,7 @@
                                 <span> Notification</span>
                             </a>
                         </li>
-                        
+
 
                         <li class="menu-title">Administration</li>
                         <li class="submenu">
@@ -154,7 +154,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                  <a href="/Admin/ParentList">Manage Parent List</a>  
+                                    <a href="/Admin/ParentList">Manage Parent List</a>
                                 </li>
                             </ul>
                         </li>
@@ -199,7 +199,7 @@
 
                             </ul>
                         </li>
-                        
+
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
@@ -223,7 +223,7 @@
                             </a>
                         </li>
 
-                        
+
                         <li class="menu-title">Data Analytics</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -232,7 +232,7 @@
                             </a>
                         </li>
 
-                        
+
                         <li class="menu-title">User Manual</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -255,8 +255,11 @@
         </div>
         <!-- End Sidebar -->
 
-        @RenderBody()
+        <div class="container body-content">
+            @RenderBody()
 
+
+        </div>
         <!-- END content-page -->
 
         <footer class="footer">
@@ -290,35 +293,6 @@
     <!-- dataTabled data -->
     <script src="~/Content/assets/data/data_datatables.js"></script>
 
-    <!-- Charts data -->
-    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
-    <script>
-        $(document).on('ready', function () {
-            // data-tables
-            $('#dataTable').DataTable({
-                data: dataSet,
-                columns: [{
-                    title: "Name"
-                }, {
-                    title: "Position"
-                }, {
-                    title: "Office"
-                }, {
-                    title: "Extn."
-                }, {
-                    title: "Date"
-                }, {
-                    title: "Salary"
-                }]
-            });
-
-            // counter-up
-            $('.counter').counterUp({
-                delay: 10,
-                time: 600
-            });
-        });
-    </script>
     <!-- END Java Script for this page -->
 
 </body>

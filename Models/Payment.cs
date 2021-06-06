@@ -11,20 +11,61 @@ namespace AceTC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Payment
     {
+        [DisplayName("Payment ID")]
+        [Required]
         public int confirmation_id { get; set; }
-        public string student_ic { get; set; }
+
+        [DisplayName("Parent Identification Card No.")]
+        [Required]
         public string parent_ic { get; set; }
-        public double payment_fee { get; set; }
+
+        [DisplayName("Student Identification Card No.")]
+        [Required]
+        public string student_ic { get; set; }
+
+        [DisplayName("Reference Number")]
+        [Required]
         public string ref_num { get; set; }
+
+        [DisplayName("Payment Status")]
+        [Required]
         public int status_id { get; set; }
+
+        [DisplayName("Confirmation Date")]
         public System.DateTime confirmation_date { get; set; }
-        public int class_code { get; set; }
+
+        [DisplayName("Payment Date")]
         public System.DateTime payment_date { get; set; }
+
+        [DisplayName("Payment Detail")]
+        [Required]
         public string payment_detail { get; set; }
-        public string payment_feedetails { get; set; }
+
+        [DisplayName("Payment Feed Details (Optional)")]
+        public string payment_feedetailss { get; set; }
+
+        [DisplayName("Payment Fee")]
+        [Required]
+        public double payment_fee { get; set; }
+
+        [DisplayName("Meal Fee")]
+        public int meal_fee { get; set; }
+
+        [DisplayName("Transportation Fee")]
+        public int transport_fee { get; set; }
+
+        [DisplayName("First Time Registration")]
+        public int first_register { get; set; }
+
+        [DisplayName("Discount for lower Income Family (5%-10%) ")]
+        public float lower_discount { get; set; }
+
+        [DisplayName("Payment Proof")]
         public string filename { get; set; }
     }
 }

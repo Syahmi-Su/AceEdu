@@ -76,32 +76,32 @@ namespace AceTC.Controllers
             return View(from Subject in slist.Subjects select Subject);
 
 
-/*        public ActionResult editPassword(string id)
-        {
-            AceDBEntities entity = new AceDBEntities();
-            Parent par = entity.Parents.Find(id);
-            if (par == null)
-                return View("Error");
-            else
-                return View(par);
+            /*        public ActionResult editPassword(string id)
+                    {
+                        AceDBEntities entity = new AceDBEntities();
+                        Parent par = entity.Parents.Find(id);
+                        if (par == null)
+                            return View("Error");
+                        else
+                            return View(par);
+
+                    }
+
+                    [HttpPost]
+                    public ActionResult editPassword(Parent parent)
+                    {
+                        using (AceDBEntities entity = new AceDBEntities())
+                        {
+                            entity.Entry(parent).State = EntityState.Modified;
+                            entity.SaveChanges();
+                        }
+                        ModelState.Clear();
+                        ViewBag.SuccessMessage = "Save Changes Successful. ";
+                        return RedirectToAction("ViewChildren", "Parent");
+
+                    }*/
 
         }
-
-        [HttpPost]
-        public ActionResult editPassword(Parent parent)
-        {
-            using (AceDBEntities entity = new AceDBEntities())
-            {
-                entity.Entry(parent).State = EntityState.Modified;
-                entity.SaveChanges();
-            }
-            ModelState.Clear();
-            ViewBag.SuccessMessage = "Save Changes Successful. ";
-            return RedirectToAction("ViewChildren", "Parent");
-
-        }*/
-
-
 
         // GET: editpass/Edit/5
         public ActionResult editPassword(string id)

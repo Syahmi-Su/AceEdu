@@ -26,9 +26,9 @@ namespace AceTC.Models
 
         [DisplayName("Full Name")]
         public string parents_name { get; set; }
-        
 
-        [Required(ErrorMessage =  "Please Enter Password")]
+
+        [Required(ErrorMessage = "Please Enter Password")]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
         public string parents_pass { get; set; }
