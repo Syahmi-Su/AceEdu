@@ -322,9 +322,9 @@
                                                     <td>@student.studentdetails.student_package</td>
                                                     <td>@student.parentdetails.parents_name</td>
                                                     <td>
-                                                        @Html.ActionLink("Edit", "EditStudentDetails", new { id = student.studentdetails.student_ic })
+                                                        @Html.ActionLink(" Edit", "EditStudentDetails", new { id = student.studentdetails.student_ic }, new { @class = "btn btn-warning fas fa-edit" })
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink("Delete", "DeleteStudent", new { id = student.studentdetails.student_ic })
+                                                        @Html.ActionLink(" Delete", "DeleteStudent", new { id = student.studentdetails.student_ic }, new { @class = "btn btn-danger fas fa-trash-alt" })
                                                     </td>
                                                 </tr>
 
