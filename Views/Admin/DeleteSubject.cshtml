@@ -1,11 +1,14 @@
-﻿
+﻿@model AceTC.Models.Subject
+@{ Layout = null;}
 @{
-    ViewBag.Title = "SubjectList";
+    ViewBag.Title = "DeleteSubject";
+
+    if (Session["admin_id"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
-<<<<<<< Updated upstream
-<h2>SubjectList</h2>
-=======
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +47,7 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
 
             </div>
 
@@ -276,7 +279,8 @@
                                 <h1 class="main-title float-left">Manage Subject</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Subject</li>
+                                    <li class="breadcrumb-item">Manage Subject</li>
+                                    <li class="breadcrumb-item active">Delete Subject</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -287,53 +291,59 @@
                     <!-- end row -->
 
                     <div class="row">
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "SubjectList")
+                        </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-folder"></i> Subject Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddSubject", "AddSubject")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Subject</button>
+                                    <h2 style="color:red"><i class="fas fa-exclamation"></i> WARNING </h2>
                                 </div>
 
                                 <div class="card-body">
+                                    <h4 style="color:red">Are you sure want to DELETE this subject?</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Subject Code : 
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.subject_code)
+                                        </dd>
 
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Subject Code</th>
-                                                    <th>Student Name</th>
-                                                    <th>Subject Type</th>
-                                                    <th>Subject Year</th>
-                                                    <th>Action</th>
+                                        <dt>
+                                            Subject Name : 
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.subject_name)
+                                        </dd>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var subject in Model)
-                                                {
+                                        <dt>
+                                            Subject Type :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.subject_type)
+                                        </dd>
 
-                                                <tr>
-                                                    <td>@subject.subject_code</td>
-                                                    <td>@subject.subject_name</td>
-                                                    <td>@subject.subject_type</td>
-                                                    <td>@subject.subject_year</td>
-                                                    <th>
-                                                        @Html.ActionLink(" Edit", "EditSubjectDetails", new { id = subject.subject_code }, new { @class = "btn btn-warning fas fa-edit" })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink(" Delete", "DeleteSubject", new { id = subject.subject_code }, new { @class = "btn btn-danger fas fa-trash-alt" })
-                                                    </th>
+                                        <dt>
+                                            Subject Year : 
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.subject_year)
+                                        </dd>
+                                    </dl>
+                                    @using (Html.BeginForm()) { 
+                                        @Html.AntiForgeryToken()
 
-                                                </tr>
-
-                                                }
-
-                                            </tbody>
-                                        </table>
+                                <div class="form-actions no-color">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Confirm Delete" class="btn btn-warning" style="margin:auto;display:block;" onclick="return confirm('Subject Deleted successfully !!');" />
+                                        
                                     </div>
-                                    <!-- end table-responsive-->
-                                    <div>
+                                </div>
+                                    }
 
-                                    </div>
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -397,7 +407,7 @@
                     title: "Subject Name"
                 }, {
                     title: "Subject Type"
-                },{
+                }, {
                     title: "Subject Year"
                 }, {
                     title: "Action"
@@ -416,5 +426,4 @@
 </body>
 
 </html>
->>>>>>> Stashed changes
 
