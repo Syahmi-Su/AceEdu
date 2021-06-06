@@ -18,7 +18,13 @@ namespace AceTC.Controllers
 
         public ActionResult AdminDashboard()
         {
-            return View();
+            AceDBEntities entity = new AceDBEntities();
+            CountClass cnt = new CountClass()
+            {
+                studentcount = entity.Students.Count(),
+                packagecount = entity.Packages.Count()
+            };
+            return View(cnt);
         }
 
         public ActionResult StudentList()
@@ -26,11 +32,12 @@ namespace AceTC.Controllers
             AceDBEntities entity = new AceDBEntities();
             List<Student> studentparent = entity.Students.ToList();
             List<Parent> parentname = entity.Parents.ToList();
+            List<Package> packagename = entity.Packages.ToList();
 
             var multipletable = from s in studentparent
-                                join p in parentname on s.parent_ic equals p.parents_ic into table1
-                                from p in table1.DefaultIfEmpty()
-                                select new MultipleClass { studentdetails = s, parentdetails = p };
+                                join p in parentname on s.parent_ic equals p.parents_ic 
+                                join pc in packagename on s.student_package equals pc.package_id
+                                select new MultipleClass { studentdetails = s, parentdetails = p, packagedetails = pc };
 
             return View(multipletable);
         }

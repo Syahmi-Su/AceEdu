@@ -308,6 +308,7 @@
 
                                             <thead>
                                                 <tr>
+                                                    <th>Parent IC</th>
                                                     <th>Parent Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
@@ -318,6 +319,7 @@
                                                 @foreach (var parent in Model)
                                                 {
                                                     <tr>
+                                                        <td>@parent.parents_ic</td>
                                                         <td>@parent.parents_name</td>
                                                         <td>@parent.parents_email</td>
                                                         <td>@parent.parents_phone</td>
@@ -388,6 +390,8 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
+                    title: "Parent IC"
+                }, {
                     title: "Parent Name"
                 }, {
                     title: "Email"

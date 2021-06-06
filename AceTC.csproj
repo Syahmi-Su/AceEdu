@@ -159,6 +159,8 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CountClass.cs" />
+    <Compile Include="Models\JoinClass.cs" />
     <Compile Include="Models\MultipleClass.cs" />
     <Compile Include="Models\Outstanding.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
@@ -166,6 +168,7 @@
     <Compile Include="Models\Package.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PackageClass.cs" />
     <Compile Include="Models\Parent.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>

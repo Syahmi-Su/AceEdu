@@ -5,10 +5,9 @@ using System.Web;
 
 namespace AceTC.Models
 {
-    public class MultipleClass
+    public class JoinClass
     {
         public Student studentdetails { get; set; }
-        public Parent parentdetails { get; set; }
         public Package packagedetails { get; set; }
     }
 }
