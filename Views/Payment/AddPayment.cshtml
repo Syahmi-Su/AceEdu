@@ -1,0 +1,143 @@
+﻿@model AceTC.Models.Payment
+
+@{
+    ViewBag.Title = "addPayment";
+    Layout = "~/Views/Shared/navBar.cshtml";
+}
+
+<h2>addPayment</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Payment</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.confirmation_id)
+    @Html.HiddenFor(model => model.payment_feedetailss)
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.student_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.parent_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.payment_fee, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.payment_fee, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ref_num, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ref_num, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.status_id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.status_id, (SelectList)ViewBag.status_id, "-select-")
+            @Html.ValidationMessageFor(model => model.status_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.confirmation_date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.confirmation_date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.confirmation_date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.payment_date, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.payment_date, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.payment_detail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.filename, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.filename, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.meal_fee, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            Include
+            @Html.RadioButtonFor(model => model.meal_fee, "100") &nbsp;&nbsp;&nbsp;
+            Not Include
+            @Html.RadioButtonFor(model => model.meal_fee, "0")
+            @Html.ValidationMessageFor(model => model.meal_fee, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.transport_fee, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.transport_fee, (SelectList)ViewBag.transport_fee, "-select-")
+            @Html.ValidationMessageFor(model => model.transport_fee, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.first_register, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            Yes
+            @Html.RadioButtonFor(model => model.first_register, "30") &nbsp;&nbsp;&nbsp;
+            No
+            @Html.RadioButtonFor(model => model.first_register, "0")
+            @Html.ValidationMessageFor(model => model.first_register, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.lower_discount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.lower_discount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.lower_discount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn-default" />
+        </div>
+    </div>
+</div>
+}

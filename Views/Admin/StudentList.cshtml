@@ -191,7 +191,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="tables-basic.html">Manage Package List</a>
+                                    <a href="/Admin/PackageList">Manage Package List</a>
                                 </li>
 
                             </ul>
@@ -205,7 +205,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="tables-basic.html">Manage Subject List</a>
+                                    <a href="/Admin/SubjectList">Manage Subject List</a>
                                 </li>
 
                             </ul>
@@ -293,7 +293,7 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-user-friends"></i> Student Details</h3>
+                                    <h3><i class="fas fa-users"></i> Student Details</h3>
                                     <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddStudent", "AddStudent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Student</button>
                                 </div>
 
@@ -305,7 +305,11 @@
                                                 <tr>
                                                     <th>Student IC</th>
                                                     <th>Student Name</th>
-                                                    <th>Student Name (BC)</th>
+                                                    <th>Student Name (Chinese)</th>
+                                                    <th>Gender</th>
+                                                    <th>Date of Birth</th>
+                                                    <th>Category</th>
+                                                    <th>Study Year</th>
                                                     <th>Package Taken</th>
                                                     <th>Guardian</th>
                                                     <th>Action</th>
@@ -319,6 +323,10 @@
                                                     <td>@student.studentdetails.student_ic</td>
                                                     <td>@student.studentdetails.student_name</td>
                                                     <td>@student.studentdetails.student_cname</td>
+                                                    <td>@student.studentdetails.student_gender</td>
+                                                    <td>@student.studentdetails.student_dob.ToShortDateString()</td>
+                                                    <td>@student.studentdetails.student_category</td>
+                                                    <td>@student.studentdetails.student_year</td>
                                                     <td>@student.studentdetails.student_package</td>
                                                     <td>@student.parentdetails.parents_name</td>
                                                     <td>
@@ -401,10 +409,18 @@
                 }, {
                     title: "Student Name (Chinese)"
                 }, {
+                    title: "Gender"
+                }, {
+                    title: "Date of Birth"
+                }, {
+                    title: "Category"
+                }, {
+                    title: "Study Year"
+                }, {
                     title: "Package Taken"
                 }, {
                     title: "Guardian"
-                },{
+                }, {
                     title: "Action"
                 }]
             });

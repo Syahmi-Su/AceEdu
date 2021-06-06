@@ -1,9 +1,8 @@
-﻿@{ Layout = null;}
-
+﻿@model IEnumerable<AceTC.Models.Subject>
+@{ Layout = null;}
 @{
-    ViewBag.Title = "AdminDashboard";
-
-    if (Session["admin_id"] == null)
+    ViewBag.Title = "ViewSubject";
+    if (Session["parents_ic"] == null)
     {
         Response.Redirect("~/Login/Index");
     }
@@ -47,10 +46,10 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                    <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                    
+                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+
             </div>
-            
+
             <nav class="navbar-custom">
 
                 <ul class="list-inline float-right mb-0">
@@ -105,7 +104,7 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hi, @Session["admin_id"].ToString()</small>
+                                    <small>Hi, @Session["parents_ic"].ToString()</small>
                                 </h5>
                             </div>
 
@@ -141,12 +140,12 @@
                     <ul>
 
                         <li class="submenu">
-                            <a class="active" href="/Admin/AdminDashboard">
+                            <a class="active" href="index.html">
                                 <i class="fas fa-bars"></i>
-                                <span> Dashboard </span>
+                                <span> Parent Account </span>
                             </a>
                         </li>
-                        
+
                         <li class="menu-title">Home</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -154,22 +153,9 @@
                                 <span> Notification</span>
                             </a>
                         </li>
-                        
 
-                        <li class="menu-title">Administration</li>
-                        <li class="submenu">
-                            <a id="tables" href="#">
-                                <i class="fas fa-user-circle"></i>
-                                <span> Parent List </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="list-unstyled">
-                                <li>
-                                  <a href="/Admin/ParentList">Manage Parent List</a>  
-                                </li>
-                            </ul>
-                        </li>
 
+                        <li class="menu-title">Student</li>
                         <li class="submenu">
                             <a id="tables" href="#">
                                 <i class="fas fa-users"></i>
@@ -178,22 +164,8 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Admin/StudentList">Manage Student List</a>
+                                    <a href="/Parent/ViewChildren">View Children List</a>
                                 </li>
-                            </ul>
-                        </li>
-
-                        <li class="submenu">
-                            <a id="tables" href="#">
-                                <i class="fas fa-book"></i>
-                                <span> Package List </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="/Admin/PackageList">Manage Package List</a>
-                                </li>
-
                             </ul>
                         </li>
 
@@ -205,25 +177,17 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Admin/SubjectList">Manage Subject List</a>
+                                    <a href="/Parent/ViewSubject">View Subject Offered</a>
                                 </li>
-
                             </ul>
                         </li>
-                        
+
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Payment/addPayment">
-                                <i class="fas fa-credit-card"></i>
-                                <span> Add Payment</span>
-                            </a>
-                        </li>
-
-                        <li class="submenu">
                             <a href="/Admin/testing">
-                                <i class="fas fa-list"></i>
-                                <span> Approval List</span>
+                                <i class="fas fa-credit-card"></i>
+                                <span> Make Payment</span>
                             </a>
                         </li>
 
@@ -234,21 +198,12 @@
                             </a>
                         </li>
 
-                        
-                        <li class="menu-title">Data Analytics</li>
-                        <li class="submenu">
-                            <a href="/Outstanding/Index">
-                                <i class="fas fa-chart-bar"></i>
-                                <span> Outstanding List</span>
-                            </a>
-                        </li>
 
-                        
                         <li class="menu-title">User Manual</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
                                 <i class="fas fa-info-circle"></i>
-                                <span> Admin Manual</span>
+                                <span> Parent Manual</span>
                             </a>
                         </li>
 
@@ -276,10 +231,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Dashboard</h1>
+                                <h1 class="main-title float-left">Subject Lists</h1>
                                 <ol class="breadcrumb float-right">
-                                    <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li href="/Parent/ParentsDashboard" class="breadcrumb-item">Home</li>
+                                    <li href="/Parent/ViewChildren" class="breadcrumb-item active">Subject Lists</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -288,50 +243,69 @@
                         </div>
                     </div>
                     <!-- end row -->
-
-
+                    <!-- start student lists row -->
                     <div class="row">
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-danger">
-                                <i class="far fa-user float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Students</h6>
-                                <h1 class="m-b-20 text-white counter">487</h1>
-                                <span class="text-white">12 Today</span>
-                            </div>
-                        </div>
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-folder"></i> Subject Details</h3>
+                                   
+                                </div>
 
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-purple">
-                                <i class="fas fa-credit-card float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Payments</h6>
-                                <h1 class="m-b-20 text-white counter">290</h1>
-                                <span class="text-white">12 Today</span>
-                            </div>
-                        </div>
+                                <div class="card-body">
 
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-warning">
-                                <i class="fas fa-book float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Packages</h6>
-                                <h1 class="m-b-20 text-white counter">320</h1>
-                                <span class="text-white">25 Today</span>
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Subject Code</th>
+                                                    <th>Student Name</th>
+                                                    <th>Subject Type</th>
+                                                    <th>Subject Year</th>
+                                                    
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var subject in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td>@subject.subject_code</td>
+                                                        <td>@subject.subject_name</td>
+                                                        <td>@subject.subject_type</td>
+                                                        <td>@subject.subject_year</td>
+                                                        
+
+                                                    </tr>
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end table-responsive-->
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <!-- end card-body-->
                             </div>
+                            <!-- end card-->
                         </div>
 
 
                     </div>
                     <!-- end row -->
-
-
- 
-
-
-
-                    <div class="row">
+                    @*<label>IC : </label>@Model.student_ic
+                        <label>Name : </label>@Model.student_name
+                        <label>Package : </label>@Model.student_name-->*@
 
 
 
-                    </div>
+
+
+
                     <!-- end row-->
 
                 </div>
@@ -380,19 +354,15 @@
         $(document).on('ready', function () {
             // data-tables
             $('#dataTable').DataTable({
-                data: dataSet,
+                //    data:dataSet,
                 columns: [{
-                    title: "Name"
+                    title: "Subject Code"
                 }, {
-                    title: "Position"
+                    title: "Subject Name"
                 }, {
-                    title: "Office"
+                    title: "Subject Type"
                 }, {
-                    title: "Extn."
-                }, {
-                    title: "Date"
-                }, {
-                    title: "Salary"
+                    title: "Subject Year"
                 }]
             });
 
