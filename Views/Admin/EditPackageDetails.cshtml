@@ -48,7 +48,7 @@
             <!-- LOGO -->
             <div class="headerbar-left">
                 <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                <span style="color:white">Pusat Tuisyen Madani</span>
+                
             </div>
 
             <nav class="navbar-custom">
@@ -110,7 +110,7 @@
                             </div>
 
                             <!-- item-->
-                            <a href="#" class="dropdown-item notify-item">
+                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
@@ -312,7 +312,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.package_id, "Package ID", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.package_id, "", new { @class = "text-danger" })
                                             </div>
                                         </div>

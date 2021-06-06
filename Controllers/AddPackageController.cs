@@ -9,15 +9,25 @@ namespace AceTC.Controllers
 {
     public class AddPackageController : Controller
     {
+        AceDBEntities db = new AceDBEntities();
         // GET: AddPackage
         public ActionResult AddPackage()
         {
-            Package addpack = new Package();
+            PackageClass addpack = new PackageClass();
+            var Id = db.Packages.OrderByDescending(c => c.package_id).FirstOrDefault();
+            if(Id == null)
+            {
+                addpack.package_id = 1;
+            }
+            else
+            {
+                addpack.package_id = Id.package_id + 1;
+            }
             return View(addpack);
         }
 
         [HttpPost]
-        public ActionResult AddPackage(Package package)
+        public ActionResult AddPackage([Bind(Include = "package_id,package_desc,package_category,package_price")] Package package)
         {
             using (AceDBEntities db = new AceDBEntities())
             {

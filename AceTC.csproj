@@ -168,6 +168,7 @@
     <Compile Include="Models\Package.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PackageClass.cs" />
     <Compile Include="Models\Parent.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
