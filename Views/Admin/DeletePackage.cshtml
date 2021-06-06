@@ -1,11 +1,14 @@
-﻿
+﻿@model AceTC.Models.Package
+@{ Layout = null;}
 @{
-    ViewBag.Title = "PackageList";
+    ViewBag.Title = "DeletePackage";
+
+    if (Session["admin_id"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
-<<<<<<< Updated upstream
-<h2>PackageList</h2>
-=======
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +47,7 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
 
             </div>
 
@@ -276,7 +279,8 @@
                                 <h1 class="main-title float-left">Manage Package</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Package</li>
+                                    <li class="breadcrumb-item">Manage Package</li>
+                                    <li class="breadcrumb-item active">Delete Package</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -287,54 +291,60 @@
                     <!-- end row -->
 
                     <div class="row">
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "PackageList")
+                        </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-book"></i> Package Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddPackage", "AddPackage")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Package</button>
+                                    <h2 style="color:red"><i class="fas fa-exclamation"></i> WARNING </h2>
                                 </div>
 
                                 <div class="card-body">
+                                    <h4 style="color:red">Are you sure want to DELETE this tuition package?</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Package ID :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_id)
+                                        </dd>
 
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Package ID</th>
-                                                    <th>Package Description</th>
-                                                    <th>Package Category</th>
-                                                    <th>Price (RM)</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var package in Model)
-                                                {
+                                        <dt>
+                                            Package Description :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_desc)
+                                        </dd>
 
-                                                <tr>
-                                                    <td>@package.package_id</td>
-                                                    <td>@package.package_desc</td>
-                                                    <td>@package.package_category</td>
-                                                    <td>@package.package_price</td>
-                                                    <td>
-                                                        @Html.ActionLink(" Edit", "EditPackageDetails", new { id = package.package_id }, new { @class = "btn btn-warning fas fa-edit" })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink(" Delete", "DeletePackage", new { id = package.package_id }, new { @class = "btn btn-danger fas fa-trash-alt" })
-                                                    </td>
+                                        <dt>
+                                            Package Category :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_category)
+                                        </dd>
+
+                                        <dt>
+                                            Price (RM) :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_price)
+                                        </dd>
+                                    </dl>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-actions no-color">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Confirm Delete" class="btn btn-warning" style="margin:auto;display:block;" onclick="return confirm('Package Deleted successfully !!');" />
+
+                                            </div>
+                                        </div>
+                                    }
 
 
-                                                   
-                                                </tr>
-
-                                                }
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive-->
-                                    <div>
-
-                                    </div>
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -417,6 +427,3 @@
 </body>
 
 </html>
-
->>>>>>> Stashed changes
-
