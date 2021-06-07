@@ -73,15 +73,15 @@ namespace AceTC.Controllers
 
             List<Student> studentlist = entity.Students.ToList();
             List<Parent> parentlist = entity.Parents.ToList();
-            List<Outstanding> outstandinglist = entity.Outstandings.ToList();
+            List<Payment> paymentlist = entity.Payments.ToList();
 
             var multipletable = from s in studentlist
                                 join p in parentlist on s.parent_ic equals p.parents_ic into table1
                                 from p in table1.DefaultIfEmpty()
-                                join o in outstandinglist on p.parents_ic equals o.O_pID into table2
+                                join o in paymentlist on p.parents_ic equals o.parent_ic into table2
                                 from o in table2.DefaultIfEmpty()
                                 where p.parents_ic == Session["parents_ic"].ToString()
-                                select new MultipleClass { studentdetails = s, parentdetails = p, outstandingdetails = o };
+                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = o };
 
             return View(multipletable);
         }

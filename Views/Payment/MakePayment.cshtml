@@ -302,11 +302,10 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Parent IC</th>
-                                                    <th>Parent Name</th>
-                                                    <th>Student IC</th>
-                                                    <th>Student Name</th>
-                                                    <th>Month</th>
+                                                    <th>Reference Number</th>
+                                                    <th>Date Issued</th>
+                                                    <th>Status</th>
+                                                    <th>Payment Date</th>
                                                     <th>Fee</th>
                                                     <th>Operation</th>
                                                 </tr>
@@ -315,13 +314,12 @@
                                                 @foreach (var student in Model)
                                                 {
                                                 <tr>
-                                                    <td>@student.parentdetails.parents_ic</td>
-                                                    <td>@student.parentdetails.parents_name</td>
-                                                    <td>@student.studentdetails.student_ic</td>
-                                                    <td>@student.studentdetails.student_name</td>
-                                                    <td>@student.outstandingdetails.O_month</td>
-                                                    <td>@student.outstandingdetails.O_fees</td>
-                                                    <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Payment", new { student.parentdetails.parents_ic})'>Make Payment</a></td>
+                                                    <td>@student.paymentdetails.ref_num</td>
+                                                    <td>@student.paymentdetails.confirmation_date</td>
+                                                    <td>@student.paymentdetails.status_id</td>
+                                                    <td>@student.paymentdetails.payment_date</td>
+                                                    <td>@student.paymentdetails.payment_fee</td>
+                                                    <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Payment", new { student.parentdetails.parents_ic})'>Upload Payment Proof</a></td>
                                                 </tr>
                                                 }
 
