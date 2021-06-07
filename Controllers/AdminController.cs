@@ -48,9 +48,14 @@ namespace AceTC.Controllers
 
             AceDBEntities entity = new AceDBEntities();
             Student stud = entity.Students.Find(id);
-            if (stud == null)
-                return View("NotFound");
-            else
+            var par = entity.Parents.ToList();
+            var pack = entity.Packages.ToList();
+            if (par != null && pack != null)
+            {
+                ViewBag.data = par;
+                ViewBag.packs = pack;
+            }
+
                 return View(stud);
         }
         [HttpPost]
@@ -153,9 +158,15 @@ namespace AceTC.Controllers
         // GET: PACKAGE
         public ActionResult PackageList()
         {
-            AceDBEntities packagelist = new AceDBEntities();
-            return View(from Package in packagelist.Packages select Package);
-            
+            AceDBEntities entity = new AceDBEntities();
+            List<Student> studentparent = entity.Students.ToList();
+            List<Package> packagename = entity.Packages.ToList();
+
+            var multable = from pc in packagename
+                                join s in studentparent on pc.package_id equals s.student_package
+                                select new MultipleClass { studentdetails = s, packagedetails = pc };
+            return View(multable);
+
         }
 
 
@@ -198,30 +209,8 @@ namespace AceTC.Controllers
         }
 
 
-        public ActionResult EditPackageDetails(int id)
-        {
-
-            AceDBEntities entity = new AceDBEntities();
-            Package pack = entity.Packages.Find(id);
-            if (pack == null)
-                return View("NotFound");
-            else
-                return View(pack);
-        }
-        [HttpPost]
-        public ActionResult EditPackageDetails(Package package)
-        {
-
-            using (AceDBEntities entity = new AceDBEntities())
-            {
-                entity.Entry(package).State = EntityState.Modified;
-                entity.SaveChanges();
-            }
-            ModelState.Clear();
-            //ViewBag.SuccessMessage = "Save Changes Successful. ";
-            return RedirectToAction("PackageList", "Admin");
-
-        }
+        
+       
 
         public ActionResult DeletePackage(int id)
         {
@@ -244,14 +233,6 @@ namespace AceTC.Controllers
             return RedirectToAction("PackageList", "Admin");
         }
 
-
-        // GET: SUBJECT
-        public ActionResult SubjectList()
-        {
-            AceDBEntities slist = new AceDBEntities();
-            return View(from Subject in slist.Subjects select Subject);
-
-        }
 
         public ActionResult EditSubjectDetails(string id)
         {

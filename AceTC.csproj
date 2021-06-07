@@ -137,6 +137,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OutstandingController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
+    <Compile Include="Controllers\ParentsControllerdummy.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1652,6 +1653,13 @@
     <Content Include="Views\AddPackage\AddPackage.cshtml" />
     <Content Include="Views\Admin\EditPackageDetails.cshtml" />
     <Content Include="Views\Parent\ViewSubject.cshtml" />
+    <Content Include="Views\Admin\DeletePackage.cshtml" />
+    <Content Include="Views\Admin\DeleteParent.cshtml" />
+    <Content Include="Views\Admin\DeleteStudent.cshtml" />
+    <Content Include="Views\Admin\DeleteSubject.cshtml" />
+    <Content Include="Views\Admin\EditParentDetails.cshtml" />
+    <Content Include="Views\Admin\EditSubjectDetails.cshtml" />
+    <Content Include="Views\Parent\editPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
