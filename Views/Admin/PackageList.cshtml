@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AceTC.Models.Package>
+﻿@model IEnumerable<AceTC.Models.MultipleClass>
 @{ Layout = null;}
 @{
     ViewBag.Title = "PackageList";
@@ -307,6 +307,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Package ID</th>
+                                                    <th>Student Name</th>
                                                     <th>Package Description</th>
                                                     <th>Package Category</th>
                                                     <th>Price (RM)</th>
@@ -318,18 +319,19 @@
                                                 {
 
                                                 <tr>
-                                                    <td>@package.package_id</td>
-                                                    <td>@package.package_desc</td>
-                                                    <td>@package.package_category</td>
-                                                    <td>@package.package_price</td>
+                                                    <td>@package.packagedetails.package_id</td>
+                                                    <td>@package.studentdetails.student_name</td>
+                                                    <td>@package.packagedetails.package_desc</td>
+                                                    <td>@package.packagedetails.package_category</td>
+                                                    <td>@package.packagedetails.package_price</td>
                                                     <td>
-                                                        @Html.ActionLink("Edit", "EditPackageDetails", new { id = package.package_id }, new { @class = "btn btn-warning fas fa-edit" })
+                                                        @Html.ActionLink("Edit", "EditPackageDetails", new { id = package.packagedetails.package_id }, new { @class = "btn btn-warning fas fa-edit" })
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink("Delete", "DeletePackage", new { id = package.package_id }, new { @class = "btn btn-danger fas fa-trash-alt", onclick = "return confirm('Are you sure want to delete?');" })
+                                                        @Html.ActionLink("Delete", "DeletePackage", new { id = package.packagedetails.package_id }, new { @class = "btn btn-danger fas fa-trash-alt", onclick = "return confirm('Are you sure want to delete?');" })
                                                     </td>
 
 
-                                                   
+
                                                 </tr>
 
                                                 }
@@ -400,6 +402,8 @@
                 //    data:dataSet,
                 columns: [{
                     title: "Package ID"
+                }, {
+                    title: "Student Name"
                 }, {
                     title: "Package Description"
                 }, {

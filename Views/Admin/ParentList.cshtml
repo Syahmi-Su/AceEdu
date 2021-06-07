@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<AceTC.Models.Parent>
+﻿@model IEnumerable<AceTC.Models.Parent>
 @{ Layout = null;}
 @{
     ViewBag.Title = "ParentList";
@@ -296,12 +295,12 @@
 
                                     <button style="float:right;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddParent", "AddParent")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Parent</button>&nbsp;&nbsp;
                                     &nbsp;
-                                   
+
                                 </div>
 
                                 <div class="card-body">
                                     <button class="btn btn-success btn-sm" onclick="javascript: fnExcelReport('dataTable', 'data')" style="float: right;"><i class="fa fa-download"></i>&nbsp; Download</button>
-<br />
+                                    <br />
                                     <div class="table-responsive">
 
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
@@ -326,9 +325,9 @@
                                                         <td>@parent.parents_phone</td>
                                                         <td>@parent.parents_address</td>
                                                         <td>
-                                                        @Html.ActionLink(" Edit", "EditParentDetails", new { id = parent.parents_ic }, new { @class = "btn btn-warning fas fa-edit" })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        @Html.ActionLink(" Delete", "DeleteParent", new { id = parent.parents_ic }, new { @class = "btn btn-danger fas fa-trash-alt" })
+                                                            @Html.ActionLink(" Edit", "EditParentDetails", new { id = parent.parents_ic }, new { @class = "btn btn-warning fas fa-edit" })
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            @Html.ActionLink(" Delete", "DeleteParent", new { id = parent.parents_ic }, new { @class = "btn btn-danger fas fa-trash-alt" })
                                                         </td>
                                                     </tr>
                                                 }
@@ -405,7 +404,10 @@
                     title: "Phone Number"
                 }, {
                     title: "Address"
-                }]
+                }, {
+                    title: "Action"
+                }
+                ]
             });
 
             // counter-up
@@ -429,7 +431,7 @@
 
 
             var exportTable = $('#' + id).clone();
-   //         exportTable.find('th').last().remove();
+            //         exportTable.find('th').last().remove();
             exportTable.find('input').each(function (index, elem) { $(elem).remove(); });
             exportTable.find('a').each(function (index, elem) { $(elem).remove(); });
 

@@ -310,7 +310,7 @@
                                                     <th>Date of Birth</th>
                                                     <th>Category</th>
                                                     <th>Study Year</th>
-                                                    <th>Package ID</th>
+                                                    
                                                     <th>Package Name</th>
                                                     <th>Guardian</th>
                                                     <th>Action</th>
@@ -328,12 +328,12 @@
                                                     <td>@student.studentdetails.student_dob.ToShortDateString()</td>
                                                     <td>@student.studentdetails.student_category</td>
                                                     <td>@student.studentdetails.student_year</td>
-                                                    <td>@student.studentdetails.student_package</td>
+                                                    
                                                     <td>@student.packagedetails.package_desc</td>
                                                     <td>@student.parentdetails.parents_name</td>
                                                     <td>
                                                         @Html.ActionLink(" Edit", "EditStudentDetails", new { id = student.studentdetails.student_ic }, new { @class = "btn btn-warning fas fa-edit" })
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        &nbsp;&nbsp;
                                                         @Html.ActionLink(" Delete", "DeleteStudent", new { id = student.studentdetails.student_ic }, new { @class = "btn btn-danger fas fa-trash-alt" })
                                                     </td>
                                                 </tr>
@@ -418,8 +418,6 @@
                     title: "Category"
                 }, {
                     title: "Study Year"
-                }, {
-                    title: "Package ID"
                 }, {
                    title: "Package Name"
                 }, {
