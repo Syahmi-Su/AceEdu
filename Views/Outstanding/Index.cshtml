@@ -1,16 +1,14 @@
-﻿@model IEnumerable<AceTC.Models.MultipleClass>
+﻿@model IEnumerable<AceTC.Models.Outstanding>
 
 @{ Layout = null;}
 
 @{
-    ViewBag.Title = "ViewPaymentHistory";
+    ViewBag.Title = "Index";
 
-    if (Session["parents_ic"] == null)
+    if (Session["admin_id"] == null)
     {
         Response.Redirect("~/Login/Index");
     }
-
-    var ses = Session["parents_ic"];
 }
 
 <!DOCTYPE html>
@@ -73,10 +71,10 @@
                             </div>
 
                             <!-- item-->
-                            <a href="@Url.Action("editPassword", "Parent", new { id = @Session["parents_ic"] })" class="dropdown-item notify-item">
+                            <a href="#" class="dropdown-item notify-item">
                                 <p class="notify-details ml-0">
                                     <i class="fas fa-cog"></i>
-                                    <b>Change Password</b>
+                                    <b>Settings 1</b>
                                 </p>
                             </a>
 
@@ -109,7 +107,7 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hi, @Session["parents_ic"].ToString()</small>
+                                    <small>Hi, @Session["admin_id"].ToString()</small>
                                 </h5>
                             </div>
 
@@ -145,9 +143,9 @@
                     <ul>
 
                         <li class="submenu">
-                            <a class="active" href="index.html">
+                            <a class="active" href="/Admin/AdminDashboard">
                                 <i class="fas fa-bars"></i>
-                                <span> Parent Account </span>
+                                <span> Dashboard </span>
                             </a>
                         </li>
 
@@ -160,7 +158,20 @@
                         </li>
 
 
-                        <li class="menu-title">Student</li>
+                        <li class="menu-title">Administration</li>
+                        <li class="submenu">
+                            <a id="tables" href="#">
+                                <i class="fas fa-user-circle"></i>
+                                <span> Parent List </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/Admin/ParentList">Manage Parent List</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="submenu">
                             <a id="tables" href="#">
                                 <i class="fas fa-users"></i>
@@ -169,8 +180,22 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Parent/ViewChildren">View Children List</a>
+                                    <a href="/Admin/StudentList">Manage Student List</a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a id="tables" href="#">
+                                <i class="fas fa-book"></i>
+                                <span> Package List </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="tables-basic.html">Manage Package List</a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -182,24 +207,41 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Parent/ViewSubject">View Subject Offered</a>
+                                    <a href="tables-basic.html">Manage Subject List</a>
                                 </li>
+
                             </ul>
                         </li>
 
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Parent/MakePayment">
+                            <a href="/Payment/AddPayment">
                                 <i class="fas fa-credit-card"></i>
                                 <span> Make Payment</span>
                             </a>
                         </li>
 
                         <li class="submenu">
-                            <a href="/Parent/ViewPaymentHistory">
+                            <a href="/Payment/ApprovalList">
+                                <i class="fas fa-list"></i>
+                                <span> Approval List</span>
+                            </a>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="/Payment/PaymentHistories">
                                 <i class="fas fa-history"></i>
                                 <span> Payment History</span>
+                            </a>
+                        </li>
+
+
+                        <li class="menu-title">Data Analytics</li>
+                        <li class="submenu">
+                            <a href="/Outstanding/Index">
+                                <i class="fas fa-chart-bar"></i>
+                                <span> Outstanding List</span>
                             </a>
                         </li>
 
@@ -208,7 +250,7 @@
                         <li class="submenu">
                             <a href="/Admin/testing">
                                 <i class="fas fa-info-circle"></i>
-                                <span> Parent Manual</span>
+                                <span> Admin Manual</span>
                             </a>
                         </li>
 
@@ -236,10 +278,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Payment History</h1>
+                                <h1 class="main-title float-left">Outstanding List</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Payment History</li>
+                                    <li class="breadcrumb-item active">Outstanding List</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -253,7 +295,8 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-users"></i> Payment History Details</h3>
+                                    <h3><i class="fas fa-user-friends"></i> Outstanding</h3>
+                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("Create", "Outstanding")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Outstanding</button>
                                 </div>
 
                                 <div class="card-body">
@@ -262,42 +305,33 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Student Name</th>
-                                                    <th>Chinese Name</th>
-                                                    <th>Ref No</th>
-                                                    <th>Payment Date</th>
-                                                    <th>Payment Detail</th>
-                                                    <th>Fee Detail</th>
-                                                    <th>Amount Paid</th>
-                                                    <th>Proof</th>
-                                                    <th>Confirmation Date</th>
+                                                    <th>ID</th>
+                                                    <th>Month</th>
+                                                    <th>Parent</th>
+                                                    <th>Fees</th>
+                                                    <th>Remark</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var payment in Model)
+                                                @foreach (var outstanding in Model)
                                                 {
 
                                                     <tr>
-                                                        <td>@payment.studentdetails.student_name</td>
-                                                        <td>@payment.studentdetails.student_cname</td>
-                                                        <td>@payment.paymentdetails.ref_num</td>
-                                                        <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
-                                                        <td>@payment.paymentdetails.payment_detail</td>
-                                                        <td>@payment.paymentdetails.payment_feedetailss</td>
-                                                        <td>@payment.paymentdetails.payment_fee</td>
-                                                        <td>@payment.paymentdetails.filename</td>
-                                                        <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
-                                                        @if (payment.statusdetails.status_id == 2)
-                                                        {
-                                                            <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { payment.parentdetails.parents_ic})'>View</a></td>
+                                                        <td>@outstanding.O_ID</td>
+                                                        <td>@outstanding.O_month</td>
+                                                        <td>@outstanding.O_pID</td>
+                                                        <td>@outstanding.O_fees</td>
+                                                        <td>@outstanding.O_remark</td>
+                                                        <td>@outstanding.O_status</td>
+                                                        <td>
+                                                            <a class='btn btn-info' href='@Url.Action("Edit", "Outstanding", new { id = outstanding.O_ID})'>Edit</a>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <a class='btn btn-info' href='@Url.Action("Details", "Outstanding", new { id = outstanding.O_ID})'>Details</a>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <a class='btn btn-info' href='@Url.Action("Delete", "Outstanding", new { id = outstanding.O_ID})'>Delete</a>
+                                                        </td>
                                                     </tr>
 
                                                 }
@@ -367,21 +401,15 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Student Name"
+                    title: "ID"
                 }, {
-                    title: "Chinese Name"
+                    title: "Month"
                 }, {
-                    title: "Ref No"
+                    title: "Parent"
                 }, {
-                    title: "Payment Date"
+                    title: "Fees"
                 }, {
-                    title: "Payment Detail"
-                }, {
-                    title: "Fee Detail"
-                }, {
-                    title: "Amount Paid"
-                }, {
-                    title: "Confirmation Date"
+                    title: "Remark"
                 }, {
                     title: "Status"
                 }, {

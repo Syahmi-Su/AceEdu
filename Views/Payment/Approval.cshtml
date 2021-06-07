@@ -1,12 +1,16 @@
-﻿@model IEnumerable<AceTC.Models.Subject>
+﻿@model AceTC.Models.Payment
+
 @{ Layout = null;}
+
 @{
-    ViewBag.Title = "SubjectList";
-    if (Session["admin_id"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
+   ViewBag.Title = "Approval";
+
+   if (Session["admin_id"] == null)
+   {
+       Response.Redirect("~/Login/Index");
+   }
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +50,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
 
             <nav class="navbar-custom">
@@ -275,10 +279,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Manage Subject</h1>
+                                <h1 class="main-title float-left">Approval</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Subject</li>
+                                    <li class="breadcrumb-item">Approval List</li>
+                                    <li class="breadcrumb-item active">Approval</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -292,46 +297,126 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-folder"></i> Subject Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddSubject", "AddSubject")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Subject</button>
+                                    <h3><i class="fas fa-user-friends"></i> Approval</h3>
                                 </div>
 
                                 <div class="card-body">
 
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Subject Code</th>
-                                                    <th>Student Name</th>
-                                                    <th>Subject Type</th>
-                                                    <th>Subject Year</th>
-                                                    <th>Action</th>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var subject in Model)
+                                    <div class="form-horizontal">
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.confirmation_id)
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.parent_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.student_ic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.ref_num, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.ref_num, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.payment_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control"} })
+                                                @Html.ValidationMessageFor(model => model.payment_date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.payment_detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.payment_feedetailss, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.payment_feedetailss, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.payment_feedetailss, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.payment_feedetailss, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.payment_fee, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
+                                                @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control"} })
+                                                @Html.ValidationMessageFor(model => model.payment_fee, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.filename, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.filename, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.confirmation_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @*@Html.EditorFor(model => model.confirmation_date, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly", value = "@DateTime.Now" } })*@
+                                                @Html.EditorFor(model => model.confirmation_date, new { htmlAttributes = new { @class = "form-control", value = "@DateTime.Now" } })
+                                                @Html.ValidationMessageFor(model => model.confirmation_date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(model => model.status_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                                            <div class="col-md-10">
+                                                @Html.DropDownList("Dropdown", new List<SelectListItem>
                                                 {
+                                                    new SelectListItem { Text = "Approved", Value = "2", Selected=true },
+                                                    new SelectListItem { Text = "Rejected", Value = "3" },
+                                                    }, "Select Approval")
+                                                @Html.ValidationMessageFor(model => model.status_id, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-                                                <tr>
-                                                    <td>@subject.subject_code</td>
-                                                    <td>@subject.subject_name</td>
-                                                    <td>@subject.subject_type</td>
-                                                    <td>@subject.subject_year</td>
-                                                    <th></th>
-
-                                                </tr>
-
-                                                }
-
-                                            </tbody>
-                                        </table>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Update" class="btn btn-success" />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- end table-responsive-->
+
+
                                     <div>
-
+                                        @Html.ActionLink("Back to List", "Index")
                                     </div>
+                                    }
+
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -383,35 +468,12 @@
     <script src="~/Content/assets/data/data_datatables.js"></script>
 
     <!-- Charts data -->
-    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
-    <script>
-        $(document).on('ready', function () {
-            // data-tables
-            $('#dataTable').DataTable({
-                //    data:dataSet,
-                columns: [{
-                    title: "Subject Code"
-                }, {
-                    title: "Subject Name"
-                }, {
-                    title: "Subject Type"
-                },{
-                    title: "Subject Year"
-                }, {
-                    title: "Action"
-                }]
-            });
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
-            // counter-up
-            $('.counter').counterUp({
-                delay: 10,
-                time: 600
-            });
-        });
-    </script>
     <!-- END Java Script for this page -->
 
 </body>
 
 </html>
-

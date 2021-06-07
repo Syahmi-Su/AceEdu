@@ -9,5 +9,8 @@ namespace AceTC.Models
     {
         public Student studentdetails { get; set; }
         public Parent parentdetails { get; set; }
+        public Outstanding outstandingdetails { get; set; }
+        public Payment paymentdetails { get; set; }
+        public Status statusdetails { get; set; }
     }
 }

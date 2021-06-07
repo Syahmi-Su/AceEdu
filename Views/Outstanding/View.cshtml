@@ -1,7 +1,9 @@
-﻿@model IEnumerable<AceTC.Models.Subject>
+﻿@model AceTC.Models.Outstanding
+
 @{ Layout = null;}
 @{
-    ViewBag.Title = "SubjectList";
+    ViewBag.Title = "Create";
+
     if (Session["admin_id"] == null)
     {
         Response.Redirect("~/Login/Index");
@@ -46,8 +48,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
 
             <nav class="navbar-custom">
@@ -109,7 +111,7 @@
                             </div>
 
                             <!-- item-->
-                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
+                            <a href="#" class="dropdown-item notify-item">
                                 <i class="fas fa-power-off"></i>
                                 <span>Logout</span>
                             </a>
@@ -190,7 +192,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Admin/PackageList">Manage Package List</a>
+                                    <a href="tables-basic.html">Manage Package List</a>
                                 </li>
 
                             </ul>
@@ -204,7 +206,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Admin/SubjectList">Manage Subject List</a>
+                                    <a href="tables-basic.html">Manage Subject List</a>
                                 </li>
 
                             </ul>
@@ -275,10 +277,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Manage Subject</h1>
+                                <h1 class="main-title float-left">Outstanding</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Subject</li>
+                                    <li class="breadcrumb-item active">Oustanding List</li>
+                                    <li class="breadcrumb-item active">Add Outstanding</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -292,46 +295,67 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-folder"></i> Subject Details</h3>
-                                    <button style="float:right;position:relative;" class="btn btn-info btn-sm" onclick="location.href='@Url.Action("AddSubject", "AddSubject")';return false;"><i class="fa fa-plus"></i>&nbsp;Add Subject</button>
+                                    <h3><i class="fas fa-user-friends"></i> Add Oustanding</h3>
                                 </div>
 
                                 <div class="card-body">
 
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Subject Code</th>
-                                                    <th>Student Name</th>
-                                                    <th>Subject Type</th>
-                                                    <th>Subject Year</th>
-                                                    <th>Action</th>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var subject in Model)
-                                                {
+                                        <div class="form-horizontal">
+                                            <h4>Student</h4>
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.O_pID, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.O_pID, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.O_pID, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                                <tr>
-                                                    <td>@subject.subject_code</td>
-                                                    <td>@subject.subject_name</td>
-                                                    <td>@subject.subject_type</td>
-                                                    <td>@subject.subject_year</td>
-                                                    <th></th>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.O_month, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.O_month, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.O_month, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                                </tr>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.O_remark, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.O_remark, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.O_remark, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                                }
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.O_fees, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.O_fees, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.O_fees, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive-->
-                                    <div>
+                                            <div class="form-group">
+                                                <div class="col-md-10">
+                                                    @Html.HiddenFor(model => model.O_status, new { @class = "form-control", @value = "1" })
+                                                </div>
+                                            </div>
 
-                                    </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Add" style="margin:auto;display:block;" class="btn btn-info" />
+                                                    <input type="button" value="Go Back" style="margin:auto;display:block;" class="btn btn-info" href="javascript: history.go(-1)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -383,35 +407,161 @@
     <script src="~/Content/assets/data/data_datatables.js"></script>
 
     <!-- Charts data -->
-    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
-    <script>
-        $(document).on('ready', function () {
-            // data-tables
-            $('#dataTable').DataTable({
-                //    data:dataSet,
-                columns: [{
-                    title: "Subject Code"
-                }, {
-                    title: "Subject Name"
-                }, {
-                    title: "Subject Type"
-                },{
-                    title: "Subject Year"
-                }, {
-                    title: "Action"
-                }]
-            });
 
-            // counter-up
-            $('.counter').counterUp({
-                delay: 10,
-                time: 600
-            });
-        });
-    </script>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+
     <!-- END Java Script for this page -->
 
 </body>
 
 </html>
+
+
+
+@*@model IEnumerable<AceTC.Models.Outstanding>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.O_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.O_month)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.O_pID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.O_fees)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.O_remark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.O_status)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.O_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.O_month)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.O_pID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.O_fees)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.O_remark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.O_status)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }*@
+
+
+@*@model AceTC.Models.Outstanding
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Outstanding</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_ID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_month, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_month, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_month, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_pID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_pID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_pID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_fees, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_fees, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_fees, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_remark, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_remark, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_remark, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
 

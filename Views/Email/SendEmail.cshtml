@@ -1,17 +1,6 @@
-﻿@model IEnumerable<AceTC.Models.MultipleClass>
+﻿@model AceTC.Models.CascadingClass
 
 @{ Layout = null;}
-
-@{
-    ViewBag.Title = "ViewPaymentHistory";
-
-    if (Session["parents_ic"] == null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
-
-    var ses = Session["parents_ic"];
-}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,8 +40,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                <span style="color:white">Pusat Tuisyen Madani</span>
             </div>
 
             <nav class="navbar-custom">
@@ -73,10 +62,10 @@
                             </div>
 
                             <!-- item-->
-                            <a href="@Url.Action("editPassword", "Parent", new { id = @Session["parents_ic"] })" class="dropdown-item notify-item">
+                            <a href="#" class="dropdown-item notify-item">
                                 <p class="notify-details ml-0">
                                     <i class="fas fa-cog"></i>
-                                    <b>Change Password</b>
+                                    <b>Settings 1</b>
                                 </p>
                             </a>
 
@@ -109,7 +98,7 @@
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="text-overflow">
-                                    <small>Hi, @Session["parents_ic"].ToString()</small>
+                                    <small>Hi, @Session["admin_id"].ToString()</small>
                                 </h5>
                             </div>
 
@@ -145,9 +134,9 @@
                     <ul>
 
                         <li class="submenu">
-                            <a class="active" href="index.html">
+                            <a class="active" href="/Admin/AdminDashboard">
                                 <i class="fas fa-bars"></i>
-                                <span> Parent Account </span>
+                                <span> Dashboard </span>
                             </a>
                         </li>
 
@@ -160,7 +149,20 @@
                         </li>
 
 
-                        <li class="menu-title">Student</li>
+                        <li class="menu-title">Administration</li>
+                        <li class="submenu">
+                            <a id="tables" href="#">
+                                <i class="fas fa-user-circle"></i>
+                                <span> Parent List </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/Admin/ParentList">Manage Parent List</a>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="submenu">
                             <a id="tables" href="#">
                                 <i class="fas fa-users"></i>
@@ -169,8 +171,22 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Parent/ViewChildren">View Children List</a>
+                                    <a href="/Admin/StudentList">Manage Student List</a>
                                 </li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a id="tables" href="#">
+                                <i class="fas fa-book"></i>
+                                <span> Package List </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="tables-basic.html">Manage Package List</a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -182,24 +198,40 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="/Parent/ViewSubject">View Subject Offered</a>
+                                    <a href="tables-basic.html">Manage Subject List</a>
                                 </li>
+
                             </ul>
                         </li>
 
-
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Parent/MakePayment">
+                            <a href="/Payment/AddPayment">
                                 <i class="fas fa-credit-card"></i>
                                 <span> Make Payment</span>
                             </a>
                         </li>
 
                         <li class="submenu">
-                            <a href="/Parent/ViewPaymentHistory">
+                            <a href="/Payment/ApprovalList">
+                                <i class="fas fa-list"></i>
+                                <span> Approval List</span>
+                            </a>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="/Payment/PaymentHistories">
                                 <i class="fas fa-history"></i>
                                 <span> Payment History</span>
+                            </a>
+                        </li>
+
+
+                        <li class="menu-title">Data Analytics</li>
+                        <li class="submenu">
+                            <a href="/Outstanding/Index">
+                                <i class="fas fa-chart-bar"></i>
+                                <span> Outstanding List</span>
                             </a>
                         </li>
 
@@ -208,7 +240,7 @@
                         <li class="submenu">
                             <a href="/Admin/testing">
                                 <i class="fas fa-info-circle"></i>
-                                <span> Parent Manual</span>
+                                <span> Admin Manual</span>
                             </a>
                         </li>
 
@@ -236,10 +268,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Payment History</h1>
+                                <h1 class="main-title float-left">Send Email Reminder</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Payment History</li>
+                                    <li class="breadcrumb-item">Admin</li>
+                                    <li class="breadcrumb-item active">Send Email Reminder</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -253,62 +286,61 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-users"></i> Payment History Details</h3>
+                                    <h3><i class="fas fa-user-friends"></i> Send Email Reminder</h3>
                                 </div>
 
                                 <div class="card-body">
 
-                                    <div class="table-responsive">
-                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Student Name</th>
-                                                    <th>Chinese Name</th>
-                                                    <th>Ref No</th>
-                                                    <th>Payment Date</th>
-                                                    <th>Payment Detail</th>
-                                                    <th>Fee Detail</th>
-                                                    <th>Amount Paid</th>
-                                                    <th>Proof</th>
-                                                    <th>Confirmation Date</th>
-                                                    <th>Status</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var payment in Model)
-                                                {
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
 
-                                                    <tr>
-                                                        <td>@payment.studentdetails.student_name</td>
-                                                        <td>@payment.studentdetails.student_cname</td>
-                                                        <td>@payment.paymentdetails.ref_num</td>
-                                                        <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
-                                                        <td>@payment.paymentdetails.payment_detail</td>
-                                                        <td>@payment.paymentdetails.payment_feedetailss</td>
-                                                        <td>@payment.paymentdetails.payment_fee</td>
-                                                        <td>@payment.paymentdetails.filename</td>
-                                                        <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
-                                                        @if (payment.statusdetails.status_id == 2)
-                                                        {
-                                                            <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { payment.parentdetails.parents_ic})'>View</a></td>
-                                                    </tr>
+                                        <div class="form-horizontal">
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.receiver, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.receiver, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.receiver, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                                }
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <!-- end table-responsive-->
-                                    <div>
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.message, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.TextAreaFor(model => model.message, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-                                    </div>
+                                            @if (ViewBag.msg != null)
+                                            {
+                                                <div class="alert alert-success"> @ViewBag.msg </div>
+                                            }
+
+                                            @if (ViewBag.Error != null)
+                                            {
+                                                <div class="alert alert-danger">  @ViewBag.Error  </div>
+                                            }
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Send" style="margin:auto;display:block;" class="btn btn-info" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
+
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -360,44 +392,13 @@
     <script src="~/Content/assets/data/data_datatables.js"></script>
 
     <!-- Charts data -->
-    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
-    <script>
-        $(document).on('ready', function () {
-            // data-tables
-            $('#dataTable').DataTable({
-                //    data:dataSet,
-                columns: [{
-                    title: "Student Name"
-                }, {
-                    title: "Chinese Name"
-                }, {
-                    title: "Ref No"
-                }, {
-                    title: "Payment Date"
-                }, {
-                    title: "Payment Detail"
-                }, {
-                    title: "Fee Detail"
-                }, {
-                    title: "Amount Paid"
-                }, {
-                    title: "Confirmation Date"
-                }, {
-                    title: "Status"
-                }, {
-                    title: "Action"
-                }]
-            });
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
-            // counter-up
-            $('.counter').counterUp({
-                delay: 10,
-                time: 600
-            });
-        });
-    </script>
     <!-- END Java Script for this page -->
 
 </body>
 
 </html>
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AceTC.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -38,6 +39,7 @@ namespace AceTC.Controllers
         // GET: Payment/Create
         public ActionResult addPayment()
         {
+
             Payment addpack = new Payment();
             var Id = db.Payments.OrderByDescending(c => c.confirmation_id).FirstOrDefault();
             if (Id == null)
@@ -140,19 +142,81 @@ namespace AceTC.Controllers
             return View(payment);
         }
 
-        // GET: Payment/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult MakePayment()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            AceDBEntities entity = new AceDBEntities();
+            List<Student> student = entity.Students.ToList();
+            List<Parent> parentname = entity.Parents.ToList();
+            List<Outstanding> outstanding = entity.Outstandings.ToList();
+
+            var multipletable = from s in student
+                                join p in parentname on s.parent_ic equals p.parents_ic into table1
+                                from p in table1.DefaultIfEmpty()
+                                join o in outstanding on p.parents_ic equals o.O_pID into table2
+                                from o in table2.DefaultIfEmpty()
+                                select new MultipleClass { studentdetails = s, parentdetails = p, outstandingdetails = o };
+
+            return View(multipletable);
+
+        }
+
+        public ActionResult ApprovalList()
+        {
+            AceDBEntities entity = new AceDBEntities();
+            List<Payment> payment = entity.Payments.ToList();
+            List<Status> status = entity.Status.ToList();
+
+            var multipletable = from a in payment
+                                join b in status on a.status_id equals b.status_id into table1
+                                from b in table1.DefaultIfEmpty()
+                                select new MultipleClass { paymentdetails = a, statusdetails = b};
+
+            return View(multipletable);
+
+        }
+
+        public ActionResult Approval(int id)
+        {
+
+            using (AceDBEntities entity = new AceDBEntities())
+            { 
+                return View(entity.Payments.Where(x => x.confirmation_id == id).FirstOrDefault());
             }
-            Payment payment = db.Payments.Find(id);
-            if (payment == null)
+
+        }
+
+        [HttpPost]
+        public ActionResult Approval(int id, Payment payment)
+        {
+            try
             {
-                return HttpNotFound();
+                // TODO: Add update logic here
+                using (AceDBEntities entity = new AceDBEntities())
+                {
+                    entity.Entry(payment).State = EntityState.Modified;
+                    entity.SaveChanges();
+                }
+                return RedirectToAction("ApprovalList","Payment");
             }
-            return View(payment);
+            catch
+            {
+                return View();
+            }
+
+        }
+
+        public ActionResult PaymentHistories()
+        {
+            AceDBEntities entity = new AceDBEntities();
+            List<Payment> payment = entity.Payments.ToList();
+            List<Status> status = entity.Status.ToList();
+
+            var multipletable = from a in payment
+                                join b in status on a.status_id equals b.status_id into table1
+                                from b in table1.DefaultIfEmpty()
+                                select new MultipleClass { paymentdetails = a, statusdetails = b };
+
+            return View(multipletable);
         }
 
         // POST: Payment/Delete/5

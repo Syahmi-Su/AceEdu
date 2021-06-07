@@ -3,7 +3,7 @@
 @{ Layout = null;}
 
 @{
-    ViewBag.Title = "ViewPaymentHistory";
+    ViewBag.Title = "ViewChildren";
 
     if (Session["parents_ic"] == null)
     {
@@ -236,10 +236,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Payment History</h1>
+                                <h1 class="main-title float-left">Make Payment</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Payment History</li>
+                                    <li class="breadcrumb-item active">Make Payment</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -253,7 +253,7 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-users"></i> Payment History Details</h3>
+                                    <h3><i class="fas fa-users"></i> Outstanding Details</h3>
                                 </div>
 
                                 <div class="card-body">
@@ -262,42 +262,30 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
+                                                    <th>No</th>
                                                     <th>Student Name</th>
-                                                    <th>Chinese Name</th>
-                                                    <th>Ref No</th>
-                                                    <th>Payment Date</th>
-                                                    <th>Payment Detail</th>
-                                                    <th>Fee Detail</th>
-                                                    <th>Amount Paid</th>
-                                                    <th>Proof</th>
-                                                    <th>Confirmation Date</th>
+                                                    <th>Student Name (Chinese)</th>
+                                                    <th>Month</th>
+                                                    <th>Remark</th>
+                                                    <th>Fees</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var payment in Model)
+                                                @foreach (var outstanding in Model)
                                                 {
 
                                                     <tr>
-                                                        <td>@payment.studentdetails.student_name</td>
-                                                        <td>@payment.studentdetails.student_cname</td>
-                                                        <td>@payment.paymentdetails.ref_num</td>
-                                                        <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
-                                                        <td>@payment.paymentdetails.payment_detail</td>
-                                                        <td>@payment.paymentdetails.payment_feedetailss</td>
-                                                        <td>@payment.paymentdetails.payment_fee</td>
-                                                        <td>@payment.paymentdetails.filename</td>
-                                                        <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
-                                                        @if (payment.statusdetails.status_id == 2)
-                                                        {
-                                                            <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { payment.parentdetails.parents_ic})'>View</a></td>
+                                                        <td>@outstanding.outstandingdetails.O_ID</td>
+                                                        <td>@outstanding.studentdetails.student_name</td>
+                                                        <td>@outstanding.studentdetails.student_cname</td>
+                                                        <td>@outstanding.outstandingdetails.O_month.ToShortDateString()</td>
+                                                        <td>@outstanding.outstandingdetails.O_remark</td>
+                                                        <td>@outstanding.outstandingdetails.O_fees</td>
+                                                        <td>@outstanding.outstandingdetails.O_status</td>
+                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { outstanding.parentdetails.parents_ic})'>Make Payment</a></td>
+
                                                     </tr>
 
                                                 }
@@ -367,21 +355,17 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
+                    title: "No"
+                }, {
                     title: "Student Name"
                 }, {
-                    title: "Chinese Name"
+                    title: "Student Name (Chinese)"
                 }, {
-                    title: "Ref No"
+                    title: "Month"
                 }, {
-                    title: "Payment Date"
+                    title: "Remark"
                 }, {
-                    title: "Payment Detail"
-                }, {
-                    title: "Fee Detail"
-                }, {
-                    title: "Amount Paid"
-                }, {
-                    title: "Confirmation Date"
+                    title: "Fees"
                 }, {
                     title: "Status"
                 }, {

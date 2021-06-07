@@ -37,7 +37,6 @@ namespace AceTC.Controllers
 
         public ActionResult EditStudentDetails(string id)
         {
-
             AceDBEntities entity = new AceDBEntities();
             Student stud = entity.Students.Find(id);
             if (stud == null)
@@ -45,6 +44,7 @@ namespace AceTC.Controllers
             else
                 return View(stud);
         }
+
         [HttpPost]
         public ActionResult EditStudentDetails(Student student)
         {
