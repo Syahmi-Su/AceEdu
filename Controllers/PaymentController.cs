@@ -131,7 +131,7 @@ namespace AceTC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,class_code,payment_date,payment_detail,payment_feedetails,filename")] Payment payment)
+        public ActionResult Edit([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetailss,filename,meal_fee,transport_fee,first_register,lower_discount")] Payment payment)
         {
             if (ModelState.IsValid)
             {
