@@ -1,7 +1,7 @@
-﻿@model AceTC.Models.Package
+﻿@model AceTC.Models.Parent
 @{ Layout = null;}
 @{
-    ViewBag.Title = "EditPackageDetails";
+    ViewBag.Title = "DeleteParent";
 
     if (Session["admin_id"] == null)
     {
@@ -48,7 +48,7 @@
             <!-- LOGO -->
             <div class="headerbar-left">
                 <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                
+
             </div>
 
             <nav class="navbar-custom">
@@ -276,11 +276,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Manage Package</h1>
+                                <h1 class="main-title float-left">Manage Parent</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item">Manage Package</li>
-                                    <li class="breadcrumb-item active">Edit Package Details</li>
+                                    <li class="breadcrumb-item">Manage Parent</li>
+                                    <li class="breadcrumb-item active">Delete Parent</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -292,68 +292,63 @@
 
                     <div class="row">
                         <p>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "PackageList")
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "ParentList")
                         </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-user-friends"></i> Edit Package Details</h3>
+                                    <h2 style="color:red"><i class="fas fa-exclamation"></i> WARNING </h2>
                                 </div>
 
                                 <div class="card-body">
+                                    <h4 style="color:red">Are you sure want to DELETE this parent?</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Parent IC :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_ic)
+                                        </dd>
 
+                                        <dt>
+                                            Parent Name :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_name)
+                                        </dd>
+
+                                        <dt>
+                                            Email:
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_email)
+                                        </dd>
+
+                                        <dt>
+                                            Phone Number :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_phone)
+                                        </dd>
+
+                                        <dt>
+                                            Address :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.parents_address)
+                                        </dd>
+                                    </dl>
                                     @using (Html.BeginForm())
                                     {
                                         @Html.AntiForgeryToken()
 
-                                    <div class="form-horizontal">
-                                        <h4>Student</h4>
-                                        <hr />
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_id, "Package ID", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.package_id, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_desc, "Package Description", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_desc, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.package_desc, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_category, "Package Category", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
-
-                                                @Html.DropDownListFor(model => model.package_category, new SelectList(new[] { "Primary", "Secondary" }))
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_price, "Package Price (RM)", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_price, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.package_price, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="form-group">
+                                        <div class="form-actions no-color">
                                             <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Save Changes" style="margin:auto;display:block;" class="btn btn-warning" onclick="return confirm('Changes saved successfully !!');" />
-                                                &nbsp;
-                                                <!--<input type="submit" href="/Admin/PackageList" value="Cancel" style="margin:auto;display:block;" class="btn btn-danger" />-->
+                                                <input type="submit" value="Confirm Delete" class="btn btn-warning" style="margin:auto;display:block;" onclick="return confirm('Parent Deleted successfully !!');" />
+
                                             </div>
                                         </div>
-                                    </div>
                                     }
 
 
@@ -415,15 +410,15 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Student IC"
+                    title: "Parent IC"
                 }, {
-                    title: "Student Name"
+                    title: "Parent Name"
                 }, {
-                    title: "Student Name (BC)"
+                    title: "Email"
                 }, {
-                    title: "Package Taken"
+                    title: "Phone Number"
                 }, {
-                    title: "Guardian"
+                    title: "Address"
                 }]
             });
 
@@ -439,4 +434,3 @@
 </body>
 
 </html>
-

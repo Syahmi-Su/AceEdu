@@ -1,7 +1,7 @@
 ﻿@model AceTC.Models.Package
 @{ Layout = null;}
 @{
-    ViewBag.Title = "EditPackageDetails";
+    ViewBag.Title = "DeletePackage";
 
     if (Session["admin_id"] == null)
     {
@@ -48,7 +48,7 @@
             <!-- LOGO -->
             <div class="headerbar-left">
                 <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                
+
             </div>
 
             <nav class="navbar-custom">
@@ -280,7 +280,7 @@
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
                                     <li class="breadcrumb-item">Manage Package</li>
-                                    <li class="breadcrumb-item active">Edit Package Details</li>
+                                    <li class="breadcrumb-item active">Delete Package</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -297,63 +297,51 @@
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-user-friends"></i> Edit Package Details</h3>
+                                    <h2 style="color:red"><i class="fas fa-exclamation"></i> WARNING </h2>
                                 </div>
 
                                 <div class="card-body">
+                                    <h4 style="color:red">Are you sure want to DELETE this tuition package?</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Package ID :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_id)
+                                        </dd>
 
+                                        <dt>
+                                            Package Description :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_desc)
+                                        </dd>
+
+                                        <dt>
+                                            Package Category :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_category)
+                                        </dd>
+
+                                        <dt>
+                                            Price (RM) :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_price)
+                                        </dd>
+                                    </dl>
                                     @using (Html.BeginForm())
                                     {
                                         @Html.AntiForgeryToken()
 
-                                    <div class="form-horizontal">
-                                        <h4>Student</h4>
-                                        <hr />
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_id, "Package ID", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.package_id, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_desc, "Package Description", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_desc, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.package_desc, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_category, "Package Category", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
-
-                                                @Html.DropDownListFor(model => model.package_category, new SelectList(new[] { "Primary", "Secondary" }))
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.package_price, "Package Price (RM)", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_price, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.package_price, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="form-group">
+                                        <div class="form-actions no-color">
                                             <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Save Changes" style="margin:auto;display:block;" class="btn btn-warning" onclick="return confirm('Changes saved successfully !!');" />
-                                                &nbsp;
-                                                <!--<input type="submit" href="/Admin/PackageList" value="Cancel" style="margin:auto;display:block;" class="btn btn-danger" />-->
+                                                <input type="submit" value="Confirm Delete" class="btn btn-warning" style="margin:auto;display:block;" onclick="return confirm('Package Deleted successfully !!');" />
+
                                             </div>
                                         </div>
-                                    </div>
                                     }
 
 
@@ -415,15 +403,15 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Student IC"
+                    title: "Package ID"
                 }, {
-                    title: "Student Name"
+                    title: "Package Description"
                 }, {
-                    title: "Student Name (BC)"
+                    title: "Package Category"
                 }, {
-                    title: "Package Taken"
+                    title: "Price (RM)"
                 }, {
-                    title: "Guardian"
+                    title: "Action"
                 }]
             });
 
@@ -439,4 +427,3 @@
 </body>
 
 </html>
-

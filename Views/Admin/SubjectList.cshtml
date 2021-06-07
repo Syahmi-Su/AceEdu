@@ -8,6 +8,8 @@
     }
 }
 
+
+<h2>SubjectList</h2>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -319,7 +321,13 @@
                                                     <td>@subject.subject_name</td>
                                                     <td>@subject.subject_type</td>
                                                     <td>@subject.subject_year</td>
-                                                    <th></th>
+
+                                                    <th>
+                                                        @Html.ActionLink(" Edit", "EditSubjectDetails", new { id = subject.subject_code }, new { @class = "btn btn-warning fas fa-edit" })
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        @Html.ActionLink(" Delete", "DeleteSubject", new { id = subject.subject_code }, new { @class = "btn btn-danger fas fa-trash-alt" })
+                                                    </th>
+
 
                                                 </tr>
 
@@ -414,4 +422,5 @@
 </body>
 
 </html>
+
 

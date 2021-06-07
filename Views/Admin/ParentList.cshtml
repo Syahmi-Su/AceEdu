@@ -313,6 +313,7 @@
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
                                                     <th>Address</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -324,6 +325,11 @@
                                                         <td>@parent.parents_email</td>
                                                         <td>@parent.parents_phone</td>
                                                         <td>@parent.parents_address</td>
+                                                        <td>
+                                                        @Html.ActionLink(" Edit", "EditParentDetails", new { id = parent.parents_ic }, new { @class = "btn btn-warning fas fa-edit" })
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        @Html.ActionLink(" Delete", "DeleteParent", new { id = parent.parents_ic }, new { @class = "btn btn-danger fas fa-trash-alt" })
+                                                        </td>
                                                     </tr>
                                                 }
 

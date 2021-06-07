@@ -280,7 +280,8 @@
                                 <h1 class="main-title float-left">Manage Student</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Student</li>
+                                    <li class="breadcrumb-item">Manage Student</li>
+                                    <li class="breadcrumb-item active">Edit Student Details</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -304,64 +305,108 @@
 
                                     @using (Html.BeginForm())
                                     {
-                                    @Html.AntiForgeryToken()
+                                        @Html.AntiForgeryToken()
 
-                                    <div class="form-horizontal">
-                                        <h4>Student</h4>
-                                        <hr />
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.student_ic, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
-                                            </div>
+                                        <div class="form-horizontal">
+                                            <h4>Student</h4>
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_ic, "Student IC", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
+                                                </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.student_name, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.student_name, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.student_name, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_name, "Student Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_name, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_name, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.student_cname, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.student_cname, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.student_cname, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_cname, "Student Name (Chinese)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_cname, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_cname, "", new { @class = "text-danger" })
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.student_package, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.student_package, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.student_package, "", new { @class = "text-danger" })
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_gender, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
+
+                                                    @Html.DropDownListFor(model => model.student_gender, new SelectList(new[] { "Male", "Female" }))
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.parent_ic, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_dob, "Date of Birth", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
+
+                                                    @Html.EditorFor(model => model.student_dob, "{0:dd/MM/yyyy}", new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Save Changes" class="btn btn-info" />
+
+
+                                                @Html.LabelFor(model => model.student_category, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
+
+                                                    @Html.DropDownListFor(model => model.student_category, new SelectList(new[] { "Primary", "Secondary" }))
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_year, "Study Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @*@Html.EditorFor(model => model.subject_type, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.subject_type, "", new { @class = "text-danger" })*@
+
+                                                    @Html.DropDownListFor(model => model.student_year, new SelectList(new[] { "Primary 1", "Primary 2", "Primary 3", "Primary 4", "Primary 5", "Primary 6", "Form 1", "Form 2", "Form 3", "Form 4", "Form 5" }))
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_package, "Student Package", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_package, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.student_package, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.parent_ic, "Parent IC", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Save Changes" style="margin:auto;display:block;" class="btn btn-warning" onclick="return confirm('Changes saved successfully !!');" />
+                                                    &nbsp;
+                                                    <!--<input type="submit" href="/Admin/StudentList" value="Cancel" style="margin:auto;display:block;" class="btn btn-danger" />-->
                                             </div>
                                         </div>
                                     </div>
-                                    }
+                                }
 
 
-                                </div>
-                                <!-- end card-body-->
-                            </div>
+    </div>
+    <!-- end card-body-->
+                                                </div>
                             <!-- end card-->
                         </div>
 
@@ -421,11 +466,23 @@
                 }, {
                     title: "Student Name"
                 }, {
-                    title: "Student Name (BC)"
+                    title: "Student Name (Chinese)"
                 }, {
-                    title: "Package Taken"
+                    title: "Gender"
+                }, {
+                    title: "Date of Birth"
+                }, {
+                    title: "Category"
+                }, {
+                    title: "Study Year"
+                }, {
+                    title: "Package ID"
+                }, {
+                    title: "Package Name"
                 }, {
                     title: "Guardian"
+                }, {
+                    title: "Action"
                 }]
             });
 
