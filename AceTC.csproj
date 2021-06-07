@@ -139,6 +139,7 @@
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\ParentsControllerdummy.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1265,6 +1266,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\FileSaver.js" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1660,6 +1662,7 @@
     <Content Include="Views\Admin\EditParentDetails.cshtml" />
     <Content Include="Views\Admin\EditSubjectDetails.cshtml" />
     <Content Include="Views\Parent\editPassword.cshtml" />
+    <Content Include="Views\Receipt\Slip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
