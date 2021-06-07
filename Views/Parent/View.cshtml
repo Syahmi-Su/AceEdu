@@ -3,7 +3,7 @@
 @{ Layout = null;}
 
 @{
-    ViewBag.Title = "ViewPaymentHistory";
+    ViewBag.Title = "ViewChildren";
 
     if (Session["parents_ic"] == null)
     {
@@ -263,8 +263,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Student Name</th>
-                                                    <th>Chinese Name</th>
-                                                    <th>Ref No</th>
+                                                    <th>Student Name (Chinese)</th>
+                                                    <th>Reference Number</th>
                                                     <th>Payment Date</th>
                                                     <th>Payment Detail</th>
                                                     <th>Fee Detail</th>
@@ -279,26 +279,26 @@
                                                 @foreach (var payment in Model)
                                                 {
 
-                                                    <tr>
-                                                        <td>@payment.studentdetails.student_name</td>
-                                                        <td>@payment.studentdetails.student_cname</td>
-                                                        <td>@payment.paymentdetails.ref_num</td>
-                                                        <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
-                                                        <td>@payment.paymentdetails.payment_detail</td>
-                                                        <td>@payment.paymentdetails.payment_feedetailss</td>
-                                                        <td>@payment.paymentdetails.payment_fee</td>
-                                                        <td>@payment.paymentdetails.filename</td>
-                                                        <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
-                                                        @if (payment.statusdetails.status_id == 2)
-                                                        {
-                                                            <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { payment.parentdetails.parents_ic})'>View</a></td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>@payment.studentdetails.student_name</td>
+                                                    <td>@payment.studentdetails.student_cname</td>
+                                                    <td>@payment.paymentdetails.ref_num</td>
+                                                    <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
+                                                    <td>@payment.paymentdetails.payment_detail</td>
+                                                    <td>@payment.paymentdetails.payment_feedetailss</td>
+                                                    <td>@payment.paymentdetails.payment_fee</td>
+                                                    <td>@payment.paymentdetails.filename</td>
+                                                    <td>@payment.paymentdetails.confirmation_date</td>
+                                                    @if (payment.statusdetails.status_id == 2)
+                                                    {
+                                                        <td style='color:green;'>@payment.statusdetails.status_desc</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style='color:red;'>@payment.statusdetails.status_desc</td>
+                                                    }
+                                                    <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { payment.parentdetails.parents_ic})'>View</a></td>
+                                                </tr>
 
                                                 }
 
@@ -369,9 +369,9 @@
                 columns: [{
                     title: "Student Name"
                 }, {
-                    title: "Chinese Name"
+                    title: "Student Name (Chinese)"
                 }, {
-                    title: "Ref No"
+                    title: "Reference Number"
                 }, {
                     title: "Payment Date"
                 }, {

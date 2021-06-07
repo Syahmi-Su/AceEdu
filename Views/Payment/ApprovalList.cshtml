@@ -1,9 +1,15 @@
-﻿@model AceTC.Models.Payment
-@{ Layout = null;}
-@{
-    ViewBag.Title = "AddPayment";
-}
+﻿@model IEnumerable<AceTC.Models.MultipleClass>
 
+@{ Layout = null;}
+
+@{
+    ViewBag.Title = "StudentList";
+
+    if (Session["admin_id"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +49,8 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                <span style="color:white">Pusat Tuisyen Madani</span>
+                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+
             </div>
 
             <nav class="navbar-custom">
@@ -89,7 +95,6 @@
                             </a>
 
                         </div>
-
                     </li>
 
 
@@ -187,7 +192,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="tables-basic.html">Manage Package List</a>
+                                    <a href="/Admin/PackageList">Manage Package List</a>
                                 </li>
 
                             </ul>
@@ -201,7 +206,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="tables-basic.html">Manage Subject List</a>
+                                    <a href="/Admin/SubjectList">Manage Subject List</a>
                                 </li>
 
                             </ul>
@@ -210,21 +215,21 @@
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Payment/MakePayment">
+                            <a href="/Payment/AddPayment">
                                 <i class="fas fa-credit-card"></i>
                                 <span> Make Payment</span>
                             </a>
                         </li>
 
                         <li class="submenu">
-                            <a href="/Admin/testing">
+                            <a href="/Payment/ApprovalList">
                                 <i class="fas fa-list"></i>
                                 <span> Approval List</span>
                             </a>
                         </li>
 
                         <li class="submenu">
-                            <a href="/Admin/testing">
+                            <a href="/Payment/PaymentHistories">
                                 <i class="fas fa-history"></i>
                                 <span> Payment History</span>
                             </a>
@@ -233,7 +238,7 @@
 
                         <li class="menu-title">Data Analytics</li>
                         <li class="submenu">
-                            <a href="/Admin/testing">
+                            <a href="/Outstanding/Index">
                                 <i class="fas fa-chart-bar"></i>
                                 <span> Outstanding List</span>
                             </a>
@@ -272,10 +277,10 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Manage Student</h1>
+                                <h1 class="main-title float-left">Approval List</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Student</li>
+                                    <li class="breadcrumb-item active">Approval List</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -286,74 +291,58 @@
                     <!-- end row -->
 
                     <div class="row">
-                        <p>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "StudentList")
-                        </p>
                         <div class="col-12">
                             <div class="card mb-3">
                                 <div class="card-header">
-                                    <h3><i class="fas fa-user-friends"></i> Edit Student Details</h3>
+                                    <h3><i class="fas fa-users"></i> Approval Details</h3>
                                 </div>
 
                                 <div class="card-body">
 
-                                    @using (Html.BeginForm())
-                                    {
-                                        @Html.AntiForgeryToken()
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Parent IC</th>
+                                                    <th>Student IC</th>
+                                                    <th>Ref Num</th>
+                                                    <th>Payment Date</th>
+                                                    <th>Payment Detail</th>
+                                                    <th>Fee Detail</th>
+                                                    <th>Payment Fee</th>
+                                                    <th>Proof</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var payment in Model)
+                                                {
+                                                    if(payment.paymentdetails.status_id == 1)
+                                                    {
+                                                        <tr>
+                                                            <td>@payment.paymentdetails.parent_ic</td>
+                                                            <td>@payment.paymentdetails.student_ic</td>
+                                                            <td>@payment.paymentdetails.ref_num</td>
+                                                            <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
+                                                            <td>@payment.paymentdetails.payment_detail</td>
+                                                            <td>@payment.paymentdetails.payment_feedetailss</td>
+                                                            <td>@payment.paymentdetails.payment_fee</td>
+                                                            <td>@payment.paymentdetails.filename</td>
+                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
+                                                            <td><a class='btn btn-info' href='@Url.Action("Approval", "Payment", new { id = payment.paymentdetails.confirmation_id})'>Approval</a></td>
+                                                        </tr>
+                                                    }
 
-                                        <div class="form-horizontal">
-                                            <h4>Student</h4>
-                                            <hr />
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.student_ic, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
+                                                }
 
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.payment_detail, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end table-responsive-->
+                                    <div>
 
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.payment_fee, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.payment_fee, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.payment_feedetails, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.payment_feedetails, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.class_code, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.class_code, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.class_code, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-offset-2 col-md-10">
-                                                    <input type="submit" value="Save Changes" class="btn btn-default" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-
-
+                                    </div>
                                 </div>
                                 <!-- end card-body-->
                             </div>
@@ -412,15 +401,25 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
+                    title: "Parent IC"
+                }, {
                     title: "Student IC"
                 }, {
-                    title: "Student Name"
+                    title: "Ref Num"
                 }, {
-                    title: "Student Name (BC)"
+                    title: "Payment Date"
                 }, {
-                    title: "Package Taken"
+                    title: "Payment Detail"
                 }, {
-                    title: "Guardian"
+                    title: "Fee Detail"
+                }, {
+                    title: "Payment Fee"
+                }, {
+                    title: "Proof"
+                }, {
+                    title: "Status"
+                }, {
+                    title: "Action"
                 }]
             });
 
@@ -436,6 +435,3 @@
 </body>
 
 </html>
-
-
-

@@ -23,9 +23,5 @@ namespace AceTC.Models
         public string student_category { get; set; }
         public string student_year { get; set; }
         public string parent_ic { get; set; }
-        public System.DateTime student_dob { get; set; }
-        public string student_gender { get; set; }
-        public string student_category { get; set; }
-        public string student_year { get; set; }
     }
 }

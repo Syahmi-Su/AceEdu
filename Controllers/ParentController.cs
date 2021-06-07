@@ -65,9 +65,47 @@ namespace AceTC.Controllers
 
         }
 
+        public ActionResult MakePayment(string id)
+        {
+            AceDBEntities entity = new AceDBEntities();
+            string uid = Session["parents_ic"].ToString();
+
+            List<Student> studentlist = entity.Students.ToList();
+            List<Parent> parentlist = entity.Parents.ToList();
+            List<Outstanding> outstandinglist = entity.Outstandings.ToList();
+
+            var multipletable = from s in studentlist
+                                join p in parentlist on s.parent_ic equals p.parents_ic into table1
+                                from p in table1.DefaultIfEmpty()
+                                join o in outstandinglist on p.parents_ic equals o.O_pID into table2
+                                from o in table2.DefaultIfEmpty()
+                                where p.parents_ic == Session["parents_ic"].ToString()
+                                select new MultipleClass { studentdetails = s, parentdetails = p, outstandingdetails = o };
+
+            return View(multipletable);
+        }
+
         public ActionResult ViewPaymentHistory()
         {
-            return View();
+            AceDBEntities entity = new AceDBEntities();
+            string uid = Session["parents_ic"].ToString();
+
+            List<Student> studentlist = entity.Students.ToList();
+            List<Parent> parentlist = entity.Parents.ToList();
+            List<Payment> paymentlist = entity.Payments.ToList();
+            List<Status> status = entity.Status.ToList();
+
+            var multipletable = from s in studentlist
+                                join p in parentlist on s.parent_ic equals p.parents_ic into table1
+                                from p in table1.DefaultIfEmpty()
+                                join pa in paymentlist on p.parents_ic equals pa.parent_ic into table2
+                                from pa in table2.DefaultIfEmpty()
+                                join st in status on pa.status_id equals st.status_id into table3
+                                from st in table3.DefaultIfEmpty()
+                                where p.parents_ic == Session["parents_ic"].ToString()
+                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa , statusdetails = st};
+
+            return View(multipletable);
         }
 
         public ActionResult ViewSubject()
