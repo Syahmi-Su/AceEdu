@@ -13,6 +13,7 @@ namespace AceTC.Models
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
+    using System.Web;
 
     public partial class Payment
     {
@@ -66,6 +67,6 @@ namespace AceTC.Models
         public float lower_discount { get; set; }
 
         [DisplayName("Payment Proof")]
-        public string filename { get; set; }
+        public HttpPostedFileBase filename { get; set; }
     }
 }

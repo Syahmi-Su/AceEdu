@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -139,5 +140,42 @@ namespace AceTC.Controllers
             return View(parent);
 
         }
+
+        [HttpGet]
+        public ActionResult Upload() 
+        {
+            AceDBEntities entity = new AceDBEntities();
+            int id = 1;
+            Payment p = entity.Payments.Find(id);
+            return View(); 
+        }
+        [HttpPost]
+        public ActionResult Upload([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetailss,filename,meal_fee,transport_fee,first_register,lower_discount")] Payment p)
+        {
+            using (AceDBEntities entity = new AceDBEntities())
+            {
+                var candidate = new Payment()
+                {
+                    filename = p.filename
+                };
+                entity.Entry(candidate).State = EntityState.Modified;
+                entity.SaveChanges();
+            }
+            return View(p);
+        }
+        private string SaveToPhysicalLocation(HttpPostedFileBase file)
+        {
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/upload"), fileName);
+                file.SaveAs(path);
+                return path;
+            }
+            return string.Empty;
+        }
     }
+
+
+
 }
