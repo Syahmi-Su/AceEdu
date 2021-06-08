@@ -45,7 +45,6 @@ namespace AceTC.Controllers
 
         public ActionResult EditStudentDetails(string id)
         {
-
             AceDBEntities entity = new AceDBEntities();
             Student stud = entity.Students.Find(id);
             var par = entity.Parents.ToList();
@@ -58,6 +57,7 @@ namespace AceTC.Controllers
 
                 return View(stud);
         }
+
         [HttpPost]
         public ActionResult EditStudentDetails(Student student)
         {

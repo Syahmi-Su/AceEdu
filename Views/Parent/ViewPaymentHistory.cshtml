@@ -1,7 +1,416 @@
-﻿
+﻿@model IEnumerable<AceTC.Models.MultipleClass>
+
+@{ Layout = null;}
+
 @{
     ViewBag.Title = "ViewPaymentHistory";
+
+    if (Session["parents_ic"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+
+    var ses = Session["parents_ic"];
 }
 
-<h2>ViewPaymentHistory</h2>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <title>Pusat Tuisyen Madani</title>
+    <meta name="description" content="Dashboard | Nura Admin">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your website">
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/ACElogo-triangle.ico">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome CSS -->
+    <link href="~/Content/assets/font-awesome/css/all.css" rel="stylesheet" type="text/css" />
+
+    <!-- Custom CSS -->
+    <link href="~/Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!-- BEGIN CSS for this page -->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/chart.js/Chart.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/plugins/datatables/datatables.min.css" />
+    <!-- END CSS for this page -->
+</head>
+
+<body class="adminbody">
+
+    <div id="main">
+
+        <!-- top bar navigation -->
+        <div class="headerbar">
+
+            <!-- LOGO -->
+            <div class="headerbar-left">
+                <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+
+            </div>
+
+            <nav class="navbar-custom">
+
+                <ul class="list-inline float-right mb-0">
+
+                    <li class="list-inline-item dropdown notif">
+                        <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right dropdown-arrow dropdown-arrow-success dropdown-sm">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5>
+                                    <small>Settings</small>
+                                </h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="@Url.Action("editPassword", "Parent", new { id = @Session["parents_ic"] })" class="dropdown-item notify-item">
+                                <p class="notify-details ml-0">
+                                    <i class="fas fa-cog"></i>
+                                    <b>Change Password</b>
+                                </p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="#" class="dropdown-item notify-item">
+                                <p class="notify-details ml-0">
+                                    <i class="fas fa-cog"></i>
+                                    <b>Settings 2</b>
+                                </p>
+                            </a>
+
+                            <!-- item-->
+                            <a href="#" class="dropdown-item notify-item">
+                                <p class="notify-details ml-0">
+                                    <i class="fas fa-cog"></i>
+                                    <b>Settings 3</b>
+                                </p>
+                            </a>
+
+                        </div>
+
+                    </li>
+
+
+                    <li class="list-inline-item dropdown notif">
+                        <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" aria-haspopup="false" aria-expanded="false">
+                            <img src="~/Content/assets/images/download.png" alt="Profile image" class="avatar-rounded">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <!-- item-->
+                            <div class="dropdown-item noti-title">
+                                <h5 class="text-overflow">
+                                    <small>Hi, @Session["parents_ic"].ToString()</small>
+                                </h5>
+                            </div>
+
+                            <!-- item-->
+                            <a href="@Url.Action("Logout","Login")" class="dropdown-item notify-item">
+                                <i class="fas fa-power-off"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ul class="list-inline menu-left mb-0">
+                    <li class="float-left">
+                        <button class="button-menu-mobile open-left">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+        <!-- End Navigation -->
+        <!-- Left Sidebar -->
+        <div class="left main-sidebar">
+
+            <div class="sidebar-inner leftscroll">
+
+                <div id="sidebar-menu">
+
+                    <ul>
+
+                        <li class="submenu">
+                            <a class="active" href="index.html">
+                                <i class="fas fa-bars"></i>
+                                <span> Parent Account </span>
+                            </a>
+                        </li>
+
+                        <li class="menu-title">Home</li>
+                        <li class="submenu">
+                            <a href="/Admin/testing">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <span> Notification</span>
+                            </a>
+                        </li>
+
+
+                        <li class="menu-title">Student</li>
+                        <li class="submenu">
+                            <a id="tables" href="#">
+                                <i class="fas fa-users"></i>
+                                <span> Student List </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/Parent/ViewChildren">View Children List</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="submenu">
+                            <a id="tables" href="#">
+                                <i class="fas fa-folder"></i>
+                                <span> Subject List </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="/Parent/ViewSubject">View Subject Offered</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li class="menu-title">Payment</li>
+                        <li class="submenu">
+                            <a href="/Parent/MakePayment">
+                                <i class="fas fa-credit-card"></i>
+                                <span> Make Payment</span>
+                            </a>
+                        </li>
+
+                        <li class="submenu">
+                            <a href="/Parent/ViewPaymentHistory">
+                                <i class="fas fa-history"></i>
+                                <span> Payment History</span>
+                            </a>
+                        </li>
+
+
+                        <li class="menu-title">User Manual</li>
+                        <li class="submenu">
+                            <a href="/Admin/testing">
+                                <i class="fas fa-info-circle"></i>
+                                <span> Parent Manual</span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+        <!-- End Sidebar -->
+
+        <div class="content-page">
+
+            <!-- Start content -->
+            <div class="content">
+
+                <div class="container-fluid">
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="breadcrumb-holder">
+                                <h1 class="main-title float-left">Payment History</h1>
+                                <ol class="breadcrumb float-right">
+                                    <li class="breadcrumb-item">Home</li>
+                                    <li class="breadcrumb-item active">Payment History</li>
+                                </ol>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-users"></i> Payment History Details</h3>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                        <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Student</th>
+                                                    <th>Ref No</th>
+                                                    <th>Payment Date</th>
+                                                    <th>Payment Detail</th>
+                                                    <th>Fee Detail</th>
+                                                    <th>Amount Paid</th>
+                                                    <th>Proof</th>
+                                                    <th>Confirmation Date</th>
+                                                    <th>Status</th>
+                                                    <th>Invoice</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var payment in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td>@payment.studentdetails.student_name</td>
+                                                        <td>@payment.paymentdetails.ref_num</td>
+                                                        <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
+                                                        <td>@payment.paymentdetails.payment_detail</td>
+                                                        <td>@payment.paymentdetails.payment_feedetailss</td>
+                                                        <td>@payment.paymentdetails.payment_fee</td>
+                                                        <td>@payment.paymentdetails.filename</td>
+                                                        <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
+                                                        @if (payment.statusdetails.status_id == 2)
+                                                        {
+                                                            <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
+                                                        }
+                                                        <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { payment.parentdetails.parents_ic})'>View</a></td>
+                                                    </tr>
+
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- end table-responsive-->
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <!-- end card-body-->
+                            </div>
+                            <!-- end card-->
+                        </div>
+
+
+                    </div>
+                    <!-- end row-->
+
+                </div>
+                <!-- END container-fluid -->
+
+            </div>
+            <!-- END content -->
+
+        </div>
+        <!-- END content-page -->
+
+        <footer class="footer">
+        </footer>
+
+        <script src="~/Content/assets/js/modernizr.min.js"></script>
+        <script src="~/Content/assets/js/jquery.min.js"></script>
+        <script src="~/Content/assets/js/moment.min.js"></script>
+
+        <script src="~/Content/assets/js/popper.min.js"></script>
+        <script src="~/Content/assets/js/bootstrap.min.js"></script>
+
+        <script src="~/Content/assets/js/detect.js"></script>
+        <script src="~/Content/assets/js/fastclick.js"></script>
+        <script src="~/Content/assets/js/jquery.blockUI.js"></script>
+        <script src="~/Content/assets/js/jquery.nicescroll.js"></script>
+
+        <!-- App js -->
+        <script src="~/Content/assets/js/admin.js"></script>
+
+    </div>
+    <!-- END main -->
+    <!-- BEGIN Java Script for this page -->
+    <script src="~/Content/assets/plugins/chart.js/Chart.min.js"></script>
+    <script src="~/Content/assets/plugins/datatables/datatables.min.js"></script>
+
+    <!-- Counter-Up-->
+    <script src="~/Content/assets/plugins/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="~/Content/assets/plugins/counterup/jquery.counterup.min.js"></script>
+
+    <!-- dataTabled data -->
+    <script src="~/Content/assets/data/data_datatables.js"></script>
+
+    <!-- Charts data -->
+    <script src="~/Content/assets/data/data_charts_dashboard.js"></script>
+    <script>
+        $(document).on('ready', function () {
+            // data-tables
+            $('#dataTable').DataTable({
+                //    data:dataSet,
+                columns: [{
+                    title: "Student"
+                }, {
+                    title: "Ref No"
+                }, {
+                    title: "Payment Date"
+                }, {
+                    title: "Payment Detail"
+                }, {
+                    title: "Fee Detail"
+                }, {
+                    title: "Amount Paid"
+                }, {
+                    title: "Proof"
+                }, {
+                    title: "Confirmation Date"
+                }, {
+                    title: "Status"
+                }, {
+                    title: "Action"
+                }]
+            });
+
+            // counter-up
+            $('.counter').counterUp({
+                delay: 10,
+                time: 600
+            });
+        });
+    </script>
+
+    @section Scripts {
+        <script>
+            function random() {
+                fetch('http://localhost:44382/Receipt/Slip')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (myJson) {
+                        console.log(JSON.stringify(myJson));
+                        document.getElementById("result").innerText = myJson.random;
+                    });
+            }
+        </script>
+    }
+    <!-- END Java Script for this page -->
+
+</body>
+
+</html>

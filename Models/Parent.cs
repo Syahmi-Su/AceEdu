@@ -11,13 +11,8 @@ namespace AceTC.Models
 {
     using System;
     using System.Collections.Generic;
-
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web.Mvc;
-    using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
-
 
     public partial class Parent
     {
@@ -26,9 +21,8 @@ namespace AceTC.Models
 
         [DisplayName("Full Name")]
         public string parents_name { get; set; }
-        
 
-        [Required(ErrorMessage =  "Please Enter Password")]
+        [Required(ErrorMessage = "Please Enter Password")]
         [DataType(DataType.Password)]
         [DisplayName("Password")]
         public string parents_pass { get; set; }
@@ -38,7 +32,6 @@ namespace AceTC.Models
         [DisplayName("Confirm Password")]
         [Compare("parents_pass")]
         public string confirmPass { get; set; }
-
 
         [DisplayName("E-mail")]
         public string parents_email { get; set; }
