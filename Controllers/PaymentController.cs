@@ -180,6 +180,8 @@ namespace AceTC.Controllers
 
         public ActionResult Approval(int id)
         {
+            var par = db.Status.ToList();
+            ViewBag.data = par;
 
             using (AceDBEntities entity = new AceDBEntities())
             { 
@@ -191,6 +193,7 @@ namespace AceTC.Controllers
         [HttpPost]
         public ActionResult Approval(int id, Payment payment)
         {
+
             try
             {
                 // TODO: Add update logic here

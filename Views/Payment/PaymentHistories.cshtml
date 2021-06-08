@@ -312,7 +312,6 @@
                                                     <th>Payment Fee</th>
                                                     <th>Proof</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -326,7 +325,7 @@
                                                     <td>@payment.paymentdetails.ref_num</td>
                                                     <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
                                                     <td>@payment.paymentdetails.payment_detail</td>
-                                                    <td>@payment.paymentdetails.payment_feedetailss</td>
+                                                    <td>@payment.paymentdetails.payment_feedetails</td>
                                                     <td>@payment.paymentdetails.payment_fee</td>
                                                     <td>@payment.paymentdetails.filename</td>
                                                     @if (payment.paymentdetails.status_id == 2)
@@ -337,8 +336,8 @@
                                                     {
                                                         <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
                                                     }
-                                                    <td><a class='btn btn-info' href='@Url.Action("Approval", "Payment", new { id = payment.paymentdetails.confirmation_id})'>View</a></td>
-                                                </tr>
+@*                                                    <td><a class='btn btn-info' href='@Url.Action("Approval", "Payment", new { id = payment.paymentdetails.confirmation_id})'>View</a></td>
+*@                                                </tr>
                                                     }
 
                                                 }

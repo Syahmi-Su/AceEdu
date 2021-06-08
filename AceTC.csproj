@@ -128,15 +128,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddPackageController.cs" />
     <Compile Include="Controllers\AddParentController.cs" />
-    <Compile Include="Controllers\AddPaymentController.cs" />
     <Compile Include="Controllers\AddStudentController.cs" />
+    <Compile Include="Controllers\AddSubjectController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OutstandingController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CascadingClass.cs" />
+    <Compile Include="Models\CountClass.cs" />
+    <Compile Include="Models\JoinClass.cs" />
     <Compile Include="Models\MultipleClass.cs" />
     <Compile Include="Models\Outstanding.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
@@ -165,6 +171,7 @@
     <Compile Include="Models\Package.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PackageClass.cs" />
     <Compile Include="Models\Parent.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
@@ -189,6 +196,71 @@
   <ItemGroup>
     <Content Include="bin\AceTC.dll" />
     <Content Include="bin\AceTC.pdb" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\Antlr3.Runtime.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.Globalization.Calendars.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Net.Http.dll" />
+    <Content Include="bin\roslyn\System.Net.Sockets.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Optimization.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
+    <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\assets\css\bootstrap-grid.css" />
     <Content Include="Content\assets\css\bootstrap-grid.min.css" />
     <Content Include="Content\assets\css\bootstrap-reboot.css" />
@@ -1335,6 +1407,18 @@
     <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.PowerShell.dll" />
     <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.PowerShell.Utility.dll" />
     <Content Include="packages\EntityFramework.6.2.0\tools\migrate.exe" />
+    <Content Include=".vs\AceTC\config\applicationhost.config" />
+    <Content Include="bin\AceTC.dll.config" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <None Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1-vsdoc.js" />
     <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.js" />
     <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.min.js" />
@@ -1654,10 +1738,26 @@
     <Content Include="Views\Outstanding\Edit.cshtml" />
     <Content Include="Views\Outstanding\Delete.cshtml" />
     <Content Include="Views\Outstanding\View.cshtml" />
+    <Content Include="Views\AddPackage\AddPackage.cshtml" />
+    <Content Include="Views\AddSubject\AddSubject.cshtml" />
+    <Content Include="Views\Email\SendEmail.cshtml" />
+    <Content Include="Views\Email\SendEmails.cshtml" />
+    <Content Include="Views\Receipt\Slip.cshtml" />
+    <Content Include="Views\Receipt\View.cshtml" />
+    <Content Include="Views\Payment\AddPayment.cshtml" />
+    <Content Include="Views\Payment\Approval.cshtml" />
+    <Content Include="Views\Payment\ApprovalList.cshtml" />
+    <Content Include="Views\Parent\editPassword.cshtml" />
+    <Content Include="Views\Parent\MakePayment.cshtml" />
+    <Content Include="Views\Parent\Upload.cshtml" />
+    <Content Include="Views\Parent\View.cshtml" />
+    <Content Include="Views\Parent\ViewSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include=".vs\AceTC\v16\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\assets\plugins\jstree\themes\default\" />
+    <Folder Include="upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
