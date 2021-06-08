@@ -59,15 +59,23 @@ namespace AceTC.Controllers
 
             List<Student> studentlist = entity.Students.ToList();
             List<Parent> parentlist = entity.Parents.ToList();
-            List<Payment> paymentdetails = entity.Payments.ToList();
+            List<Payment> paymentlist = entity.Payments.ToList();
+            List<Status> status = entity.Status.ToList();
 
-            var multipletable = from s in studentlist
-                                join p in parentlist on s.parent_ic equals p.parents_ic into table1
-                                from p in table1.DefaultIfEmpty()
-                                join o in paymentdetails on p.parents_ic equals o.parent_ic into table2
-                                from o in table2.DefaultIfEmpty()
+            //var multipletable = from s in studentlist
+            //                    join p in parentlist on s.parent_ic equals p.parents_ic into table1
+            //                    from p in table1.DefaultIfEmpty()
+            //                    join o in paymentdetails on p.parents_ic equals o.parent_ic into table2
+            //                    from o in table2.DefaultIfEmpty()
+            //                    where p.parents_ic == Session["parents_ic"].ToString()
+            //                    select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = o };
+
+            var multipletable = from pa in paymentlist
+                                join s in studentlist on pa.student_ic equals s.student_ic
+                                join p in parentlist on pa.parent_ic equals p.parents_ic
+                                join st in status on pa.status_id equals st.status_id
                                 where p.parents_ic == Session["parents_ic"].ToString()
-                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = o };
+                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa, statusdetails = st };
 
             return View(multipletable);
         }
@@ -91,6 +99,7 @@ namespace AceTC.Controllers
                                 from st in table3.DefaultIfEmpty()
                                 where p.parents_ic == Session["parents_ic"].ToString()
                                 select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa , statusdetails = st};
+            
 
             return View(multipletable);
         }
