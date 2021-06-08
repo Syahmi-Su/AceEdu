@@ -55,19 +55,19 @@ namespace AceTC.Controllers
         public ActionResult MakePayment(string id)
         {
             AceDBEntities entity = new AceDBEntities();
-            string uid = Session["parents_ic"].ToString();
+           
 
             List<Student> studentlist = entity.Students.ToList();
             List<Parent> parentlist = entity.Parents.ToList();
-            List<Outstanding> outstandinglist = entity.Outstandings.ToList();
+            List<Payment> paymentdetails = entity.Payments.ToList();
 
             var multipletable = from s in studentlist
                                 join p in parentlist on s.parent_ic equals p.parents_ic into table1
                                 from p in table1.DefaultIfEmpty()
-                                join o in outstandinglist on p.parents_ic equals o.O_pID into table2
+                                join o in paymentdetails on p.parents_ic equals o.parent_ic into table2
                                 from o in table2.DefaultIfEmpty()
                                 where p.parents_ic == Session["parents_ic"].ToString()
-                                select new MultipleClass { studentdetails = s, parentdetails = p, outstandingdetails = o };
+                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = o };
 
             return View(multipletable);
         }
@@ -166,25 +166,35 @@ namespace AceTC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Upload() 
+        public ActionResult Upload(int id) 
         {
             AceDBEntities entity = new AceDBEntities();
-            int id = 1;
             Payment p = entity.Payments.Find(id);
-            return View(); 
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View(p);
         }
         [HttpPost]
-        public ActionResult Upload([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetailss,filename,meal_fee,transport_fee,first_register,lower_discount")] Payment p)
-        {
-            using (AceDBEntities entity = new AceDBEntities())
+        public ActionResult Upload(Payment p,int id)
             {
-                var candidate = new Payment()
+            AceDBEntities entity = new AceDBEntities();
+            if (ModelState.IsValid)
+            {
+
+                var result = entity.Payments.Where(x => x.confirmation_id.Equals(id));
+                if (result != null)
                 {
-                    filename = p.filename
-                };
-                entity.Entry(candidate).State = EntityState.Modified;
-                entity.SaveChanges();
+                    p.payment_date = DateTime.Now;
+                    string ImageName = System.IO.Path.GetFileName(p.filename);
+                    entity.Entry(p).State = EntityState.Modified;
+                    entity.SaveChanges();
+                    return RedirectToAction("ViewChildren", "Parent");
+                }
+
             }
+
             return View(p);
         }
         private string SaveToPhysicalLocation(HttpPostedFileBase file)
@@ -192,7 +202,7 @@ namespace AceTC.Controllers
             if (file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/upload"), fileName);
+                var path = Path.Combine(Server.MapPath("~/upload/"), fileName);
                 file.SaveAs(path);
                 return path;
             }
