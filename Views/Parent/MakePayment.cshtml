@@ -262,32 +262,25 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>No</th>
-                                                    <th>Student Name</th>
-                                                    <th>Student Name (Chinese)</th>
-                                                    <th>Month</th>
-                                                    <th>Remark</th>
-                                                    <th>Fees</th>
+                                                    <th>Reference Number</th>
+                                                    <th>Date Issued</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th>Payment Date</th>
+                                                    <th>Fee</th>
+                                                    <th>Payment Proof</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach (var outstanding in Model)
+                                                @foreach (var student in Model)
                                                 {
-
                                                     <tr>
-                                                        <td>@outstanding.outstandingdetails.O_ID</td>
-                                                        <td>@outstanding.studentdetails.student_name</td>
-                                                        <td>@outstanding.studentdetails.student_cname</td>
-                                                        <td>@outstanding.outstandingdetails.O_month.ToShortDateString()</td>
-                                                        <td>@outstanding.outstandingdetails.O_remark</td>
-                                                        <td>@outstanding.outstandingdetails.O_fees</td>
-                                                        <td>@outstanding.outstandingdetails.O_status</td>
-                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { outstanding.parentdetails.parents_ic})'>Make Payment</a></td>
-
+                                                        <td>@student.paymentdetails.ref_num</td>
+                                                        <td>@student.paymentdetails.confirmation_date</td>
+                                                        <td>@student.paymentdetails.status_id</td>
+                                                        <td>@student.paymentdetails.payment_date</td>
+                                                        <td>@student.paymentdetails.payment_fee</td>
+                                                        <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id})'>Upload</a></td>
                                                     </tr>
-
                                                 }
 
                                             </tbody>
@@ -355,23 +348,20 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "No"
+                    title: "Reference Number"
                 }, {
-                    title: "Student Name"
-                }, {
-                    title: "Student Name (Chinese)"
-                }, {
-                    title: "Month"
-                }, {
-                    title: "Remark"
-                }, {
-                    title: "Fees"
+                    title: "Date Issued"
                 }, {
                     title: "Status"
                 }, {
-                    title: "Action"
+                    title: "Payment Date"
+                }, {
+                    title: "Fee"
+                }, {
+                    title: "Payment Proof"
                 }]
             });
+
 
             // counter-up
             $('.counter').counterUp({

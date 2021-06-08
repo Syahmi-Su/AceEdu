@@ -11,58 +11,27 @@ namespace AceTC.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-    using System.Web;
-
+    
     public partial class Payment
     {
         public int confirmation_id { get; set; }
-
-        [UIHint("parent_ic")]
-        [DisplayName("Parent")]
         public string parent_ic { get; set; }
-
-        [DisplayName("Student")]
         public string student_ic { get; set; }
-
-        [DisplayName("Reference Number")]
         public string ref_num { get; set; }
-
-        [DisplayName("Approval")]
         public int status_id { get; set; }
-
-        [DisplayName("Date Confirmation Payment")]
         public System.DateTime confirmation_date { get; set; }
-
-        [DisplayName("Payment Date")]
         public System.DateTime payment_date { get; set; }
-
-        [DisplayName("Payment Detail")]
         public string payment_detail { get; set; }
-
-        [DisplayName("Fee Detail")]
         public string payment_feedetailss { get; set; }
-
-        [DisplayName("Amount Payment Fee")]
         public double payment_fee { get; set; }
-
-        [DisplayName("Proof")]
-        public string filename { get; set; }
-
-        [DisplayName("Meal Fee")]
         public int meal_fee { get; set; }
 
-        [DisplayName("Transportation Fee")]
         public int transport_fee { get; set; }
 
-        [DisplayName("First Time Registration")]
         public int first_register { get; set; }
 
-        [DisplayName("Discount for lower Income Family (5%-10%) ")]
         public float lower_discount { get; set; }
 
-        [DisplayName("Payment Proof")]
-        public HttpPostedFileBase filename { get; set; }
+        public string filename { get; set; }
     }
 }
