@@ -57,7 +57,7 @@
           <Property Name="payment_detail" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="payment_feedetailss" Type="nvarchar" MaxLength="100" />
           <Property Name="payment_fee" Type="float" Nullable="false" />
-          <Property Name="filename" Type="nchar" MaxLength="100" />
+          <Property Name="filename" Type="nchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -195,7 +195,7 @@
           <Property Name="payment_detail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="payment_feedetailss" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="payment_fee" Type="Double" Nullable="false" />
-          <Property Name="filename" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="filename" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>

@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="AceDBModel.Outstanding" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AceDBModel.Parent" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AceDBModel.Package" Width="1.5" PointX="6.75" PointY="0.5" />
-        <EntityTypeShape EntityType="AceDBModel.Payment" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="AceDBModel.Payment" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

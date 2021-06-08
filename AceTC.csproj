@@ -128,15 +128,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AddPackageController.cs" />
     <Compile Include="Controllers\AddParentController.cs" />
-    <Compile Include="Controllers\AddPaymentController.cs" />
     <Compile Include="Controllers\AddStudentController.cs" />
+    <Compile Include="Controllers\AddSubjectController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OutstandingController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,6 +161,9 @@
     <Compile Include="Models\Admin.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CascadingClass.cs" />
+    <Compile Include="Models\CountClass.cs" />
+    <Compile Include="Models\JoinClass.cs" />
     <Compile Include="Models\MultipleClass.cs" />
     <Compile Include="Models\Outstanding.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
@@ -165,6 +171,7 @@
     <Compile Include="Models\Package.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PackageClass.cs" />
     <Compile Include="Models\Parent.cs">
       <DependentUpon>AceDBEntity.tt</DependentUpon>
     </Compile>
@@ -1654,6 +1661,19 @@
     <Content Include="Views\Outstanding\Edit.cshtml" />
     <Content Include="Views\Outstanding\Delete.cshtml" />
     <Content Include="Views\Outstanding\View.cshtml" />
+    <Content Include="Views\AddPackage\AddPackage.cshtml" />
+    <Content Include="Views\AddSubject\AddSubject.cshtml" />
+    <Content Include="Views\Admin\DeletePackage.cshtml" />
+    <Content Include="Views\Admin\DeleteParent.cshtml" />
+    <Content Include="Views\Admin\DeleteStudent.cshtml" />
+    <Content Include="Views\Admin\DeleteSubject.cshtml" />
+    <Content Include="Views\Admin\EditPackageDetails.cshtml" />
+    <Content Include="Views\Admin\EditParentDetails.cshtml" />
+    <Content Include="Views\Admin\EditSubjectDetails.cshtml" />
+    <Content Include="Views\Email\SendEmail.cshtml" />
+    <Content Include="Views\Email\SendEmails.cshtml" />
+    <Content Include="Views\Receipt\Slip.cshtml" />
+    <Content Include="Views\Receipt\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
