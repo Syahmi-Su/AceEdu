@@ -190,7 +190,7 @@
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Parent/MakePayment">
+                            <a href="@Url.Action("MakePayment", "Parent", new { id = @Session["parents_ic"] })">
                                 <i class="fas fa-credit-card"></i>
                                 <span> Make Payment</span>
                             </a>
@@ -279,8 +279,10 @@
                                                         <td>@student.paymentdetails.status_id</td>
                                                         <td>@student.paymentdetails.payment_date</td>
                                                         <td>@student.paymentdetails.payment_fee</td>
-                                                        <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id})'>Upload</a></td>
+                                                        <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id })'>Upload</a></td>
                                                     </tr>
+
+                                               
                                                 }
 
                                             </tbody>
