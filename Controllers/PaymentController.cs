@@ -39,9 +39,10 @@ namespace AceTC.Controllers
         // GET: Payment/Create
         public ActionResult addPayment()
         {
-
+            AceDBEntities entity = new AceDBEntities();
             Payment addpack = new Payment();
             var Id = db.Payments.OrderByDescending(c => c.confirmation_id).FirstOrDefault();
+
             if (Id == null)
             {
                 addpack.confirmation_id = 1;
@@ -50,7 +51,7 @@ namespace AceTC.Controllers
             {
                 addpack.confirmation_id = Id.confirmation_id + 1;
             }
-            
+
 
             List<SelectListItem> a = new List<SelectListItem>()
             {
@@ -75,15 +76,14 @@ namespace AceTC.Controllers
             List<SelectListItem> b = new List<SelectListItem>()
             {
                 new SelectListItem {
-                    Text = "Cash", Value = "1"
+                    Text = "Received", Value = "1"
                 },
                 new SelectListItem {
-                    Text = "Online Banking", Value = "40"
+                    Text = "Paid", Value = "2"
                 },
             };
             ViewBag.status_id = new SelectList(b, "Value", "Text");
 
-            ViewBag.ref_num = "ACE";
 
             return View(addpack);
         }
@@ -96,7 +96,7 @@ namespace AceTC.Controllers
         public ActionResult addPayment([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetails,filename, meal_fee,transport_fee,first_register,lower_discount")] Payment p)
         {
 
-            double total = p.payment_fee + p.transport_fee + p.first_register;
+            double total = p.payment_fee + p.transport_fee + p.first_register + p.meal_fee;
             double discount = (100 - p.lower_discount) / 100;
             p.payment_fee = total * discount;
 

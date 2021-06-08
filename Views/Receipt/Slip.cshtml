@@ -12,6 +12,8 @@
 
     var ses = Session["parents_ic"];
 
+    var count = 0;
+
 }
 
 <!DOCTYPE html>
@@ -56,8 +58,10 @@
                 </header>
                 <main>
 
+
                     @foreach (var item in Model)
                     {
+
 
                         <div class="row contacts">
                             <div class="col invoice-to">
@@ -67,12 +71,11 @@
                                 <div class="email">@Html.DisplayFor(model => item.parentdetails.parents_email)</div>
                             </div>
                             <div class="col invoice-details">
-                                <h1 class="invoice-id">INVOICE @Html.DisplayFor(model => item.paymentdetails.ref_num)</h1>
-                                <div class="date">Date of Invoice: @Html.DisplayFor(model => item.paymentdetails.confirmation_date)</div>
+                                <h1 class="invoice-id">RECEIPT @Html.DisplayFor(model => item.paymentdetails.ref_num)</h1>
+                                <div class="date">Date of Receipt: @Html.DisplayFor(model => item.paymentdetails.confirmation_date)</div>
 
                             </div>
                         </div>
-
 
 
                         <table border="0" cellspacing="0" cellpadding="0">
@@ -87,10 +90,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="no">first.Text.counter++;</td>
+                                    count++;
+                                    <td class="no">@Html.DisplayFor(modelItem => count)</td>
                                     <td class="text-left"> @Html.DisplayFor(model => item.paymentdetails.payment_date)</td>
                                     <td class="unit"> @Html.DisplayFor(model => item.studentdetails.student_name)</td>
-                                    <td class="qty">100</td>
+                                    <td class="qty"> @Html.DisplayFor(model => item.packagedetails.package_desc)</td>
                                     <td class="total"> @Html.DisplayFor(model => item.paymentdetails.payment_fee)</td>
                                 </tr>
                             </tbody>
