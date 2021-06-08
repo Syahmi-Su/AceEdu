@@ -190,7 +190,7 @@
 
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Parent/MakePayment">
+                            <a href="@Url.Action("MakePayment", "Parent", new { id = @Session["parents_ic"] })">
                                 <i class="fas fa-credit-card"></i>
                                 <span> Make Payment</span>
                             </a>
