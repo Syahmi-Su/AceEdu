@@ -1,4 +1,5 @@
 ﻿using AceTC.Models;
+using AceTC.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -151,37 +152,29 @@ namespace AceTC.Controllers
             return View(p);
         }
         [HttpPost]
-        public ActionResult Upload(Payment p,int id)
-            {
-            AceDBEntities entity = new AceDBEntities();
-            if (ModelState.IsValid)
-            {
-
-                var result = entity.Payments.Where(x => x.confirmation_id.Equals(id));
-                if (result != null)
-                {
-                    p.payment_date = DateTime.Now;
-                    string ImageName = System.IO.Path.GetFileName(p.filename);
-                    entity.Entry(p).State = EntityState.Modified;
-                    entity.SaveChanges();
-                    return RedirectToAction("ViewChildren", "Parent");
-                }
-
-            }
-
-            return View(p);
-        }
-        private string SaveToPhysicalLocation(HttpPostedFileBase file)
+        public ActionResult Upload(int? id, ParentViewModel pvm)
         {
-            if (file.ContentLength > 0)
+            using(AceDBEntities db = new AceDBEntities())
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/upload/"), fileName);
-                file.SaveAs(path);
-                return path;
+                string guid = Guid.NewGuid().ToString();
+                string filepath = guid + Path.GetExtension(pvm.filename.FileName);
+
+
+                Payment p = db.Payments.Find(id);
+
+                pvm.filename.SaveAs(Server.MapPath("~/upload/" + filepath));
+                p.filename = "~/upload/" + filepath;
+                p.status_id = 4;
+
+                db.Entry(p).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ViewChildren", "Parent");
             }
-            return string.Empty;
+
+            
+
         }
+
     }
 
 
