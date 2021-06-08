@@ -1,0 +1,134 @@
+@model IEnumerable<AceTC.Models.MultipleClass>
+
+@{ Layout = null;}
+
+@{
+    ViewBag.Title = "Slip";
+
+    if (Session["parents_ic"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+
+    var ses = Session["parents_ic"];
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Content will go here -->
+    <div id="invoice">
+
+        <div class="toolbar hidden-print">
+            <div class="text-right">
+                <button id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Print</button>
+                <button class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+            </div>
+            <hr>
+        </div>
+        <div class="invoice overflow-auto">
+            <div style="min-width: 600px">
+                <header>
+                    <div class="row">
+                        <div class="col">
+                            <a target="_blank" href="https://lobianijs.com">
+                                <img src="~/Content/assets/images/ACElogo-triangle.png" style="width:200px;height:130px;" data-holder-rendered="true" />
+                            </a>
+                        </div>
+                        <div class="col company-details">
+                            <h2 class="name">Ace Education</h2>
+                            <div>455 Foggy Heights, AZ 85004, US</div>
+                            <div>(123) 456-789</div>
+                            <div>company@example.com</div>
+                        </div>
+                    </div>
+                </header>
+                <main>
+
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="row contacts">
+                            <div class="col invoice-to">
+                                <div class="text-gray-light">RECEIPT TO:</div>
+                                <h2 class="to">@Html.DisplayFor(model => item.parentdetails.parents_name)</h2>
+                                <div class="address">@Html.DisplayFor(model => item.parentdetails.parents_address)</div>
+                                <div class="email">@Html.DisplayFor(model => item.parentdetails.parents_email)</div>
+                            </div>
+                            <div class="col invoice-details">
+                                <h1 class="invoice-id">INVOICE @Html.DisplayFor(model => item.paymentdetails.ref_num)</h1>
+                                <div class="date">Date of Invoice: @Html.DisplayFor(model => item.paymentdetails.confirmation_date)</div>
+
+                            </div>
+                        </div>
+
+
+
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th class="text-left">DATE</th>
+                                    <th class="text-right">CHILDREN NAME</th>
+                                    <th class="text-right">PACKAGE NAME</th>
+                                    <th class="text-right">TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="no">first.Text.counter++;</td>
+                                    <td class="text-left"> @Html.DisplayFor(model => item.paymentdetails.payment_date)</td>
+                                    <td class="unit"> @Html.DisplayFor(model => item.studentdetails.student_name)</td>
+                                    <td class="qty">100</td>
+                                    <td class="total"> @Html.DisplayFor(model => item.paymentdetails.payment_fee)</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td colspan="2">GRAND TOTAL</td>
+                                    <td> @Html.DisplayFor(model => item.paymentdetails.payment_fee)</td>
+                                </tr>
+                            </tfoot>
+                        </table><br /><br /><br /><br />
+                        <div class="thanks">Thank you!</div>
+                        <div class="notices">
+                            <div>NOTICE:</div>
+                            <div class="notice">Parents are encouraged to pay the fee before 14th of every Month for early payment discount. </div>
+                        </div>
+                    }
+                </main>
+
+                <footer>
+                    Invoice was created on a computer and is valid without the signature and seal.
+                </footer>
+            </div>
+            <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+            <div></div>
+        </div>
+    </div>
+
+<script>
+    $('#printInvoice').click(function () {
+        Popup($('.invoice')[0].outerHTML);
+        function Popup(data) {
+            window.print();
+            return true;
+        }
+    });
+</script>
+
+</body>
+</html>
+

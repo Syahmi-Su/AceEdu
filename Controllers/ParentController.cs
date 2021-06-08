@@ -9,6 +9,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace AceTC.Controllers
 {
     public class ParentController : Controller
@@ -22,63 +23,48 @@ namespace AceTC.Controllers
         public ActionResult ViewChildren()
         {
             AceDBEntities entity = new AceDBEntities();
-            //return View(from Student in entity.Students select Student);
-            //var groupeddata = entity.Students.Where()
-            // List<Student> studentlist = entity.Students.ToList();
-            //List<Parent> parentlist = entity.Parents.ToList();
-            //List<Package> packagetlist = entity.Packages.ToList();
-
-            //ViewData["jointables"] = from p in parentlist
-            //                        join s in studentlist on p.parents_ic equals s.parent_ic into table1
-            //                      from s in table1.DefaultIfEmpty()
-            //                     select new MultipleClass { parentdetails = p, studentdetails = s};
-            // string userID = Convert.ToBase64String(Session["parents_ic"]);
             string uid = Session["parents_ic"].ToString();
-            var list = entity.Students.Where(a => a.parent_ic.Equals(uid));
+            List<Student> studentpackage = entity.Students.Where(a => a.parent_ic.Equals(uid)).ToList();
+            List<Package> packagename = entity.Packages.ToList();
+            var jointable = from s in studentpackage
+                            join p in packagename on s.student_package equals p.package_id into table1
+                            from p in table1.DefaultIfEmpty()
+                            select new JoinClass { studentdetails = s, packagedetails = p };
+            
+           // var list = entity.Students.Where(a => a.parent_ic.Equals(uid));
            //return View(entity.Students.ToList());
-            return View(list);
+            return View(jointable);
         }
 
        public ActionResult ViewChildrenDetails(string id)
        {
            AceDBEntities entity = new AceDBEntities();
-           Student stud = entity.Students.Find(id);
-           /*List<Student> studentlist = entity.Students.ToList();
-           List<Parent> parentlist = entity.Parents.ToList();
-           List<Package> packagetlist = entity.Packages.ToList();
+            //Student stud = entity.Students.Find(id);
+            List<Student> studentpackage = entity.Students.Where(a => a.student_ic.Equals(id)).ToList();
+            List<Package> packagename = entity.Packages.ToList();
+            var combinetable = from s in studentpackage
+                            join p in packagename on s.student_package equals p.package_id into table1
+                            from p in table1.DefaultIfEmpty()
+                            select new JoinClass { studentdetails = s, packagedetails = p };
 
-           ViewData["jointables"] = from p in parentlist
-                                    join s in studentlist on p.parents_ic equals s.parent_ic into table1
-                                    from s in table1.DefaultIfEmpty()
-                                    join pk in packagetlist on s.student_package equals pk.package_id into table2
-                                    from pk in table2.DefaultIfEmpty()
-                                    select new MultipleClass { parentdetails = p, studentdetails = s, packagedetails = pk };
 
-           if (ViewData["jointables"] == null)
-               return View("NotFound");
-           else
-               return View(ViewData["jointables"]);*/
-
-            if (stud == null)
-                return View("NotFound");
-            else
-                return View(stud);
+            return View(combinetable);
 
         }
 
         public ActionResult MakePayment(string id)
         {
             AceDBEntities entity = new AceDBEntities();
-            string uid = Session["parents_ic"].ToString();
+           
 
             List<Student> studentlist = entity.Students.ToList();
             List<Parent> parentlist = entity.Parents.ToList();
-            List<Payment> paymentlist = entity.Payments.ToList();
+            List<Payment> paymentdetails = entity.Payments.ToList();
 
             var multipletable = from s in studentlist
                                 join p in parentlist on s.parent_ic equals p.parents_ic into table1
                                 from p in table1.DefaultIfEmpty()
-                                join o in paymentlist on p.parents_ic equals o.parent_ic into table2
+                                join o in paymentdetails on p.parents_ic equals o.parent_ic into table2
                                 from o in table2.DefaultIfEmpty()
                                 where p.parents_ic == Session["parents_ic"].ToString()
                                 select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = o };
@@ -180,25 +166,35 @@ namespace AceTC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Upload() 
+        public ActionResult Upload(int id) 
         {
             AceDBEntities entity = new AceDBEntities();
-            int id = 1;
             Payment p = entity.Payments.Find(id);
-            return View(); 
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+            return View(p);
         }
         [HttpPost]
-        public ActionResult Upload([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetailss,filename,meal_fee,transport_fee,first_register,lower_discount")] Payment p)
-        {
-            using (AceDBEntities entity = new AceDBEntities())
+        public ActionResult Upload(Payment p,int id)
             {
-                var candidate = new Payment()
+            AceDBEntities entity = new AceDBEntities();
+            if (ModelState.IsValid)
+            {
+
+                var result = entity.Payments.Where(x => x.confirmation_id.Equals(id));
+                if (result != null)
                 {
-                    filename = p.filename
-                };
-                entity.Entry(candidate).State = EntityState.Modified;
-                entity.SaveChanges();
+                    p.payment_date = DateTime.Now;
+                    string ImageName = System.IO.Path.GetFileName(p.filename);
+                    entity.Entry(p).State = EntityState.Modified;
+                    entity.SaveChanges();
+                    return RedirectToAction("ViewChildren", "Parent");
+                }
+
             }
+
             return View(p);
         }
         private string SaveToPhysicalLocation(HttpPostedFileBase file)
@@ -206,7 +202,7 @@ namespace AceTC.Controllers
             if (file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Server.MapPath("~/upload"), fileName);
+                var path = Path.Combine(Server.MapPath("~/upload/"), fileName);
                 file.SaveAs(path);
                 return path;
             }

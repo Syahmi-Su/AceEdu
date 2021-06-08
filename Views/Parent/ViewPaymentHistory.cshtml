@@ -262,8 +262,7 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Student Name</th>
-                                                    <th>Chinese Name</th>
+                                                    <th>Student</th>
                                                     <th>Ref No</th>
                                                     <th>Payment Date</th>
                                                     <th>Payment Detail</th>
@@ -272,7 +271,7 @@
                                                     <th>Proof</th>
                                                     <th>Confirmation Date</th>
                                                     <th>Status</th>
-                                                    <th>Action</th>
+                                                    <th>Invoice</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -281,7 +280,6 @@
 
                                                     <tr>
                                                         <td>@payment.studentdetails.student_name</td>
-                                                        <td>@payment.studentdetails.student_cname</td>
                                                         <td>@payment.paymentdetails.ref_num</td>
                                                         <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
                                                         <td>@payment.paymentdetails.payment_detail</td>
@@ -297,7 +295,7 @@
                                                         {
                                                             <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
                                                         }
-                                                        <td><a class='btn btn-info' href='@Url.Action("AddPayment", "Parent", new { payment.parentdetails.parents_ic})'>View</a></td>
+                                                        <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { payment.parentdetails.parents_ic})'>View</a></td>
                                                     </tr>
 
                                                 }
@@ -367,9 +365,7 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Student Name"
-                }, {
-                    title: "Chinese Name"
+                    title: "Student"
                 }, {
                     title: "Ref No"
                 }, {
@@ -380,6 +376,8 @@
                     title: "Fee Detail"
                 }, {
                     title: "Amount Paid"
+                }, {
+                    title: "Proof"
                 }, {
                     title: "Confirmation Date"
                 }, {
@@ -396,6 +394,21 @@
             });
         });
     </script>
+
+    @section Scripts {
+        <script>
+            function random() {
+                fetch('http://localhost:44382/Receipt/Slip')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (myJson) {
+                        console.log(JSON.stringify(myJson));
+                        document.getElementById("result").innerText = myJson.random;
+                    });
+            }
+        </script>
+    }
     <!-- END Java Script for this page -->
 
 </body>

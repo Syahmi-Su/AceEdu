@@ -22,8 +22,8 @@
     <Key>
       <PropertyRef Name="package_id" />
     </Key>
-    <Property Name="package_id" Type="int" Nullable="false" />
-    <Property Name="package_desc" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="package_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="package_desc" Type="nvarchar" MaxLength="120" Nullable="false" />
     <Property Name="package_category" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="package_price" Type="float" Nullable="false" />
   </EntityType>

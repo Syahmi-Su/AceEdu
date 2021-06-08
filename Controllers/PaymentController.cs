@@ -37,6 +37,13 @@ namespace AceTC.Controllers
         public ActionResult addPayment()
         {
             Payment addpack = new Payment();
+            var par = db.Parents.ToList();
+            var pack = db.Packages.ToList();
+            if (par != null && pack != null)
+            {
+                ViewBag.data = par;
+                ViewBag.packs = pack;
+            }
             var Id = db.Payments.OrderByDescending(c => c.confirmation_id).FirstOrDefault();
 
             if (Id == null)
@@ -72,15 +79,14 @@ namespace AceTC.Controllers
             List<SelectListItem> b = new List<SelectListItem>()
             {
                 new SelectListItem {
-                    Text = "Received", Value = "2"
+                    Text = "Approved", Value = "2"
                 },
                 new SelectListItem {
-                    Text = "Approved", Value = "3"
+                    Text = "Pending", Value = "1"
                 },
             };
             ViewBag.status_id = new SelectList(b, "Value", "Text");
 
-            ViewBag.ref_num = "ACE";
 
             return View(addpack);
         }

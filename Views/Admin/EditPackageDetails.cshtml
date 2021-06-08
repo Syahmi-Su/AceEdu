@@ -50,7 +50,7 @@
             <!-- LOGO -->
             <div class="headerbar-left">
                 <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                <span style="color:white">Pusat Tuisyen Madani</span>
+                
             </div>
 
             <nav class="navbar-custom">
@@ -281,7 +281,8 @@
                                 <h1 class="main-title float-left">Manage Package</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Manage Package</li>
+                                    <li class="breadcrumb-item">Manage Package</li>
+                                    <li class="breadcrumb-item active">Edit Package Details</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -314,7 +315,7 @@
                                         <div class="form-group">
                                             @Html.LabelFor(model => model.package_id, "Package ID", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.EditorFor(model => model.package_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.package_id, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -349,7 +350,9 @@
 
                                         <div class="form-group">
                                             <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Save Changes" style="margin:auto;display:block;" class="btn btn-info" onclick = "return confirm('Are you sure want to submit?');" />
+                                                <input type="submit" value="Save Changes" style="margin:auto;display:block;" class="btn btn-warning" onclick="return confirm('Changes saved successfully !!');" />
+                                                &nbsp;
+                                                <!--<input type="submit" href="/Admin/PackageList" value="Cancel" style="margin:auto;display:block;" class="btn btn-danger" />-->
                                             </div>
                                         </div>
                                     </div>
