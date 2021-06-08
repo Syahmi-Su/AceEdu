@@ -55,9 +55,9 @@
           <Property Name="confirmation_date" Type="date" Nullable="false" />
           <Property Name="payment_date" Type="date" Nullable="false" />
           <Property Name="payment_detail" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="payment_feedetailss" Type="nvarchar" MaxLength="100" />
+          <Property Name="payment_feedetails" Type="nvarchar" MaxLength="100" />
           <Property Name="payment_fee" Type="float" Nullable="false" />
-          <Property Name="filename" Type="nchar" MaxLength="300" />
+          <Property Name="filename" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
@@ -193,9 +193,9 @@
           <Property Name="confirmation_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="payment_detail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="payment_feedetailss" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="payment_feedetails" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="payment_fee" Type="Double" Nullable="false" />
-          <Property Name="filename" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="filename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -283,7 +283,7 @@
               <MappingFragment StoreEntitySet="Payment">
                 <ScalarProperty Name="filename" ColumnName="filename" />
                 <ScalarProperty Name="payment_fee" ColumnName="payment_fee" />
-                <ScalarProperty Name="payment_feedetailss" ColumnName="payment_feedetailss" />
+                <ScalarProperty Name="payment_feedetails" ColumnName="payment_feedetails" />
                 <ScalarProperty Name="payment_detail" ColumnName="payment_detail" />
                 <ScalarProperty Name="payment_date" ColumnName="payment_date" />
                 <ScalarProperty Name="confirmation_date" ColumnName="confirmation_date" />

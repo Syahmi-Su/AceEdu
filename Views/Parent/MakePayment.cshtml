@@ -275,9 +275,9 @@
                                                 {
                                                     <tr>
                                                         <td>@student.paymentdetails.ref_num</td>
-                                                        <td>@student.paymentdetails.confirmation_date</td>
+                                                        <td>@student.paymentdetails.confirmation_date.ToShortDateString()</td>
                                                         <td>@student.paymentdetails.status_id</td>
-                                                        <td>@student.paymentdetails.payment_date</td>
+                                                        <td>@student.paymentdetails.payment_date.ToShortDateString()</td>
                                                         <td>@student.paymentdetails.payment_fee</td>
                                                         <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id })'>Upload</a></td>
                                                     </tr>

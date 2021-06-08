@@ -81,7 +81,7 @@
         <MappingFragment StoreEntitySet="Payment">
           <ScalarProperty Name="filename" ColumnName="filename" />
           <ScalarProperty Name="payment_fee" ColumnName="payment_fee" />
-          <ScalarProperty Name="payment_feedetailss" ColumnName="payment_feedetailss" />
+          <ScalarProperty Name="payment_feedetails" ColumnName="payment_feedetails" />
           <ScalarProperty Name="payment_detail" ColumnName="payment_detail" />
           <ScalarProperty Name="payment_date" ColumnName="payment_date" />
           <ScalarProperty Name="confirmation_date" ColumnName="confirmation_date" />

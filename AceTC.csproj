@@ -1674,6 +1674,16 @@
     <Content Include="Views\Email\SendEmails.cshtml" />
     <Content Include="Views\Receipt\Slip.cshtml" />
     <Content Include="Views\Receipt\View.cshtml" />
+    <Content Include="Views\Payment\AddPayment.cshtml" />
+    <Content Include="Views\Payment\Approval.cshtml" />
+    <Content Include="Views\Payment\ApprovalList.cshtml" />
+    <Content Include="Views\Payment\View.cshtml" />
+    <Content Include="Views\Shared\navBar.cshtml" />
+    <Content Include="Views\Parent\editPassword.cshtml" />
+    <Content Include="Views\Parent\MakePayment.cshtml" />
+    <Content Include="Views\Parent\Upload.cshtml" />
+    <Content Include="Views\Parent\View.cshtml" />
+    <Content Include="Views\Parent\ViewSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

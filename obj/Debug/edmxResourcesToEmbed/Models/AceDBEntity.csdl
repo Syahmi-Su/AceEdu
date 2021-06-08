@@ -90,8 +90,8 @@
     <Property Name="confirmation_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="payment_detail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="payment_feedetailss" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="payment_feedetails" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="payment_fee" Type="Double" Nullable="false" />
-    <Property Name="filename" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+    <Property Name="filename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
