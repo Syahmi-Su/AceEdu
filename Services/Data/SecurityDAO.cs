@@ -10,7 +10,7 @@ namespace AceTC.Services.Data
     public class SecurityDAO
     {
         //connect to the database
-        string connectionString = @"Data Source=LAPTOP-7KSL7T4H\SQLEXPRESS;Initial Catalog=AceDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=DESKTOP-89HNG9S\SQLEXPRESS;Initial Catalog=AceDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         internal bool FindByUser(UserModel user)
         {
