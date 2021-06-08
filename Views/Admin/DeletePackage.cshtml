@@ -1,8 +1,7 @@
-﻿@model AceTC.Models.CountClass
+﻿@model AceTC.Models.Package
 @{ Layout = null;}
-
 @{
-    ViewBag.Title = "AdminDashboard";
+    ViewBag.Title = "DeletePackage";
 
     if (Session["admin_id"] == null)
     {
@@ -48,10 +47,10 @@
 
             <!-- LOGO -->
             <div class="headerbar-left">
-                    <img alt="Logo" style="width:80px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
-                    
+                <img alt="Logo" style="width:60px;height:60px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+
             </div>
-            
+
             <nav class="navbar-custom">
 
                 <ul class="list-inline float-right mb-0">
@@ -147,7 +146,7 @@
                                 <span> Dashboard </span>
                             </a>
                         </li>
-                        
+
                         <li class="menu-title">Home</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -155,7 +154,7 @@
                                 <span> Notification</span>
                             </a>
                         </li>
-                        
+
 
                         <li class="menu-title">Administration</li>
                         <li class="submenu">
@@ -166,7 +165,7 @@
                             </a>
                             <ul class="list-unstyled">
                                 <li>
-                                  <a href="/Admin/ParentList">Manage Parent List</a>  
+                                    <a href="/Admin/ParentList">Manage Parent List</a>
                                 </li>
                             </ul>
                         </li>
@@ -211,39 +210,40 @@
 
                             </ul>
                         </li>
-                        
+
+
                         <li class="menu-title">Payment</li>
                         <li class="submenu">
-                            <a href="/Payment/AddPayment">
+                            <a href="/Admin/testing">
                                 <i class="fas fa-credit-card"></i>
-                                <span> Add Payment</span>
+                                <span> Make Payment</span>
                             </a>
                         </li>
 
                         <li class="submenu">
-                            <a href="/Payment/ApprovalList">
+                            <a href="/Admin/testing">
                                 <i class="fas fa-list"></i>
                                 <span> Approval List</span>
                             </a>
                         </li>
 
                         <li class="submenu">
-                            <a href="/Payment/PaymentHistories">
+                            <a href="/Admin/testing">
                                 <i class="fas fa-history"></i>
                                 <span> Payment History</span>
                             </a>
                         </li>
 
-                        
+
                         <li class="menu-title">Data Analytics</li>
                         <li class="submenu">
-                            <a href="/Outstanding/Index">
+                            <a href="/Admin/testing">
                                 <i class="fas fa-chart-bar"></i>
                                 <span> Outstanding List</span>
                             </a>
                         </li>
 
-                        
+
                         <li class="menu-title">User Manual</li>
                         <li class="submenu">
                             <a href="/Admin/testing">
@@ -276,10 +276,11 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="breadcrumb-holder">
-                                <h1 class="main-title float-left">Dashboard</h1>
+                                <h1 class="main-title float-left">Manage Package</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
-                                    <li class="breadcrumb-item active">Dashboard</li>
+                                    <li class="breadcrumb-item">Manage Package</li>
+                                    <li class="breadcrumb-item active">Delete Package</li>
                                 </ol>
                                 <div class="clearfix"></div>
                             </div>
@@ -289,46 +290,66 @@
                     </div>
                     <!-- end row -->
 
-
                     <div class="row">
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-danger">
-                                <i class="far fa-user float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Students</h6>
-                                <h1 class="m-b-20 text-white counter">@Model.studentcount</h1>
-                                <span class="text-white">Until Today</span>
+                        <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Html.ActionLink("Back to List", "PackageList")
+                        </p>
+                        <div class="col-12">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h2 style="color:red"><i class="fas fa-exclamation"></i> WARNING </h2>
+                                </div>
+
+                                <div class="card-body">
+                                    <h4 style="color:red">Are you sure want to DELETE this tuition package?</h4>
+                                    <hr />
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Package ID :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_id)
+                                        </dd>
+
+                                        <dt>
+                                            Package Description :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_desc)
+                                        </dd>
+
+                                        <dt>
+                                            Package Category :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_category)
+                                        </dd>
+
+                                        <dt>
+                                            Price (RM) :
+                                        </dt>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.package_price)
+                                        </dd>
+                                    </dl>
+                                    @using (Html.BeginForm())
+                                    {
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="form-actions no-color">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Confirm Delete" class="btn btn-warning" style="margin:auto;display:block;" onclick="return confirm('Package Deleted successfully !!');" />
+
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                </div>
+                                <!-- end card-body-->
                             </div>
+                            <!-- end card-->
                         </div>
-
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-purple">
-                                <i class="fas fa-credit-card float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Payments</h6>
-                                <h1 class="m-b-20 text-white counter">290</h1>
-                                <span class="text-white">Until Today</span>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-md-6 col-lg-6 col-xl-4">
-                            <div class="card-box noradius noborder bg-warning">
-                                <i class="fas fa-book float-right text-white"></i>
-                                <h6 class="text-white text-uppercase m-b-20">Packages</h6>
-                                <h1 class="m-b-20 text-white counter">@Model.packagecount</h1>
-                                <span class="text-white">Until Today</span>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <!-- end row -->
-
-
- 
-
-
-
-                    <div class="row">
-
 
 
                     </div>
@@ -380,19 +401,17 @@
         $(document).on('ready', function () {
             // data-tables
             $('#dataTable').DataTable({
-                data: dataSet,
+                //    data:dataSet,
                 columns: [{
-                    title: "Name"
+                    title: "Package ID"
                 }, {
-                    title: "Position"
+                    title: "Package Description"
                 }, {
-                    title: "Office"
+                    title: "Package Category"
                 }, {
-                    title: "Extn."
+                    title: "Price (RM)"
                 }, {
-                    title: "Date"
-                }, {
-                    title: "Salary"
+                    title: "Action"
                 }]
             });
 
@@ -408,4 +427,3 @@
 </body>
 
 </html>
-

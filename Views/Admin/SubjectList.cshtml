@@ -8,6 +8,8 @@
     }
 }
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -278,6 +280,7 @@
                                 <h1 class="main-title float-left">Manage Subject</h1>
                                 <ol class="breadcrumb float-right">
                                     <li class="breadcrumb-item">Home</li>
+                                    <li class="breadcrumb-item active">Admin</li>
                                     <li class="breadcrumb-item active">Manage Subject</li>
                                 </ol>
                                 <div class="clearfix"></div>
@@ -319,7 +322,13 @@
                                                     <td>@subject.subject_name</td>
                                                     <td>@subject.subject_type</td>
                                                     <td>@subject.subject_year</td>
-                                                    <th></th>
+
+                                                    <th>
+                                                        @Html.ActionLink(" Edit", "EditSubjectDetails", new { id = subject.subject_code }, new { @class = "btn btn-warning fas fa-edit" })
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        @Html.ActionLink(" Delete", "DeleteSubject", new { id = subject.subject_code }, new { @class = "btn btn-danger fas fa-trash-alt" })
+                                                    </th>
+
 
                                                 </tr>
 
@@ -414,4 +423,5 @@
 </body>
 
 </html>
+
 

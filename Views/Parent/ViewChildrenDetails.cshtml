@@ -1,5 +1,4 @@
-﻿@model AceTC.Models.Student
-@*@model IEnumerable<AceTC.Models.MultipleClass>*@
+﻿@model IEnumerable<AceTC.Models.JoinClass>
 @{ Layout = null;}
 @{
     ViewBag.Title = "ViewChildrenDetails";
@@ -261,38 +260,66 @@
 
                                     <div class="card-body">
                                         <dl>
-                                            <dt>
-                                                IC
-                                            </dt>
+                                            @foreach (var student in Model)
+                                            {
+                                                <dt>
+                                                    IC
+                                                </dt>
 
-                                            <dd>
-                                                @Html.DisplayFor(model => model.student_ic)
+                                                <dd>
+                                                    @student.studentdetails.student_ic
 
-                                            </dd>
+                                                </dd>
 
-                                            <dt>
-                                                Name
-                                            </dt>
+                                                <dt>
+                                                    Name
+                                                </dt>
 
-                                            <dd>
-                                                @Html.DisplayFor(model => model.student_name)
-                                            </dd>
+                                                <dd>
+                                                    @student.studentdetails.student_name
+                                                </dd>
 
-                                            <dt>
-                                                Chinese Name
-                                            </dt>
+                                                <dt>
+                                                    Chinese Name
+                                                </dt>
 
-                                            <dd>
-                                                @Html.DisplayFor(model => model.student_cname)
-                                            </dd>
+                                                <dd>
+                                                    @student.studentdetails.student_cname
+                                                </dd>
 
-                                            <dt>
-                                                Tuition Package
-                                            </dt>
+                                                <dt>
+                                                    Gender
+                                                </dt>
 
-                                            <dd>
-                                                @Html.DisplayFor(model => model.student_package)
-                                            </dd>
+                                                <dd>
+                                                    @student.studentdetails.student_gender
+                                                </dd>
+
+                                                <dt>
+                                                    Date Of Birth
+                                                </dt>
+
+                                                <dd>
+                                                    @student.studentdetails.student_dob.ToShortDateString()
+                                                </dd>
+
+                                                <dt>
+                                                    Category
+                                                </dt>
+
+                                                <dd>
+                                                    @student.studentdetails.student_category
+                                                </dd>
+
+                                                <dt>
+                                                    Study Year
+                                                </dt>
+
+                                                <dd>
+                                                    @student.studentdetails.student_year
+                                                </dd>
+
+                                            }
                                         </dl>
                                     </div>
                                 </div>
@@ -311,19 +338,28 @@
 
                                     <div class="card-body">
                                         <dl>
-                                            <dt>
-                                                Tuition Package Name
-                                            </dt>
-                                            <dd>
-                                                pmr
-                                            </dd>
+                                            @foreach (var pack in Model)
+                                            {
+                                                <dt>
+                                                    Package ID
+                                                </dt>
+                                                <dd>
+                                                    @pack.packagedetails.package_id
+                                                </dd>
+                                                <dt>
+                                                    Tuition Package Name
+                                                </dt>
+                                                <dd>
+                                                    @pack.packagedetails.package_desc
+                                                </dd>
 
-                                            <dt>
-                                                Tuition Package Fee (RM)
-                                            </dt>
-                                            <dd>
-                                                120
-                                            </dd>
+                                                <dt>
+                                                    Tuition Package Fee (RM)
+                                                </dt>
+                                                <dd>
+                                                    @pack.packagedetails.package_price
+                                                </dd>
+                                            }
                                         </dl>
                                     </div>
                                 </div>
