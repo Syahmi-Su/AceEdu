@@ -92,6 +92,7 @@ namespace AceTC.Controllers
                                 from st in table3.DefaultIfEmpty()
                                 where p.parents_ic == Session["parents_ic"].ToString()
                                 select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa , statusdetails = st};
+            
 
             return View(multipletable);
         }

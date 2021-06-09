@@ -9,5 +9,6 @@ namespace AceTC.Models
     {
         public int studentcount { get; set; }
         public int packagecount { get; set; }
+        public int paymentcount { get; set; }
     }
 }

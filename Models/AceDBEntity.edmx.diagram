@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9317170f6f604d269f23b17ea21586ea" Name="Diagram1" ZoomLevel="100">
-        <EntityTypeShape EntityType="AceDBModel.Admin" Width="1.5" PointX="4.5" PointY="2.5" />
-        <EntityTypeShape EntityType="AceDBModel.Parent" Width="1.5" PointX="7.375" PointY="4.125" />
-        <EntityTypeShape EntityType="AceDBModel.Outstanding" Width="1.5" PointX="12.625" PointY="2.625" />
-        <EntityTypeShape EntityType="AceDBModel.Package" Width="1.5" PointX="7.5" PointY="1.375" />
-        <EntityTypeShape EntityType="AceDBModel.Payment" Width="1.5" PointX="0.75" PointY="0.75" />
+      <Diagram DiagramId="9317170f6f604d269f23b17ea21586ea" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="AceDBModel.Admin" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AceDBModel.Outstanding" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AceDBModel.Parent" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AceDBModel.Package" Width="1.5" PointX="6.75" PointY="0.5" />
+        <EntityTypeShape EntityType="AceDBModel.Payment" Width="1.5" PointX="3.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

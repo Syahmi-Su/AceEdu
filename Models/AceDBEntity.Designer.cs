@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\user\Documents\Degree\SEM_II\SCSP3106_Applications_Development\2u2i-project\AceEdu\Models\AceDBEntity.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\User\Documents\GitHub\AceEdu\Models\AceDBEntity.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
