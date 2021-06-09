@@ -58,17 +58,17 @@ namespace AceTC.Controllers
             AceDBEntities entity = new AceDBEntities();
            
 
-            List<Student> studentlist = entity.Students.ToList();
+
             List<Parent> parentlist = entity.Parents.ToList();
             List<Payment> paymentdetails = entity.Payments.ToList();
+            List<Status> statusdetails = entity.Status.ToList();
 
-            var multipletable = from s in studentlist
-                                join p in parentlist on s.parent_ic equals p.parents_ic into table1
-                                from p in table1.DefaultIfEmpty()
-                                join o in paymentdetails on p.parents_ic equals o.parent_ic into table2
-                                from o in table2.DefaultIfEmpty()
-                                where p.parents_ic == Session["parents_ic"].ToString()
-                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = o };
+            var multipletable = from pt in paymentdetails 
+                                join st in statusdetails on pt.status_id equals st.status_id into table1
+                                from st in table1.DefaultIfEmpty()
+                                where pt.parent_ic == Session["parents_ic"].ToString()
+                                select new MultipleClass { statusdetails = st, paymentdetails = pt};
+
 
             return View(multipletable);
         }
@@ -162,10 +162,11 @@ namespace AceTC.Controllers
 
                 Payment p = db.Payments.Find(id);
 
+
                 pvm.filename.SaveAs(Server.MapPath("~/upload/" + filepath));
                 p.filename = "~/upload/" + filepath;
                 p.status_id = 4;
-
+                p.payment_date = DateTime.Now;
                 db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("ViewChildren", "Parent");
