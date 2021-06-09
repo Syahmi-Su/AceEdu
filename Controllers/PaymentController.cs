@@ -1,11 +1,9 @@
 ﻿using AceTC.Models;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AceTC.Controllers
@@ -38,7 +36,6 @@ namespace AceTC.Controllers
         // GET: Payment/Create
         public ActionResult addPayment()
         {
-
             Payment addpack = new Payment();
             var par = db.Parents.ToList();
             var pack = db.Packages.ToList();
@@ -48,6 +45,7 @@ namespace AceTC.Controllers
                 ViewBag.packs = pack;
             }
             var Id = db.Payments.OrderByDescending(c => c.confirmation_id).FirstOrDefault();
+
             if (Id == null)
             {
                 addpack.confirmation_id = 1;
@@ -101,7 +99,7 @@ namespace AceTC.Controllers
         public ActionResult addPayment([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetails,filename, meal_fee,transport_fee,first_register,lower_discount")] Payment p)
         {
 
-            double total = p.payment_fee + p.transport_fee + p.first_register;
+            double total = p.payment_fee + p.transport_fee + p.first_register + p.meal_fee;
             double discount = (100 - p.lower_discount) / 100;
             p.payment_fee = total * discount;
 
@@ -182,6 +180,8 @@ namespace AceTC.Controllers
 
         public ActionResult Approval(int id)
         {
+            var par = db.Status.ToList();
+            ViewBag.data = par;
 
             using (AceDBEntities entity = new AceDBEntities())
             { 
@@ -193,6 +193,7 @@ namespace AceTC.Controllers
         [HttpPost]
         public ActionResult Approval(int id, Payment payment)
         {
+
             try
             {
                 // TODO: Add update logic here

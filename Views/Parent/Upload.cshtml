@@ -259,107 +259,108 @@
 
                                 <div class="card-body">
 
-                                    @using (Html.BeginForm())
+                                    @using (Html.BeginForm("Upload", "Parent", FormMethod.Post , new { enctype = "multipart/form-data" }))
                                     {
                                         @Html.AntiForgeryToken()
 
-                                    <div class="form-horizontal">
-                                        <h4>Payment</h4>
-                                        <hr />
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        @Html.HiddenFor(model => model.confirmation_id)
+                                        <div class="form-horizontal">
+                                            <h4>Payment</h4>
+                                            <hr />
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(model => model.confirmation_id)
 
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.parent_ic, "Parent IC", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.parent_ic, "Parent IC", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.parent_ic, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.parent_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.student_ic, "Student IC", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.ref_num, "Ref No", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.ref_num, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.status_id, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.status_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.status_id, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.confirmation_date, "Confirmation Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.confirmation_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", value = "@DateTime.Now" } })
+                                                    @Html.ValidationMessageFor(model => model.confirmation_date, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.payment_date, "Payment Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.payment_date, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.payment_detail, "Payment Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.payment_feedetails, "Fee Detail", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.payment_feedetails, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.payment_fee, "Fee", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.payment_fee, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                @Html.LabelFor(model => model.filename, "Payment Proof", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.filename, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                                    @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })
+
+                                                </div>
+                                            </div>
+
+                                            @* <input type="file" id="imgFile" name="imgfile" class="btn btn-info" />
+                                                @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })*@
+
+
+
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <input type="submit" value="Save" class="btn btn-info" />
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.student_ic, "Student IC", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.student_ic, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.student_ic, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.ref_num, "Ref No", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.ref_num, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.status_id, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.status_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.status_id, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.confirmation_date, "Confirmation Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.confirmation_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", value = "@DateTime.Now" } })
-                                                @Html.ValidationMessageFor(model => model.confirmation_date, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_date, "Payment Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.payment_date, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_detail, "Payment Detail", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_feedetails, "Fee Detail", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.payment_feedetails, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_fee, "Fee", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                                @Html.ValidationMessageFor(model => model.payment_fee, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            @Html.LabelFor(model => model.filename, "Proof", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="col-md-10">
-                                                @Html.EditorFor(model => model.filename, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                                                @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        @* <input type="file" id="imgFile" name="imgfile" class="btn btn-info" />
-                                            @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })*@
-
-
-
-                                        <div class="form-group">
-                                            <div class="col-md-offset-2 col-md-10">
-                                                <input type="submit" value="Save" class="btn btn-info" />
-                                            </div>
-                                        </div>
-                                    </div>
                                     }
 
                                 </div>
@@ -419,6 +420,59 @@
     }
 
     <!-- END Java Script for this page -->
+    <!-- File Validation Upload Proof -->
+    <script type="text/javascript">
+        function fileValidation() {
+            var fileInput =
+                document.getElementById('file');
+
+            const fi = document.getElementById('file');
+
+            var filePath = fileInput.value;
+
+            // Allowing file type
+            var allowedExtensions =
+                /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Invalid file type, please upload a valid file.');
+                fileInput.value = '';
+                return false;
+            }
+            else {
+                if (fi.files.length > 0) {
+                    for (const i = 0; i <= fi.files.length - 1; i++) {
+
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round(fsize);
+
+                        // The size of the file.
+                        if (file >= 13107200) {
+                            alert("File too Big, please select a file less than 128Kb");
+                            fileInput.value = '';
+                            return false;
+                        }
+                        else {
+                            // Image preview
+                            if (fileInput.files && fileInput.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    document.getElementById(
+                                        'imagePreview').innerHTML =
+                                        '<img src="' + e.target.result + '" style="width:500px;height:700px;" class="center"/>';
+                                    document.getElementById('imagealready').style.display = 'none';
+                                };
+
+                                reader.readAsDataURL(fileInput.files[0]);
+                            }
+
+                            return filePath;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
 </body>
 
