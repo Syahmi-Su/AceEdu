@@ -192,6 +192,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Business\SecurityService.cs" />
     <Compile Include="Services\Data\SecurityDAO.cs" />
+    <Compile Include="ViewModel\ParentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\AceTC.dll" />
@@ -1684,6 +1685,7 @@
     <Content Include="Views\Parent\Upload.cshtml" />
     <Content Include="Views\Parent\View.cshtml" />
     <Content Include="Views\Parent\ViewSubject.cshtml" />
+    <Content Include="Views\Shared\navBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
