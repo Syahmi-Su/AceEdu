@@ -303,16 +303,19 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
+                                                    <th>Confirmation ID</th>
                                                     <th>Parent IC</th>
                                                     <th>Student IC</th>
                                                     <th>Ref Num</th>
                                                     <th>Payment Date</th>
+                                                    <th>Package Taken</th>
                                                     <th>Payment Detail</th>
                                                     <th>Fee Detail</th>
                                                     <th>Payment Fee</th>
                                                     <th>Proof</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -321,10 +324,12 @@
                                                     if(payment.paymentdetails.status_id == 1 || payment.paymentdetails.status_id == 4)
                                                     {
                                                         <tr>
+                                                            <td>@payment.paymentdetails.confirmation_id</td>
                                                             <td>@payment.paymentdetails.parent_ic</td>
                                                             <td>@payment.paymentdetails.student_ic</td>
                                                             <td>@payment.paymentdetails.ref_num</td>
                                                             <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
+                                                            <td>@payment.packagedetails.package_desc</td>
                                                             <td>@payment.paymentdetails.payment_detail</td>
                                                             <td>@payment.paymentdetails.payment_feedetails</td>
                                                             <td>@payment.paymentdetails.payment_fee</td>
@@ -401,14 +406,18 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Parent IC"
+                    title: "Confirmation ID"
                 }, {
+                    title: "Parent IC"
+                },{
                     title: "Student IC"
                 }, {
                     title: "Ref Num"
                 }, {
                     title: "Payment Date"
                 }, {
+                    title: "Package Taken"
+                },{
                     title: "Payment Detail"
                 }, {
                     title: "Fee Detail"

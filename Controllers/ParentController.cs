@@ -61,13 +61,17 @@ namespace AceTC.Controllers
 
             List<Parent> parentlist = entity.Parents.ToList();
             List<Payment> paymentdetails = entity.Payments.ToList();
+            List<Student> studentlist = entity.Students.ToList();
+            List<Package> packagelist = entity.Packages.ToList();
             List<Status> statusdetails = entity.Status.ToList();
 
             var multipletable = from pt in paymentdetails 
-                                join st in statusdetails on pt.status_id equals st.status_id into table1
-                                from st in table1.DefaultIfEmpty()
+                                join st in statusdetails on pt.status_id equals st.status_id
+                                join s in studentlist on pt.student_ic equals s.student_ic
+                                join p in packagelist on pt.package_id equals p.package_id
+                                join par in parentlist on pt.parent_ic equals par.parents_ic
                                 where pt.parent_ic == Session["parents_ic"].ToString()
-                                select new MultipleClass { statusdetails = st, paymentdetails = pt};
+                                select new MultipleClass { statusdetails = st, paymentdetails = pt, packagedetails = p, parentdetails = par, studentdetails = s};
 
 
             return View(multipletable);
@@ -77,22 +81,29 @@ namespace AceTC.Controllers
         {
             AceDBEntities entity = new AceDBEntities();
             string uid = Session["parents_ic"].ToString();
-
             List<Student> studentlist = entity.Students.ToList();
             List<Parent> parentlist = entity.Parents.ToList();
-            List<Payment> paymentlist = entity.Payments.ToList();
-            List<Status> status = entity.Status.ToList();
+            List<Status> statuslist = entity.Status.ToList();
+            List<Package> packagelist = entity.Packages.ToList();
+            List<Payment> paymentlist = entity.Payments.Where(a => a.parent_ic.Equals(uid)).ToList();
 
-            var multipletable = from s in studentlist
-                                join p in parentlist on s.parent_ic equals p.parents_ic into table1
-                                from p in table1.DefaultIfEmpty()
-                                join pa in paymentlist on p.parents_ic equals pa.parent_ic into table2
-                                from pa in table2.DefaultIfEmpty()
-                                join st in status on pa.status_id equals st.status_id into table3
-                                from st in table3.DefaultIfEmpty()
-                                where p.parents_ic == Session["parents_ic"].ToString()
-                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa , statusdetails = st};
-            
+            //var multipletable = from s in studentlist
+            //                    join p in parentlist on s.parent_ic equals p.parents_ic into table1
+            //                    from p in table1.DefaultIfEmpty()
+            //                    join pa in paymentlist on p.parents_ic equals pa.parent_ic into table2
+            //                    from pa in table2.DefaultIfEmpty()
+            //                    join st in status on pa.status_id equals st.status_id into table3
+            //                    from st in table3.DefaultIfEmpty()
+            //                    where p.parents_ic == Session["parents_ic"].ToString()
+            //                    select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa , statusdetails = st};
+
+            var multipletable = from pa in paymentlist
+                                join p in parentlist on pa.parent_ic equals p.parents_ic
+                                join s in studentlist on pa.student_ic equals s.student_ic
+                                join st in statuslist on pa.status_id equals st.status_id
+                                join pack in packagelist on pa.package_id equals pack.package_id
+                                select new MultipleClass { studentdetails = s, parentdetails = p, paymentdetails = pa, statusdetails = st, packagedetails = pack };
+
 
             return View(multipletable);
         }
@@ -166,8 +177,8 @@ namespace AceTC.Controllers
 
                 pvm.filename.SaveAs(Server.MapPath("~/upload/" + filepath));
                 p.filename = "~/upload/" + filepath;
-                p.status_id = 4;
-                p.payment_date = DateTime.Now;
+                p.status_id = 1;
+                p.confirmation_date = DateTime.Now;
                 db.Entry(p).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("ViewChildren", "Parent");

@@ -315,25 +315,27 @@
                                         @Html.HiddenFor(model => model.payment_feedetails)
                                         @Html.HiddenFor(model => model.filename)
                                         @Html.HiddenFor(model => model.confirmation_date)
+                                        @Html.HiddenFor(model => model.package_id)
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.ref_num,"Reference Number" ,htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.ref_num, "Reference Number", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
-                                                @Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" }  })
+                                                @Html.EditorFor(model => model.ref_num, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.ref_num, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_date,"Payment Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.payment_date, "Payment Date", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.payment_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.payment_date, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
+
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_detail,"Package Taken", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.payment_detail, "Payment Detail", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
@@ -341,25 +343,25 @@
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_feedetails,"Month Fee", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.payment_feedetails, "Month Fee", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @*@Html.EditorFor(model => model.payment_feedetailss, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
-                                                @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.payment_feedetails, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.payment_fee,"Payment Fee" , htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.payment_fee, "Payment Fee (RM)", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @*@Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control", disabled = "disabled", @readonly = "readonly" } })*@
-                                                @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control"} })
+                                                @Html.EditorFor(model => model.payment_fee, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                                 @Html.ValidationMessageFor(model => model.payment_fee, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            @Html.LabelFor(model => model.status_id,"Payment Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                                            @Html.LabelFor(model => model.status_id, "Payment Status", htmlAttributes: new { @class = "control-label col-md-2" })
                                             <div class="col-md-10">
                                                 @Html.DropDownList("status_id", new SelectList(ViewBag.data, "status_id", "status_desc"))
                                                 @Html.ValidationMessageFor(model => model.status_id, "", new { @class = "text-danger" })

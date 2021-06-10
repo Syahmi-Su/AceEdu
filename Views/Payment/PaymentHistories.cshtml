@@ -303,15 +303,17 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Parent IC</th>
-                                                    <th>Student IC</th>
                                                     <th>Ref Num</th>
+                                                    <th>Confirmation Date</th>
+                                                    <th>Student Name</th>
+                                                    <th>Parent Name</th>
                                                     <th>Payment Date</th>
                                                     <th>Payment Detail</th>
                                                     <th>Fee Detail</th>
-                                                    <th>Payment Fee</th>
+                                                    <th>Payment Fee (RM)</th>
                                                     <th>Proof</th>
                                                     <th>Status</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -320,9 +322,10 @@
                                                     if(payment.paymentdetails.status_id == 2 || payment.paymentdetails.status_id == 3)
                                                     {
                                                 <tr>
-                                                    <td>@payment.paymentdetails.parent_ic</td>
-                                                    <td>@payment.paymentdetails.student_ic</td>
                                                     <td>@payment.paymentdetails.ref_num</td>
+                                                    <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
+                                                    <td>@payment.studentdetails.student_name</td>
+                                                    <td>@payment.parentdetails.parents_name</td>
                                                     <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
                                                     <td>@payment.paymentdetails.payment_detail</td>
                                                     <td>@payment.paymentdetails.payment_feedetails</td>
@@ -336,10 +339,11 @@
                                                     {
                                                         <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
                                                     }
-@*                                                    <td><a class='btn btn-info' href='@Url.Action("Approval", "Payment", new { id = payment.paymentdetails.confirmation_id})'>View</a></td>
-*@                                                </tr>
-                                                    }
 
+                                                    <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { payment.paymentdetails.confirmation_id})'>View</a></td>
+                                                </tr>
+                                                    }
+                                                   
                                                 }
 
                                             </tbody>
@@ -407,11 +411,13 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Parent IC"
-                }, {
-                    title: "Student IC"
-                }, {
                     title: "Ref Num"
+                }, {
+                    title: "Confirmation Date"
+                },{
+                    title: "Student Name"
+                }, {
+                    title: "Parent Name"
                 }, {
                     title: "Payment Date"
                 }, {
@@ -419,7 +425,7 @@
                 }, {
                     title: "Fee Detail"
                 }, {
-                    title: "Payment Fee"
+                    title: "Payment Fee (RM)"
                 }, {
                     title: "Proof"
                 }, {

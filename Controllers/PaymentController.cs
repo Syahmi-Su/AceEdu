@@ -96,7 +96,7 @@ namespace AceTC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult addPayment([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetails,filename, meal_fee,transport_fee,first_register,lower_discount")] Payment p)
+        public ActionResult addPayment([Bind(Include = "confirmation_id,student_ic,parent_ic,package_id,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetails,filename, meal_fee,transport_fee,first_register,lower_discount")] Payment p)
         {
 
             double total = p.payment_fee + p.transport_fee + p.first_register + p.meal_fee;
@@ -134,7 +134,7 @@ namespace AceTC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "confirmation_id,student_ic,parent_ic,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetailss,filename,meal_fee,transport_fee,first_register,lower_discount")] Payment payment)
+        public ActionResult Edit([Bind(Include = "confirmation_id,student_ic,parent_ic,package_id,payment_fee,ref_num,status_id,confirmation_date,payment_date,payment_detail,payment_feedetailss,filename,meal_fee,transport_fee,first_register,lower_discount")] Payment payment)
         {
             if (ModelState.IsValid)
             {
@@ -168,11 +168,16 @@ namespace AceTC.Controllers
             AceDBEntities entity = new AceDBEntities();
             List<Payment> payment = entity.Payments.ToList();
             List<Status> status = entity.Status.ToList();
+            List<Package> package = entity.Packages.ToList();
+            List<Student> student = entity.Students.ToList();
+            List<Parent> parent = entity.Parents.ToList();
 
             var multipletable = from a in payment
-                                join b in status on a.status_id equals b.status_id into table1
-                                from b in table1.DefaultIfEmpty()
-                                select new MultipleClass { paymentdetails = a, statusdetails = b};
+                                join b in status on a.status_id equals b.status_id 
+                                join p in package on a.package_id equals p.package_id
+                                join s in student on a.student_ic equals s.student_ic
+                                join par in parent on a.parent_ic equals par.parents_ic
+                                select new MultipleClass { paymentdetails = a, statusdetails = b, packagedetails = p, parentdetails = par, studentdetails = s};
 
             return View(multipletable);
 
@@ -216,11 +221,17 @@ namespace AceTC.Controllers
             AceDBEntities entity = new AceDBEntities();
             List<Payment> payment = entity.Payments.ToList();
             List<Status> status = entity.Status.ToList();
+            List<Parent> parent = entity.Parents.ToList();
+            List<Student> student = entity.Students.ToList();
+            List<Package> package = entity.Packages.ToList();
 
             var multipletable = from a in payment
-                                join b in status on a.status_id equals b.status_id into table1
-                                from b in table1.DefaultIfEmpty()
-                                select new MultipleClass { paymentdetails = a, statusdetails = b };
+                                join b in status on a.status_id equals b.status_id
+                                join c in parent on a.parent_ic equals c.parents_ic
+                                join d in student on a.student_ic equals d.student_ic
+                                join e in package on a.package_id equals e.package_id
+
+                                select new MultipleClass { paymentdetails = a, statusdetails = b, parentdetails = c, studentdetails = d, packagedetails = e };
 
             return View(multipletable);
         }
