@@ -31,7 +31,7 @@ namespace AceTC.Models
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
     }
 }
