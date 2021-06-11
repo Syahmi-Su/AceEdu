@@ -262,9 +262,11 @@
                                         <table id="dataTable" class="table table-bordered table-hover display" style="width:100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Student</th>
+                                                    <th>Confirmation ID</th>
+                                                    <th>Student Name</th>
                                                     <th>Ref No</th>
                                                     <th>Payment Date</th>
+                                                    <th>Subject Taken</th>
                                                     <th>Payment Detail</th>
                                                     <th>Fee Detail</th>
                                                     <th>Amount Paid</th>
@@ -278,25 +280,35 @@
                                                 @foreach (var payment in Model)
                                                 {
 
-                                                    <tr>
-                                                        <td>@payment.studentdetails.student_name</td>
-                                                        <td>@payment.paymentdetails.ref_num</td>
-                                                        <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
-                                                        <td>@payment.paymentdetails.payment_detail</td>
-                                                        <td>@payment.paymentdetails.payment_feedetailss</td>
-                                                        <td>@payment.paymentdetails.payment_fee</td>
-                                                        <td>@payment.paymentdetails.filename</td>
-                                                        <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
-                                                        @if (payment.statusdetails.status_id == 2)
-                                                        {
-                                                            <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        else
-                                                        {
-                                                            <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
-                                                        }
-                                                        <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { payment.paymentdetails.confirmation_id})'>View</a></td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>@payment.paymentdetails.confirmation_id</td>
+                                                    <td>@payment.studentdetails.student_name</td>
+                                                    <td>@payment.paymentdetails.ref_num</td>
+                                                    <td>@payment.paymentdetails.payment_date.ToShortDateString()</td>
+                                                    <td>@payment.packagedetails.package_desc</td>
+                                                    <td>@payment.paymentdetails.payment_detail</td>
+                                                    <td>@payment.paymentdetails.payment_feedetails</td>
+                                                    <td>@payment.paymentdetails.payment_fee</td>
+                                                    <td>@payment.paymentdetails.filename</td>
+                                                    <td>@payment.paymentdetails.confirmation_date.ToShortDateString()</td>
+                                                    @if (payment.statusdetails.status_id == 2)
+                                                    {
+                                                        <td style='color:green;'><b>@payment.statusdetails.status_desc</b></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
+                                                    }
+                                                    @if (payment.statusdetails.status_id == 2)
+                                                    {
+                                                     <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { id= payment.paymentdetails.confirmation_id})'target="_blank">View</a></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                    
+                                                </tr>
 
                                                 }
 
@@ -365,11 +377,15 @@
             $('#dataTable').DataTable({
                 //    data:dataSet,
                 columns: [{
-                    title: "Student"
+                    title: "Confirmation ID"
+                }, {
+                    title: "Student Name"
                 }, {
                     title: "Ref No"
                 }, {
                     title: "Payment Date"
+                }, {
+                    title: "Subject Taken"
                 }, {
                     title: "Payment Detail"
                 }, {

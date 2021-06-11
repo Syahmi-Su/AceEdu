@@ -22,7 +22,8 @@ namespace AceTC.Controllers
             CountClass cnt = new CountClass()
             {
                 studentcount = entity.Students.Count(),
-                packagecount = entity.Packages.Count()
+                packagecount = entity.Packages.Count(),
+                paymentcount = entity.Payments.Count(),
             };
             return View(cnt);
         }
