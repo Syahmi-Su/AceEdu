@@ -111,9 +111,17 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.payment_detail, "Payment Details", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.package_id, "Package Taken", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownList("payment_detail", new SelectList(ViewBag.packs, "package_desc", "package_desc"))
+                                    @Html.DropDownList("package_id", new SelectList(ViewBag.packs, "package_id", "package_desc"))
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.payment_detail, "Remark", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.payment_detail, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.payment_detail, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -121,7 +129,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.payment_feedetails, "Month Fee", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control" } }) 
+                                    @Html.EditorFor(model => model.payment_feedetails, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.payment_feedetails, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -168,7 +176,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn-default" />
+                                    <input type="submit" value="Create" class="btn-default" onclick = "return confirm('Are you sure want to submit?');" />
                                 </div>
                             </div>
                         </div>

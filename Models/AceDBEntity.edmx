@@ -50,8 +50,9 @@
           <Property Name="confirmation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="parent_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="student_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="ref_num" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="package_id" Type="int" Nullable="false" />
           <Property Name="status_id" Type="int" Nullable="false" />
+          <Property Name="ref_num" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="confirmation_date" Type="date" Nullable="false" />
           <Property Name="payment_date" Type="date" Nullable="false" />
           <Property Name="payment_detail" Type="nvarchar" MaxLength="250" Nullable="false" />
@@ -188,8 +189,9 @@
           <Property Name="confirmation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="parent_ic" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
           <Property Name="student_ic" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="ref_num" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="package_id" Type="Int32" Nullable="false" />
           <Property Name="status_id" Type="Int32" Nullable="false" />
+          <Property Name="ref_num" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="confirmation_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="payment_date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="payment_detail" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
@@ -287,8 +289,9 @@
                 <ScalarProperty Name="payment_detail" ColumnName="payment_detail" />
                 <ScalarProperty Name="payment_date" ColumnName="payment_date" />
                 <ScalarProperty Name="confirmation_date" ColumnName="confirmation_date" />
-                <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="ref_num" ColumnName="ref_num" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="package_id" ColumnName="package_id" />
                 <ScalarProperty Name="student_ic" ColumnName="student_ic" />
                 <ScalarProperty Name="parent_ic" ColumnName="parent_ic" />
                 <ScalarProperty Name="confirmation_id" ColumnName="confirmation_id" />

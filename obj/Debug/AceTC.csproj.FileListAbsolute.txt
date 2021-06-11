@@ -196,7 +196,6 @@ C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.IO.Compression.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.IO.Compression.ZipFile.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.IO.FileSystem.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.IO.FileSystem.Primitives.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.Net.Http.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.Net.Sockets.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
@@ -216,20 +215,6 @@ C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\vbc.exe.config
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\vbc.rsp
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\VBCSCompiler.exe
 C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\User\Documents\GitHub\AceEdu\bin\Antlr3.Runtime.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\EntityFramework.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\EntityFramework.SqlServer.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\Newtonsoft.Json.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.Helpers.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.Mvc.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.Optimization.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.Razor.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.WebPages.Deployment.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.WebPages.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.WebPages.Razor.dll
-C:\Users\User\Documents\GitHub\AceEdu\bin\WebGrease.dll
 C:\Users\User\Documents\GitHub\AceEdu\bin\EntityFramework.xml
 C:\Users\User\Documents\GitHub\AceEdu\bin\EntityFramework.SqlServer.xml
 C:\Users\User\Documents\GitHub\AceEdu\bin\System.Web.Helpers.xml
@@ -315,3 +300,5 @@ C:\Users\user\Documents\Degree\SEM_II\SCSP3106_Applications_Development\2u2i-pro
 C:\Users\user\Documents\Degree\SEM_II\SCSP3106_Applications_Development\2u2i-project\AceEdu\bin\Antlr3.Runtime.pdb
 C:\Users\user\Documents\Degree\SEM_II\SCSP3106_Applications_Development\2u2i-project\AceEdu\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\user\Documents\Degree\SEM_II\SCSP3106_Applications_Development\2u2i-project\AceEdu\obj\Debug\AceTC.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.Memory.dll
+C:\Users\User\Documents\GitHub\AceEdu\bin\roslyn\System.Numerics.Vectors.dll

@@ -22,8 +22,8 @@
     <Key>
       <PropertyRef Name="package_id" />
     </Key>
-    <Property Name="package_id" Type="int" Nullable="false" />
-    <Property Name="package_desc" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="package_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="package_desc" Type="nvarchar" MaxLength="120" Nullable="false" />
     <Property Name="package_category" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="package_price" Type="float" Nullable="false" />
   </EntityType>
@@ -42,17 +42,18 @@
     <Key>
       <PropertyRef Name="confirmation_id" />
     </Key>
-    <Property Name="confirmation_id" Type="int" Nullable="false" />
-    <Property Name="student_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="confirmation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="parent_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
-    <Property Name="payment_fee" Type="float" Nullable="false" />
-    <Property Name="ref_num" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="student_ic" Type="nvarchar" MaxLength="14" Nullable="false" />
+    <Property Name="package_id" Type="int" Nullable="false" />
     <Property Name="status_id" Type="int" Nullable="false" />
+    <Property Name="ref_num" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="confirmation_date" Type="date" Nullable="false" />
     <Property Name="payment_date" Type="date" Nullable="false" />
-    <Property Name="payment_detail" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="payment_detail" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="payment_feedetails" Type="nvarchar" MaxLength="100" />
-    <Property Name="filename" Type="nvarchar" MaxLength="100" />
+    <Property Name="payment_fee" Type="float" Nullable="false" />
+    <Property Name="filename" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Status">
     <Key>

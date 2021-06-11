@@ -1754,6 +1754,14 @@
     <Content Include="Views\Parent\View.cshtml" />
     <Content Include="Views\Parent\ViewSubject.cshtml" />
     <Content Include="Views\Shared\navBar.cshtml" />
+    <Content Include="Views\Admin\DeletePackage.cshtml" />
+    <Content Include="Views\Admin\DeleteParent.cshtml" />
+    <Content Include="Views\Admin\DeleteStudent.cshtml" />
+    <Content Include="Views\Admin\DeleteSubject.cshtml" />
+    <Content Include="Views\Admin\EditPackageDetails.cshtml" />
+    <Content Include="Views\Admin\EditParentDetails.cshtml" />
+    <Content Include="Views\Admin\EditSubjectDetails.cshtml" />
+    <Content Include="Views\Payment\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\AceTC\v16\" />

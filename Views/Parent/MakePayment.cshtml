@@ -263,27 +263,44 @@
                                             <thead>
                                                 <tr>
                                                     <th>Reference Number</th>
+                                                    <th>Student Name</th>
+                                                    <th>Subject Taken</th>
                                                     <th>Date Issued</th>
-                                                    <th>Status</th>
                                                     <th>Payment Date</th>
-                                                    <th>Fee</th>
+                                                    <th>Month</th>
+                                                    <th>Fee (RM)</th>
+                                                    <th>Status</th>
                                                     <th>Payment Proof</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var student in Model)
                                                 {
+                                                    if (student.paymentdetails.status_id == 1)
+                                                    {
                                                 <tr>
                                                     <td>@student.paymentdetails.ref_num</td>
-                                                    <td>@student.paymentdetails.confirmation_date</td>
-                                                    <td>@student.statusdetails.status_desc</td>
-                                                    <td>@student.paymentdetails.payment_date</td>
+                                                    <td>@student.studentdetails.student_name</td>
+                                                    <td>@student.packagedetails.package_desc</td>
+                                                    <td>@student.paymentdetails.confirmation_date.ToShortDateString()</td>
+                                                    <td>@student.paymentdetails.payment_date.ToShortDateString()</td>
+                                                    <td>@student.paymentdetails.payment_feedetails</td>
                                                     <td>@student.paymentdetails.payment_fee</td>
-                                                    <td>@Html.ActionLink("Upload", "Upload", new { id = student.paymentdetails.confirmation_id }, new { @class = "btn btn-info" })'</td>
-@*                                                    <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id })'>Upload</a></td>
-*@                                                </tr>
+                                                    @if (student.paymentdetails.status_id == 2)
+                                                    {
+                                                        <td style='color:green;'><b>@student.statusdetails.status_desc</b></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style='color:red;'><b>@student.statusdetails.status_desc</b></td>
+                                                    }
 
-                                               
+                                                    <td>@Html.ActionLink("Upload", "Upload", new { id = student.paymentdetails.confirmation_id }, new { @class = "btn btn-info" })'</td>
+                                                    @*                                                    <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id })'>Upload</a></td>
+                                                    *@
+                                                </tr>
+                                                    }
+
                                                 }
 
                                             </tbody>
@@ -353,13 +370,19 @@
                 columns: [{
                     title: "Reference Number"
                 }, {
-                    title: "Date Issued"
+                    title: "Student Name"
                 }, {
-                    title: "Status"
+                    title: "Subject Taken"
+                },{
+                    title: "Date Issued"
                 }, {
                     title: "Payment Date"
                 }, {
-                    title: "Fee"
+                    title: "Month"
+                }, {
+                    title: "Fee (RM)"
+                }, {
+                    title: "Status"
                 }, {
                     title: "Payment Proof"
                 }]

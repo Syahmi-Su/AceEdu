@@ -17,8 +17,9 @@ namespace AceTC.Models
         public int confirmation_id { get; set; }
         public string parent_ic { get; set; }
         public string student_ic { get; set; }
-        public string ref_num { get; set; }
+        public int package_id { get; set; }
         public int status_id { get; set; }
+        public string ref_num { get; set; }
         public System.DateTime confirmation_date { get; set; }
         public System.DateTime payment_date { get; set; }
         public string payment_detail { get; set; }
