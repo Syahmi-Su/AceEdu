@@ -168,10 +168,11 @@ namespace AceTC.Controllers
         {
             using(AceDBEntities db = new AceDBEntities())
             {
-                string guid = Guid.NewGuid().ToString();
-                string filepath = guid + Path.GetExtension(pvm.filename.FileName);
-
-
+                //string guid = Guid.NewGuid().ToString();
+                //string filepath = guid + Path.GetExtension(pvm.filename.FileName);
+                string filepath = Path.GetFileNameWithoutExtension(pvm.filename.FileName);
+                string fileextension = Path.GetExtension(pvm.filename.FileName);
+                filepath = DateTime.Now.ToString("ddMMyyyy") + "-" + filepath.Trim() + fileextension;
                 Payment p = db.Payments.Find(id);
 
 

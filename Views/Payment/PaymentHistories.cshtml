@@ -340,7 +340,7 @@
                                                         <td style='color:red;'><b>@payment.statusdetails.status_desc</b></td>
                                                     }
 
-                                                    <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { payment.paymentdetails.confirmation_id})'>View</a></td>
+                                                    <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new {id= payment.paymentdetails.confirmation_id})'target="_blank">View</a></td>
                                                 </tr>
                                                     }
                                                    

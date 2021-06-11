@@ -276,6 +276,8 @@
                                             <tbody>
                                                 @foreach (var student in Model)
                                                 {
+                                                    if (student.paymentdetails.status_id == 1)
+                                                    {
                                                 <tr>
                                                     <td>@student.paymentdetails.ref_num</td>
                                                     <td>@student.studentdetails.student_name</td>
@@ -297,8 +299,8 @@
                                                     @*                                                    <td><a class='btn btn-info' href='@Url.Action("Upload", "Parent", new { id = student.paymentdetails.confirmation_id })'>Upload</a></td>
                                                     *@
                                                 </tr>
+                                                    }
 
-                                               
                                                 }
 
                                             </tbody>

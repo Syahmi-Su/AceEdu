@@ -301,7 +301,7 @@
                                                     }
                                                     @if (payment.statusdetails.status_id == 2)
                                                     {
-                                                     <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { payment.parentdetails.parents_ic})'>View</a></td>
+                                                     <td><a class='btn btn-info' href='@Url.Action("Slip", "Receipt", new { id= payment.paymentdetails.confirmation_id})'target="_blank">View</a></td>
                                                     }
                 else
                 {
