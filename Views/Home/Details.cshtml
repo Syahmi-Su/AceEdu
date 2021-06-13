@@ -40,9 +40,9 @@
     <link href="~/styles/font-awesome.css" rel="stylesheet">
     <!-- //font-awesome-icons -->
     <!-- /Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Playfair+Display:400,400i,700i" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
+    <link href="/fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900" rel="stylesheet">
+    <link href="/fonts.googleapis.com/css?family=Playfair+Display:400,400i,700i" rel="stylesheet">
+    <link href="/fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,800" rel="stylesheet">
     <!-- //Fonts -->
 </head>
 
@@ -58,13 +58,13 @@
 
                     </div>
                     <label for="drop" class="toggle">Menu</label>
-                    <img alt="Logo" style="width:130px;height:100px;" src="~/Content/assets/images/ACElogo-triangle.png" />
+                    <img alt="Logo" style="width:200px;height:100px;" src="~/Content/assets/images/ACElogo-triangle.png" />
                     <input type="checkbox" id="drop" />
                     <ul class="menu mt-2">
-                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Login", "Index", "Login")</li>
+                        <li class="active">@Html.ActionLink("Login", "Index", "Login")</li>
                     </ul>
                 </nav>
                 <!-- //nav -->
@@ -73,7 +73,9 @@
         <!-- //header -->
         <!--/banner-->
         <div class="banner-info-w3pvt" style="padding-top: 80px; padding-bottom: 80px; padding-left: 0px;">
+
             @* @using (Html.BeginForm()) *@
+
             @using (Html.BeginForm("Login", "Login", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
@@ -153,17 +155,6 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="footer-grid_section text-center">
-                    <div class="footer-text">
-                        <p>Visit our social media to get to know us.</p>
-                    </div>
-                    <ul class="social_section_1info">
-                        <li class="mb-2 facebook"><a href="#"><span class="fa fa-facebook mr-1"></span>facebook</a></li>
-                        <li class="mb-2 twitter"><a href="#"><span class="fa fa-twitter mr-1"></span>twitter</a></li>
-                        <li class="google"><a href="#"><span class="fa fa-google-plus mr-1"></span>google</a></li>
-                        <li class="linkedin"><a href="#"><span class="fa fa-linkedin mr-1"></span>linkedin</a></li>
-                    </ul>
                 </div>
                 <div class="move-top-w3layouts text-center mt-3">
                     <a href="#home" class="move-top"> <span class="fa fa-angle-up  mb-3" aria-hidden="true"></span></a>
